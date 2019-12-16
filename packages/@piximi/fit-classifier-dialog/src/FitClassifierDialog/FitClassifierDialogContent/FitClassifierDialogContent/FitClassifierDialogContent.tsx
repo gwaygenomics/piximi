@@ -6,9 +6,7 @@ import {PreprocessingListItem} from "../PreprocessingListItem";
 
 type FitClassifierDialogContentProps = {};
 
-export const FitClassifierDialogContent = (
-  props: FitClassifierDialogContentProps
-) => {
+export const FitClassifierDialogContent = ({}: FitClassifierDialogContentProps) => {
   return (
     <DialogContent>
       <List dense>
