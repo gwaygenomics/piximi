@@ -1,7 +1,7 @@
 import {Theme} from "@material-ui/core";
 import {createStyles, makeStyles} from "@material-ui/styles";
 
-const styles = ({palette, spacing}: Theme) =>
+const styles = ({spacing}: Theme) =>
   createStyles({
     appBar: {
       backgroundColor: "transparent",
