@@ -106,7 +106,9 @@ export const PreprocessingListItem = (props: PreprocessingListItemProps) => {
         <ListItemText>Preprocessing options</ListItemText>
       </ListItem>
 
-      <Collapse in={collapsedList} timeout="auto" unmountOnExit></Collapse>
+      <Collapse in={collapsedList} timeout="auto" unmountOnExit>
+        <div />
+      </Collapse>
     </>
   );
 };
