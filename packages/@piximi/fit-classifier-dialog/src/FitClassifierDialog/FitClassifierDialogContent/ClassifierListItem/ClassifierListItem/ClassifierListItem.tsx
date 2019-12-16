@@ -1,41 +1,32 @@
-// import {Collapse, List, ListItem, ListItemIcon, ListItemText} from "@material-ui/core";
-// import ExpandLessIcon from "@material-ui/icons/ExpandLess";
-// import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-// import {ClassifierForm} from "../ClassifierForm";
-// import * as React from "react";
-//
-// type ClassifierListItemProps = {};
-//
-// export const ClassifierListItem = (props: ClassifierListItemProps) => {
-//   return(
-//     <>
-//       <ListItem button onClick={onClasssifierSettingsListClick} style={{padding: "12px 0px"}}>
-//         <ListItemIcon>
-//           {collapsedClasssifierSettingsList ? (<ExpandLessIcon />) : (<ExpandMoreIcon />)}
-//         </ListItemIcon>
-//
-//         <ListItemText primary="Classifier Settings" style={{fontSize: "20px"}}/>
-//       </ListItem>
-//
-//       <Collapse in={collapsedClasssifierSettingsList} timeout="auto" unmountOnExit>
-//         <ClassifierForm
-//           batchSize={batchSize}
-//           closeDialog={closeDialog}
-//           epochs={epochs}
-//           inputShape={inputShape}
-//           learningRate={learningRate}
-//           lossFunction={lossFunction}
-//           onBatchSizeChange={onBatchSizeChange}
-//           onEpochsChange={onEpochsChange}
-//           onInputShapeChange={onInputShapeChange}
-//           onLearningRateChange={onLearningRateChange}
-//           onLossFunctionChange={onLossFunctionChange}
-//           onOptimizationAlgorithmChange={onOptimizationAlgorithmChange}
-//           // onDataAugmentationChange={onDataAugmentationChange}
-//           openedDialog={openedDialog}
-//           optimizationAlgorithm={optimizationAlgorithm}
-//         />
-//       </Collapse>
-//     </>
-//   );
-// };
+import Collapse from "@material-ui/core/Collapse";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import ExpandLess from "@material-ui/icons/ExpandLess";
+import ExpandMore from "@material-ui/icons/ExpandMore";
+import * as React from "react";
+import {useCollapseList} from "@piximi/hooks";
+
+import {ClassifierForm} from "../ClassifierForm";
+
+type ClassifierListItemProps = {};
+
+export const ClassifierListItem = ({}: ClassifierListItemProps) => {
+  const {collapsedList, collapseList} = useCollapseList();
+
+  return (
+    <>
+      <ListItem onClick={collapseList}>
+        <ListItemIcon>
+          {collapsedList ? <ExpandLess /> : <ExpandMore />}
+        </ListItemIcon>
+
+        <ListItemText>Classifier options</ListItemText>
+      </ListItem>
+
+      <Collapse in={collapsedList} timeout="auto" unmountOnExit>
+        <ClassifierForm />
+      </Collapse>
+    </>
+  );
+};

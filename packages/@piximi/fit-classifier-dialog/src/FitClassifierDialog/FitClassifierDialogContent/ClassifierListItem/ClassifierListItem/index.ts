@@ -1,1 +1,1 @@
-// export {ClassifierListItem} from './';
+export {ClassifierListItem} from "./ClassifierListItem";

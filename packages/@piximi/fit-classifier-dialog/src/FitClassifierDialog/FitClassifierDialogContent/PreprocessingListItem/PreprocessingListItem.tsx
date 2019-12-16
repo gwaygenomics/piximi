@@ -93,7 +93,7 @@ import {useCollapseList} from "@piximi/hooks";
 
 type PreprocessingListItemProps = {};
 
-export const PreprocessingListItem = (props: PreprocessingListItemProps) => {
+export const PreprocessingListItem = ({}: PreprocessingListItemProps) => {
   const {collapsedList, collapseList} = useCollapseList();
 
   return (
