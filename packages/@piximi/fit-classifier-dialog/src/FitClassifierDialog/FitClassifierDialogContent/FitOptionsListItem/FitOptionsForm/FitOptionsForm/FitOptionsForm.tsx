@@ -3,7 +3,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import * as React from "react";
 
-import {useStyles} from "./ClassifierForm.css";
+import {useStyles} from "./FitOptionsForm.css";
 
 const losses = [
   ["absoluteDifference", "Absolute difference"],
@@ -16,7 +16,7 @@ const losses = [
   ["categoricalCrossentropy", "Categorical cross entropy"]
 ];
 
-type ClassifierFormProps = {};
+type FitOptionsFormProps = {};
 
 const LossFunctionTextField = () => {
   return (
@@ -32,7 +32,7 @@ const LossFunctionTextField = () => {
   );
 };
 
-export const ClassifierForm = ({}: ClassifierFormProps) => {
+export const FitOptionsForm = ({}: FitOptionsFormProps) => {
   const classes = useStyles({});
 
   return (

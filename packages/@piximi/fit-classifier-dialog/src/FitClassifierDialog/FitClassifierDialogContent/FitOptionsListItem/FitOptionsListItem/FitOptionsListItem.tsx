@@ -7,11 +7,11 @@ import ExpandMore from "@material-ui/icons/ExpandMore";
 import * as React from "react";
 import {useCollapseList} from "@piximi/hooks";
 
-import {ClassifierForm} from "../ClassifierForm";
+import {FitOptionsForm} from "../FitOptionsForm";
 
-type ClassifierListItemProps = {};
+type FitOptionsListItemProps = {};
 
-export const ClassifierListItem = ({}: ClassifierListItemProps) => {
+export const FitOptionsListItem = ({}: FitOptionsListItemProps) => {
   const {collapsedList, collapseList} = useCollapseList();
 
   return (
@@ -21,11 +21,11 @@ export const ClassifierListItem = ({}: ClassifierListItemProps) => {
           {collapsedList ? <ExpandLess /> : <ExpandMore />}
         </ListItemIcon>
 
-        <ListItemText>Classifier options</ListItemText>
+        <ListItemText>Fit options</ListItemText>
       </ListItem>
 
       <Collapse in={collapsedList} timeout="auto" unmountOnExit>
-        <ClassifierForm />
+        <FitOptionsForm />
       </Collapse>
     </>
   );
