@@ -61,18 +61,18 @@ export const updateImagesPartitionAction = createAction<{}>(
   "update-images-partition"
 );
 
-export const updateCompileOptionsLearningRateAction = createAction<number>(
-  "update-compile-options-learning-rate-action"
+export const updateCompileOptionsLearningRate = createAction<number>(
+  "update-compile-options-learning-rate"
 );
 
-export const updateCompileOptionsLossFunctionAction = createAction<Loss>(
-  "update-compile-options-loss-function-action"
+export const updateCompileOptionsLossFunction = createAction<Loss>(
+  "update-compile-options-loss-function"
 );
 
-export const updateCompileOptionsMetricsAction = createAction<Array<Metric>>(
-  "update-compile-options-metrics-action"
+export const updateCompileOptionsMetrics = createAction<Array<Metric>>(
+  "update-compile-options-metrics"
 );
 
-export const updateCompileOptionsOptimizationFunctionAction = createAction<
+export const updateCompileOptionsOptimizationFunction = createAction<
   Array<Metric>
->("update-compile-options-optimization-function-action");
+>("update-compile-options-optimization-function");
