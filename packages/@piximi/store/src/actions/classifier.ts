@@ -73,6 +73,6 @@ export const updateCompileOptionsMetrics = createAction<Array<Metric>>(
   "update-compile-options-metrics"
 );
 
-export const updateCompileOptionsOptimizationFunction = createAction<
-  Array<Metric>
->("update-compile-options-optimization-function");
+export const updateCompileOptionsOptimizationFunction = createAction<Metric[]>(
+  "update-compile-options-optimization-function"
+);
