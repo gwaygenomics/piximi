@@ -1,5 +1,5 @@
 import {createAction} from "@reduxjs/toolkit";
-import {Category} from "@piximi/types";
+import {Category, Loss, Metric} from "@piximi/types";
 
 export const createCategoryAction = createAction<{}>("create-category");
 
@@ -60,3 +60,19 @@ export const updateImageVisibilityAction = createAction<{}>(
 export const updateImagesPartitionAction = createAction<{}>(
   "update-images-partition"
 );
+
+export const updateCompileOptionsLearningRateAction = createAction<number>(
+  "update-compile-options-learning-rate-action"
+);
+
+export const updateCompileOptionsLossFunctionAction = createAction<Loss>(
+  "update-compile-options-loss-function-action"
+);
+
+export const updateCompileOptionsMetricsAction = createAction<Array<Metric>>(
+  "update-compile-options-metrics-action"
+);
+
+export const updateCompileOptionsOptimizationFunctionAction = createAction<
+  Array<Metric>
+>("update-compile-options-optimization-function-action");

@@ -1,1 +1,1 @@
-export {getTestImages, getTrainingImages, getValidationImages} from "./images";
+export {getTestImages, getTrainingImages, getValidationImages} from "./image";
