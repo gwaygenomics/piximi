@@ -72,27 +72,14 @@ export type CompileOptions = {
   optimizationFunction: Optimizer;
 };
 
-export type FitOptions = {
-  epochs: number;
-  initialEpoch: number;
-};
-
-export type Image = {
-  categoryIdentifier: string;
-  checksum: string;
-  data: string;
-  identifier: string;
-  partition: Partition;
-  scores: Score[];
-  visualization: ImageVisualization;
-};
-
-export type ImageVisualization = {
-  brightness: number;
-  contrast: number;
-  visible: boolean;
-  visibleChannels: number[];
-};
+export enum Optimizer {
+  Adadelta = "Adadelta",
+  Adagrad = "Adagrad",
+  Adam = "Adam",
+  Adamax = "Adamax",
+  RMSProp = "RMSProp",
+  SGD = "SGD"
+}
 
 export enum Loss {
   BinaryCrossentropy = "binaryCrossentropy",
@@ -123,20 +110,45 @@ export enum Metric {
   SparseCategoricalCrossentropy = "sparseCategoricalCrossentropy"
 }
 
+export const DefaultCompileOptions: CompileOptions = {
+  learningRate: 0.01,
+  lossFunction: Loss.BinaryCrossentropy,
+  metrics: Metric.BinaryAccuracy,
+  optimizationFunction: Optimizer.Adadelta
+};
+
+export type FitOptions = {
+  epochs: number;
+  initialEpoch: number;
+};
+
+export const DefaultFitOptions: FitOptions = {
+  epochs: 10,
+  initialEpoch: 1
+};
+
+export type Image = {
+  categoryIdentifier: string;
+  checksum: string;
+  data: string;
+  identifier: string;
+  partition: Partition;
+  scores: Score[];
+  visualization: ImageVisualization;
+};
+
+export type ImageVisualization = {
+  brightness: number;
+  contrast: number;
+  visible: boolean;
+  visibleChannels: number[];
+};
+
 export type Model = {
   compileOptions?: CompileOptions;
   fitOptions?: FitOptions;
   graph?: tensorflow.LayersModel;
 };
-
-export enum Optimizer {
-  Adadelta = "Adadelta",
-  Adagrad = "Adagrad",
-  Adam = "Adam",
-  Adamax = "Adamax",
-  RMSProp = "RMSProp",
-  SGD = "SGD"
-}
 
 export enum Partition {
   Training,
