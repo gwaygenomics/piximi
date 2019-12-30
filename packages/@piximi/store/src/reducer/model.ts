@@ -33,7 +33,9 @@ export const modelReducer = createReducer(initialState, {
     const {categories, images} = action.payload;
 
     const x = tensorflow.data.array(
-      [...Array(100)].map(() => tensorflow.randomUniform([224, 224, 3]))
+      [...Array(100)].map(() => {
+        return tensorflow.randomUniform([224, 224, 3]);
+      })
     );
   },
   [load.toString()]: (state, action) => {},
