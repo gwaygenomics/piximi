@@ -12,6 +12,21 @@ import {
   updateFitOptions
 } from "../actions/model";
 
+function* generator() {
+  const elements = 10;
+  let index = 0;
+
+  while (index < elements) {
+    index++;
+
+    const x = tensorflow.randomUniform([224, 224, 3]);
+
+    const y = tensorflow.randomUniform([1], 0, 2);
+
+    yield [x, y];
+  }
+}
+
 const initialState: Model = {};
 
 export const modelReducer = createReducer(initialState, {
@@ -32,11 +47,7 @@ export const modelReducer = createReducer(initialState, {
   [fit.toString()]: (state, action) => {
     const {categories, images} = action.payload;
 
-    const x = tensorflow.data.array(
-      [...Array(100)].map(() => {
-        return tensorflow.randomUniform([224, 224, 3]);
-      })
-    );
+    const dataset = tensorflow.data.generator(generator);
   },
   [load.toString()]: (state, action) => {},
   [predict.toString()]: (state, action) => {

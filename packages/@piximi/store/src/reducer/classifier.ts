@@ -54,7 +54,6 @@ const findImageIndex = (images: Image[], identifier: string): number => {
 const initialState: Classifier = {
   categories: [],
   compileOptions: {
-    architecture: Architecture.MobileNet_224_140_V2,
     learningRate: 0.01,
     lossFunction: Loss.CategoricalCrossentropy,
     metrics: [],
@@ -237,11 +236,6 @@ export const classifierReducer = createReducer(initialState, {
       image.partition = partitions[0];
       partitions.splice(0, 1);
     });
-  },
-  [updateCompileOptionsArchitecture.toString()]: (state, action) => {
-    const {architecture} = action.payload;
-
-    state.compileOptions.architecture = architecture;
   },
   [updateCompileOptionsLearningRate.toString()]: (state, action) => {
     const {learningRate} = action.payload;
