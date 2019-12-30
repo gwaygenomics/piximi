@@ -1,5 +1,5 @@
 import {createAction} from "@reduxjs/toolkit";
-import {Category, Loss, Metric} from "@piximi/types";
+import {Architecture, Loss, Metric} from "@piximi/types";
 
 export const createCategoryAction = createAction<{}>("create-category");
 
@@ -75,4 +75,8 @@ export const updateCompileOptionsMetrics = createAction<Array<Metric>>(
 
 export const updateCompileOptionsOptimizationFunction = createAction<Metric[]>(
   "update-compile-options-optimization-function"
+);
+
+export const updateCompileOptionsArchitecture = createAction<Architecture>(
+  "update-compile-options-architecture"
 );

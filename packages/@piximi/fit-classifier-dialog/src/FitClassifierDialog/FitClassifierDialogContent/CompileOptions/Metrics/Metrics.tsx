@@ -1,6 +1,6 @@
 import * as React from "react";
 import {Metric} from "@piximi/types";
-import {useStyles} from "./MetricsList.css";
+import {useStyles} from "./Metrics.css";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -30,9 +30,9 @@ descriptions.set(
   "Sparse categorical cross-entropy"
 );
 
-type MetricsListProps = {};
+type MetricsProps = {};
 
-export const MetricsList = ({}: MetricsListProps) => {
+export const Metrics = ({}: MetricsProps) => {
   const {anchorEl, closeMenu, openedMenu, openMenu} = useMenu();
 
   const [metrics, setMetrics] = React.useState<Array<Metric>>([

@@ -1,7 +1,7 @@
-import {AnyAction, combineReducers, Reducer} from "redux";
+import {combineReducers, Reducer} from "redux";
 
 import {classifierReducer} from "./classifier";
 
-export const reducer: Reducer<any, AnyAction> = combineReducers({
+export const reducer: Reducer = combineReducers({
   classifier: classifierReducer
 });

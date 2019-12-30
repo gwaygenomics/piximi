@@ -1,13 +1,11 @@
 import logger from "redux-logger";
-import {persistReducer, persistStore} from "redux-persist";
+import {persistReducer, persistStore, Persistor} from "redux-persist";
 import thunk from "redux-thunk";
 import autoMergeLevel2 from "redux-persist/es/stateReconciler/autoMergeLevel2";
 import localforage from "localforage";
-
 import {
-  AnyAction,
-  configureStore,
   EnhancedStore,
+  configureStore,
   Middleware,
   StoreEnhancer
 } from "@reduxjs/toolkit";
@@ -16,7 +14,7 @@ import {reducer} from "./reducer";
 
 const enhancers: StoreEnhancer[] = [];
 
-const middleware: Middleware<{}, any>[] = [logger, thunk];
+const middleware: Middleware[] = [logger, thunk];
 
 const preloadedState = {};
 
@@ -41,6 +39,6 @@ const options = {
   reducer: persistedReducer
 };
 
-export const store: EnhancedStore<any, AnyAction> = configureStore(options);
+export const store: EnhancedStore = configureStore(options);
 
-export const persistor = persistStore(store);
+export const persistor: Persistor = persistStore(store);

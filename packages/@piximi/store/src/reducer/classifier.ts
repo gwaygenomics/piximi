@@ -3,12 +3,12 @@ import {createReducer} from "@reduxjs/toolkit";
 import {
   createCategoryAction,
   createClassifierAction,
-  openClassifierAction,
   createImageAction,
   createImagesAction,
   createImagesScoreAction,
   deleteCategoryAction,
   deleteImageAction,
+  openClassifierAction,
   toggleCategoryVisibilityAction,
   updateCategoryColorAction,
   updateCategoryDescriptionAction,
@@ -16,13 +16,27 @@ import {
   updateClassifierNameAction,
   updateImageBrightnessAction,
   updateImageCategoryAction,
-  updateImagesCategoryAction,
   updateImageContrastAction,
-  updateImageVisibilityAction,
-  updateImagesPartitionAction
+  updateImagesCategoryAction,
+  updateImagesPartitionAction,
+  updateImageVisibilityAction
 } from "../actions";
 
-import {Category, Classifier, Image} from "@piximi/types";
+import {
+  Architecture,
+  Category,
+  Classifier,
+  Image,
+  Loss,
+  Optimizer
+} from "@piximi/types";
+import {
+  updateCompileOptionsArchitecture,
+  updateCompileOptionsLearningRate,
+  updateCompileOptionsLossFunction,
+  updateCompileOptionsMetrics,
+  updateCompileOptionsOptimizationFunction
+} from "../actions/classifier";
 
 const findCategoryIndex = (
   categories: Category[],
@@ -39,6 +53,13 @@ const findImageIndex = (images: Image[], identifier: string): number => {
 
 const initialState: Classifier = {
   categories: [],
+  compileOptions: {
+    architecture: Architecture.MobileNet_224_140_V2,
+    learningRate: 0.01,
+    lossFunction: Loss.CategoricalCrossentropy,
+    metrics: [],
+    optimizationFunction: Optimizer.SGD
+  },
   images: [],
   name: "Untitled classifier"
 };
@@ -216,5 +237,30 @@ export const classifierReducer = createReducer(initialState, {
       image.partition = partitions[0];
       partitions.splice(0, 1);
     });
+  },
+  [updateCompileOptionsArchitecture.toString()]: (state, action) => {
+    const {architecture} = action.payload;
+
+    state.compileOptions.architecture = architecture;
+  },
+  [updateCompileOptionsLearningRate.toString()]: (state, action) => {
+    const {learningRate} = action.payload;
+
+    state.compileOptions.learningRate = learningRate;
+  },
+  [updateCompileOptionsLossFunction.toString()]: (state, action) => {
+    const {lossFunction} = action.payload;
+
+    state.compileOptions.lossFunction = lossFunction;
+  },
+  [updateCompileOptionsMetrics.toString()]: (state, action) => {
+    const {metrics} = action.payload;
+
+    state.compileOptions.metrics = metrics;
+  },
+  [updateCompileOptionsOptimizationFunction.toString()]: (state, action) => {
+    const {optimizationFunction} = action.payload;
+
+    state.compileOptions.optimizationFunction = optimizationFunction;
   }
 });

@@ -22,6 +22,8 @@ import {
 
 import {persistor, store} from "./store";
 
+export {reducer} from "./reducer";
+
 export {
   createCategoryAction,
   createClassifierAction,

@@ -4,6 +4,11 @@ import {FitClassifierDialog} from "./FitClassifierDialog";
 import {ThemeProvider} from "@material-ui/styles";
 import {createMuiTheme} from "@material-ui/core";
 import {useDialog} from "@piximi/hooks";
+import {Provider} from "react-redux";
+import {reducer} from "@piximi/store";
+import {createStore} from "redux";
+
+const store = createStore(reducer);
 
 const theme = createMuiTheme({
   palette: {
@@ -15,8 +20,10 @@ storiesOf("FitClassifierDialog", module).add("example", () => {
   const {closeDialog} = useDialog();
 
   return (
-    <ThemeProvider theme={theme}>
-      <FitClassifierDialog closeDialog={closeDialog} openedDialog />
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <FitClassifierDialog closeDialog={closeDialog} openedDialog />
+      </ThemeProvider>
+    </Provider>
   );
 });

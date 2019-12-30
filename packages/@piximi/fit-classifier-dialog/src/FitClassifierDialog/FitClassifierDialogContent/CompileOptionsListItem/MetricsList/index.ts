@@ -1,1 +1,0 @@
-export {MetricsList} from "./MetricsFormControl";
