@@ -3,7 +3,10 @@ import {Category, CompileOptions, FitOptions, Image} from "@piximi/types";
 
 export const compile = createAction<{}>("MODEL/COMPILE");
 
-export const evaluate = createAction<{}>("MODEL/EVALUATE");
+export const evaluate = createAction<{
+  categories: Array<Category>;
+  images: Array<Image>;
+}>("MODEL/EVALUATE");
 
 export const fit = createAction<{
   categories: Array<Category>;
