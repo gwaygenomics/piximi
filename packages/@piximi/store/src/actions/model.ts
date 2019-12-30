@@ -1,5 +1,5 @@
-import {createAction} from "@reduxjs/toolkit";
 import {Category, CompileOptions, FitOptions, Image} from "@piximi/types";
+import {createAction} from "@reduxjs/toolkit";
 
 export const compile = createAction<{}>("MODEL/COMPILE");
 
