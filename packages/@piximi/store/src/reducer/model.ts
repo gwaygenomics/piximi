@@ -1,5 +1,6 @@
 import {Model} from "@piximi/types";
 import {createReducer} from "@reduxjs/toolkit";
+import * as tensorflow from "@tensorflow/tfjs";
 import {
   compile,
   evaluate,
@@ -14,7 +15,15 @@ import {
 const initialState: Model = {};
 
 export const modelReducer = createReducer(initialState, {
-  [compile.toString()]: (state, action) => {},
+  [compile.toString()]: (state) => {
+    const {lossFunction, optimizationFunction, metrics} = state.compileOptions;
+
+    state.graph.compile({
+      loss: lossFunction,
+      metrics: metrics,
+      optimizer: optimizationFunction
+    });
+  },
   [evaluate.toString()]: (state, action) => {},
   [fit.toString()]: (state, action) => {},
   [load.toString()]: (state, action) => {},
@@ -23,5 +32,7 @@ export const modelReducer = createReducer(initialState, {
   [updateCompileOptions.toString()]: (state, action) => {
     state.compileOptions = action.payload;
   },
-  [updateFitOptions.toString()]: (state, action) => {}
+  [updateFitOptions.toString()]: (state, action) => {
+    state.fitOptions = action.payload;
+  }
 });

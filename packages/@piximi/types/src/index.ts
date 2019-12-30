@@ -66,7 +66,6 @@ export type Classifier = {
 };
 
 export type CompileOptions = {
-  architecture: Architecture;
   learningRate: number;
   lossFunction: Loss | Array<Loss> | {[outputName: string]: Loss};
   metrics: Metric | Array<Metric> | {[outputName: string]: Metric};
@@ -127,6 +126,7 @@ export enum Metric {
 export type Model = {
   compileOptions?: CompileOptions;
   fitOptions?: FitOptions;
+  graph?: tensorflow.LayersModel;
 };
 
 export enum Optimizer {
