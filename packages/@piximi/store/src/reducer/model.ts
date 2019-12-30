@@ -24,12 +24,16 @@ export const modelReducer = createReducer(initialState, {
       optimizer: optimizationFunction
     });
   },
-  [evaluate.toString()]: (state, action) => {},
+  [evaluate.toString()]: (state, action) => {
+    const {categories, images} = action.payload;
+  },
   [fit.toString()]: (state, action) => {
     const {categories, images} = action.payload;
   },
   [load.toString()]: (state, action) => {},
-  [predict.toString()]: (state, action) => {},
+  [predict.toString()]: (state, action) => {
+    const {images} = action.payload;
+  },
   [save.toString()]: (state, action) => {},
   [updateCompileOptions.toString()]: (state, action) => {
     state.compileOptions = action.payload;
