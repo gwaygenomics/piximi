@@ -25,7 +25,9 @@ export const modelReducer = createReducer(initialState, {
     });
   },
   [evaluate.toString()]: (state, action) => {},
-  [fit.toString()]: (state, action) => {},
+  [fit.toString()]: (state, action) => {
+    const {categories, images} = action.payload;
+  },
   [load.toString()]: (state, action) => {},
   [predict.toString()]: (state, action) => {},
   [save.toString()]: (state, action) => {},
