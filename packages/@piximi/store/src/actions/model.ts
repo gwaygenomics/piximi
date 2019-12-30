@@ -15,7 +15,7 @@ export const fit = createAction<{
 
 export const load = createAction<{}>("MODEL/LOAD");
 
-export const predict = createAction<{}>("MODEL/PREDICT");
+export const predict = createAction<{images: Array<Image>}>("MODEL/PREDICT");
 
 export const save = createAction<{}>("MODEL/SAVE");
 
