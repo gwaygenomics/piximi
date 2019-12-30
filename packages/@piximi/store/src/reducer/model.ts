@@ -18,17 +18,23 @@ export const modelReducer = createReducer(initialState, {
   [compile.toString()]: (state) => {
     const {lossFunction, optimizationFunction, metrics} = state.compileOptions;
 
-    state.graph.compile({
+    const args = {
       loss: lossFunction,
       metrics: metrics,
       optimizer: optimizationFunction
-    });
+    };
+
+    state.graph.compile(args);
   },
   [evaluate.toString()]: (state, action) => {
     const {categories, images} = action.payload;
   },
   [fit.toString()]: (state, action) => {
     const {categories, images} = action.payload;
+
+    const x = tensorflow.data.array(
+      [...Array(100)].map(() => tensorflow.randomUniform([224, 224, 3]))
+    );
   },
   [load.toString()]: (state, action) => {},
   [predict.toString()]: (state, action) => {
