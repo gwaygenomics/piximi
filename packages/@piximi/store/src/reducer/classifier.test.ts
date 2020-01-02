@@ -22,7 +22,15 @@ import {
 
 import {classifierReducer} from "./classifier";
 
-import {Category, Classifier, Image, Partition, Score} from "@piximi/types";
+import {
+  Category,
+  Classifier,
+  Image,
+  Partition,
+  Score,
+  DefaultCompileOptions,
+  DefaultFitOptions
+} from "@piximi/types";
 
 it("createCategoryAction", () => {
   const state: Classifier = {
@@ -125,7 +133,9 @@ it("createClassifierAction", () => {
       }
     ],
     images: [],
-    name: "example"
+    name: "example",
+    fitOptions: DefaultFitOptions,
+    compileOptions: DefaultCompileOptions
   };
 
   expect(reducer).toEqual(expected);
@@ -149,6 +159,8 @@ it("openClassifierAction", () => {
   };
 
   const payload: Classifier = {
+    fitOptions: DefaultFitOptions,
+    compileOptions: DefaultCompileOptions,
     categories: [
       {
         description: "Unknown",
@@ -247,6 +259,8 @@ it("openClassifierAction", () => {
         }
       }
     ],
+    fitOptions: DefaultFitOptions,
+    compileOptions: DefaultCompileOptions,
     name: "example"
   };
 

@@ -28,7 +28,9 @@ import {
   Classifier,
   Image,
   Loss,
-  Optimizer
+  Optimizer,
+  DefaultFitOptions,
+  DefaultCompileOptions
 } from "@piximi/types";
 import {
   updateCompileOptionsArchitecture,
@@ -53,14 +55,10 @@ const findImageIndex = (images: Image[], identifier: string): number => {
 
 const initialState: Classifier = {
   categories: [],
-  compileOptions: {
-    learningRate: 0.01,
-    lossFunction: Loss.CategoricalCrossentropy,
-    metrics: [],
-    optimizationFunction: Optimizer.SGD
-  },
   images: [],
-  name: "Untitled classifier"
+  name: "Untitled classifier",
+  compileOptions: DefaultCompileOptions,
+  fitOptions: DefaultFitOptions
 };
 
 const unknownCategory: Category = {
@@ -91,15 +89,31 @@ export const classifierReducer = createReducer(initialState, {
     state.images = [];
 
     state.name = name;
+
+    state.compileOptions = DefaultCompileOptions;
+
+    state.fitOptions = DefaultFitOptions;
   },
   [openClassifierAction.toString()]: (state, action) => {
-    const {categories, images, name} = action.payload;
+    const {
+      categories,
+      images,
+      name,
+      fitOptions,
+      compileOptions
+    } = action.payload;
 
     state.categories = categories;
 
     state.images = images;
 
     state.name = name;
+
+    state.compileOptions = compileOptions;
+
+    state.fitOptions = fitOptions;
+
+    state = state;
   },
   [createImageAction.toString()]: (state, action) => {
     const {image} = action.payload;
