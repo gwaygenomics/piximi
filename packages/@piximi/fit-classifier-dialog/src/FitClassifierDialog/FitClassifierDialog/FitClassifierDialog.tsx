@@ -929,11 +929,6 @@ export const FitClassifierDialog = ({
     <Dialog fullScreen onClose={closeDialog} open={openedDialog}>
       <FitClassifierDialogAppBar closeDialog={closeDialog} />
 
-      <br />
-      <br />
-      <br />
-      <br />
-
       <FitClassifierDialogContent />
     </Dialog>
   );

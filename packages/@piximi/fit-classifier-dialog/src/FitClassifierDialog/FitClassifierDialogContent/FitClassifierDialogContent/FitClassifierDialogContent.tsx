@@ -8,7 +8,7 @@ type FitClassifierDialogContentProps = {};
 
 export const FitClassifierDialogContent = ({}: FitClassifierDialogContentProps) => {
   return (
-    <DialogContent>
+    <DialogContent style={{paddingTop: "80px"}}>
       <History />
 
       <List dense>
