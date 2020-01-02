@@ -1,5 +1,6 @@
 import * as React from "react";
 import {ListItemText, MenuItem} from "@material-ui/core";
+import * as types from "@piximi/types";
 
 export const OpenClassifierMenuItem = (props: any) => {
   const {closeMenu, openClassifier} = props;
@@ -12,7 +13,19 @@ export const OpenClassifierMenuItem = (props: any) => {
     reader.onload = (e) => {
       const target = e.target as FileReader;
 
-      const classifier = JSON.parse(target.result as string);
+      const classifier = JSON.parse(
+        target.result as string
+      ) as types.Classifier;
+
+      var compileOptions = types.DefaultCompileOptions;
+      if (classifier.compileOptions) {
+        compileOptions = classifier.compileOptions;
+      }
+
+      var fitOptions = types.DefaultFitOptions;
+      if (classifier.fitOptions) {
+        fitOptions = classifier.fitOptions;
+      }
 
       openClassifier(classifier.categories, classifier.images, classifier.name);
     };

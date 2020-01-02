@@ -1,6 +1,12 @@
 import {connect} from "react-redux";
 import {OpenClassifierMenuItem} from "./OpenClassifierMenuItem";
-import {Category, Classifier, Image} from "@piximi/types";
+import {
+  Category,
+  Classifier,
+  Image,
+  FitOptions,
+  CompileOptions
+} from "@piximi/types";
 import {Dispatch} from "redux";
 import {openClassifierAction} from "@piximi/store";
 
@@ -16,11 +22,19 @@ const mapStateToProps = (state: State) => {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    openClassifier: (categories: Category[], images: Image[], name: string) => {
+    openClassifier: (
+      categories: Category[],
+      images: Image[],
+      name: string,
+      fitOptions: FitOptions,
+      compileOptions: CompileOptions
+    ) => {
       const payload = {
         categories: categories,
         images: images,
-        name: name
+        name: name,
+        fitOptions: fitOptions,
+        compileOptions: compileOptions
       };
 
       const action = openClassifierAction(payload);
