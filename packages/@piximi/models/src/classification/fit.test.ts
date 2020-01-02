@@ -2,6 +2,12 @@ import {compile} from "./compile";
 import {fit} from "./fit";
 import {mobilenetv1} from "./mobilenetv1";
 import {Loss, Metric, Optimizer} from "@piximi/types";
+import * as tensorflow from "@tensorflow/tfjs";
+import "@tensorflow/tfjs-node";
+
+tensorflow.setBackend("tensorflow");
+
+jest.setTimeout(50000);
 
 const path =
   "https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_0.25_224/model.json";
@@ -20,7 +26,9 @@ describe("fit", () => {
     const graph = await compile(promise, options);
 
     if (graph) {
-      expect(graph.metricsNames).toEqual(["loss", "categoricalAccuracy"]);
+      const history = await fit(graph, {epochs: 2, initialEpoch: 0});
+
+      expect(history.epoch).toEqual([0, 1]);
     }
   });
 });
