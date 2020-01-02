@@ -9,12 +9,16 @@ import {
   Middleware,
   StoreEnhancer
 } from "@reduxjs/toolkit";
+import createSagaMiddleware from "redux-saga";
 
 import {reducer} from "./reducer";
+import {root} from "./sagas";
 
 const enhancers: StoreEnhancer[] = [];
 
-const middleware: Middleware[] = [logger, thunk];
+const saga = createSagaMiddleware();
+
+const middleware: Middleware[] = [logger, saga, thunk];
 
 const preloadedState = {};
 
@@ -42,3 +46,5 @@ const options = {
 export const store: EnhancedStore = configureStore(options);
 
 export const persistor: Persistor = persistStore(store);
+
+saga.run(root);
