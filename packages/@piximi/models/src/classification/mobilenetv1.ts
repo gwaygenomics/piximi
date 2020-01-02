@@ -22,7 +22,7 @@ export const mobilenetv1 = async (
       useBias: true
     });
 
-    const c = tensorflow.layers.dense({
+    const softmax = tensorflow.layers.dense({
       units: classes,
       kernelInitializer: "varianceScaling",
       useBias: false,
@@ -30,7 +30,7 @@ export const mobilenetv1 = async (
     });
 
     const config = {
-      layers: [...truncated.layers, a, b, c]
+      layers: [...truncated.layers, a, b, softmax]
     };
 
     return tensorflow.sequential(config);
