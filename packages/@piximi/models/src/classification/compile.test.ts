@@ -1,5 +1,3 @@
-import * as tensorflow from "@tensorflow/tfjs";
-
 import {compile} from "./compile";
 import {mobilenetv1} from "./mobilenetv1";
 import {Loss, Metric, Optimizer} from "@piximi/types";
