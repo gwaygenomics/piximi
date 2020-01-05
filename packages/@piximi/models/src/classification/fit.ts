@@ -7,22 +7,21 @@ export const fit = async (
   graph: tensorflow.LayersModel,
   options: FitOptions
 ) => {
-  const x = tensorflow.randomNormal([100, 224, 224, 3]);
-
-  const imageElements = images.map((image: Image) => {
+  const x: Array<tensorflow.Tensor> = images.map((image: Image) => {
     const data = new HTMLImageElement();
+
     data.src = image.data;
 
-    return data;
+    return tensorflow.browser.fromPixels(data);
   });
 
-  const categoryIdentifiers = images.map((image: Image) => {
-    return categories.findIndex((category: Category) => {
+  const y: Array<tensorflow.Tensor> = images.map((image: Image) => {
+    const index: number = categories.findIndex((category: Category) => {
       return category.identifier === image.categoryIdentifier;
     });
+
+    return tensorflow.oneHot(index, categories.length);
   });
 
-  const y = tensorflow.oneHot(categoryIdentifiers, categories.length);
-
-  return await graph.fit(x, y, {epochs: 2, verbose: 1});
+  return await graph.fit(x, y, {epochs: options.epochs});
 };
