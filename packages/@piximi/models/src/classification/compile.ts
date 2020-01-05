@@ -1,5 +1,5 @@
-import * as tensorflow from "@tensorflow/tfjs";
 import {CompileOptions} from "@piximi/types";
+import * as tensorflow from "@tensorflow/tfjs";
 
 export const compile = (
   promise: Promise<tensorflow.LayersModel>,

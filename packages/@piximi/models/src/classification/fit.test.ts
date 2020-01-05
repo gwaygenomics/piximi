@@ -1,9 +1,11 @@
+import "@tensorflow/tfjs-node";
+
+import {Loss, Metric, Optimizer} from "@piximi/types";
+import * as tensorflow from "@tensorflow/tfjs";
+
 import {compile} from "./compile";
 import {fit} from "./fit";
 import {mobilenetv1} from "./mobilenetv1";
-import {Loss, Metric, Optimizer} from "@piximi/types";
-import * as tensorflow from "@tensorflow/tfjs";
-import "@tensorflow/tfjs-node";
 
 tensorflow.setBackend("tensorflow");
 

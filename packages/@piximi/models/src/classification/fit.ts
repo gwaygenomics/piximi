@@ -9,6 +9,13 @@ export const fit = async (
 ) => {
   const x = tensorflow.randomNormal([100, 224, 224, 3]);
 
+  const imageElements = images.map((image: Image) => {
+    const data = new HTMLImageElement();
+    data.src = image.data;
+
+    return data;
+  });
+
   const categoryIdentifiers = images.map((image: Image) => {
     return categories.findIndex((category: Category) => {
       return category.identifier === image.categoryIdentifier;
