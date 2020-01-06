@@ -1,6 +1,6 @@
 import {Category, FitOptions, Image} from "@piximi/types";
 import * as tensorflow from "@tensorflow/tfjs";
-import {generate} from "./generate";
+import {generate, encodeCategory, encodeImage} from "./generate";
 
 export const fit = async (
   categories: Array<Category>,
@@ -10,7 +10,11 @@ export const fit = async (
 ) => {
   const generator = generate(categories, images);
 
-  const dataset = tensorflow.data.generator(generator).batch(16);
+  const dataset = tensorflow.data
+    .generator(generator)
+    .map(encodeCategory(categories.length))
+    .mapAsync(encodeImage)
+    .batch(16);
 
   return await graph.fitDataset(dataset, {epochs: options.epochs});
 };

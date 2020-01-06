@@ -3,15 +3,15 @@ import * as tensorflow from "@tensorflow/tfjs";
 import * as ImageJS from "image-js";
 
 export const encodeCategory = (categories: number) => {
-  return (item: {xs: string; ys: number}) => {
+  return (item: {xs: any; ys: number}): {xs: any; ys: tensorflow.Tensor} => {
     return {...item, ys: tensorflow.oneHot(item.ys, categories)};
   };
 };
 
 export const encodeImage = async (item: {
   xs: string;
-  ys: number;
-}): Promise<{xs: tensorflow.Tensor3D; ys: number}> => {
+  ys: any;
+}): Promise<{xs: tensorflow.Tensor3D; ys: any}> => {
   const fetched = await tensorflow.util.fetch(item.xs);
 
   const buffer: ArrayBuffer = await fetched.arrayBuffer();
