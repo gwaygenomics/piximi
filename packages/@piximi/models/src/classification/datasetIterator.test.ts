@@ -2,7 +2,7 @@ import "@tensorflow/tfjs-node";
 
 import * as tensorflow from "@tensorflow/tfjs";
 import {Category, Image, Partition} from "@piximi/types";
-import {datasetIterator, get, open, xs} from "./datasetIterator";
+import {datasetIterator, get, open} from "./datasetIterator";
 
 // tensorflow.setBackend("webgl");
 
@@ -33,7 +33,7 @@ const images: Array<Image> = [
   {
     categoryIdentifier: "11111111-1111-1111-1111-11111111111",
     checksum: "",
-    data: "https://picsum.photos/224/224",
+    data: "https://picsum.photos/seed/piximi/224",
     identifier: "11111111-1111-1111-1111-11111111111",
     partition: Partition.Training,
     scores: [],
@@ -47,7 +47,7 @@ const images: Array<Image> = [
   {
     categoryIdentifier: "22222222-2222-2222-2222-22222222222",
     checksum: "",
-    data: "https://picsum.photos/224/224",
+    data: "https://picsum.photos/seed/piximi/224",
     identifier: "22222222-2222-2222-2222-22222222222",
     partition: Partition.Training,
     scores: [],
@@ -68,33 +68,20 @@ describe("datasetIterator", () => {
   });
 
   it("open", async () => {
-    const canvas: HTMLCanvasElement = await open(
-      "https://picsum.photos/seed/piximi/224"
-    );
+    const canvas: HTMLCanvasElement = await open(images[0]);
 
     expect(canvas.width).toEqual(224);
     expect(canvas.height).toEqual(224);
   });
 
-  it("xs", async () => {
-    const buffers = await xs(images);
+  it("next", async () => {
+    const dataset = datasetIterator(categories, images);
 
-    const b = [
-      "https://picsum.photos/224/224",
-      "https://picsum.photos/224/224"
-    ];
+    const next = dataset.next();
 
-    expect(buffers).toEqual(b);
+    const [xs, ys] = next.value;
+
+    expect(xs.shape).toEqual([1, 224, 224, 3]);
+    expect(ys.shape).toEqual([1, 2]);
   });
-
-  // it("next", async () => {
-  //   const dataset = datasetIterator(categories, images);
-
-  //   const next = dataset.next();
-
-  //   const [xs, ys] = next.value;
-
-  //   expect(xs.shape).toEqual([1, 224, 224, 3]);
-  //   expect(ys.shape).toEqual([1, 2]);
-  // });
 });

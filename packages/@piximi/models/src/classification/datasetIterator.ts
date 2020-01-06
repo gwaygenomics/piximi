@@ -9,20 +9,12 @@ export const get = async (image: string): Promise<Buffer> => {
   return Buffer.from(response.data, "binary");
 };
 
-export const open = async (image: string): Promise<HTMLCanvasElement> => {
-  const buffer: Buffer = await get(image);
+export const open = async (image: Image): Promise<HTMLCanvasElement> => {
+  const buffer: Buffer = await get(image.data);
 
   const data: ImageJS.Image = await ImageJS.Image.load(buffer);
 
   return data.getCanvas();
-};
-
-export const xs = (images: Array<Image>) => {
-  return images.map(async (image: Image) => {
-    const data: HTMLCanvasElement = await open(image.data);
-
-    return data;
-  });
 };
 
 export const datasetIterator = (
@@ -30,12 +22,6 @@ export const datasetIterator = (
   images: Array<Image>
 ) => {
   const xs = images.map((image: Image) => {
-    // console.log(data);
-
-    // const canvas: HTMLCanvasElement = data.getCanvas();
-
-    // return tensorflow.browser.fromPixels(promise);
-
     return tensorflow.randomNormal([1, 224, 224, 3]);
   });
 
