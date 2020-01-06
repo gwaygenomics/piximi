@@ -44,10 +44,7 @@ export const datasetIterator = (
       const x = xs[index];
       const y = ys[index];
 
-      let data: {
-        done: boolean;
-        value: [tensorflow.Tensor, tensorflow.Tensor];
-      };
+      let data;
 
       if (index < count) {
         data = {
