@@ -1,11 +1,10 @@
 import {Category, Image} from "@piximi/types";
 import * as tensorflow from "@tensorflow/tfjs";
-import axios from "axios";
 import * as ImageJS from "image-js";
 
-export const encode = (depth: number) => {
+export const encodeCategory = (categories: number) => {
   return (item: {xs: string; ys: number}) => {
-    return {...item, ys: tensorflow.oneHot(item.ys, depth)};
+    return {...item, ys: tensorflow.oneHot(item.ys, categories)};
   };
 };
 
