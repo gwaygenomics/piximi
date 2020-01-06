@@ -2,8 +2,9 @@ import "@tensorflow/tfjs-node";
 
 import {Category, Image, Partition} from "@piximi/types";
 import * as tensorflow from "@tensorflow/tfjs";
+import * as ImageJS from "image-js";
 
-import {generate} from "./generate";
+import {encode, generate, get} from "./generate";
 
 tensorflow.setBackend("tensorflow");
 
@@ -62,47 +63,73 @@ const images: Array<Image> = [
 ];
 
 describe("generate", () => {
-  it("zip", async () => {
-    const xs = tensorflow.data.array(
-      images.map((image) => {
-        return {xs: image.data};
-      })
-    );
-
-    expect(await xs.toArray()).toEqual([
-      {xs: "https://picsum.photos/seed/piximi/224"},
-      {xs: "https://picsum.photos/seed/piximi/224"}
-    ]);
-
-    const ys = tensorflow.data.array(
-      categories.map((category) => {
-        return {ys: category.identifier};
-      })
-    );
-
-    expect(await ys.toArray()).toEqual([
-      {ys: "11111111-1111-1111-1111-11111111111"},
-      {ys: "22222222-2222-2222-2222-22222222222"}
-    ]);
-
-    const zipped = tensorflow.data.zip([xs, ys]).map((x) => {
-      return {xs: x[0].xs, ys: x[1].ys};
-    });
-
-    expect(await zipped.toArray()).toEqual([]);
-  });
-
-  it("toArray", async () => {
+  it("generator", async () => {
     const generator = generate(categories, images);
 
     const dataset = tensorflow.data.generator(generator);
 
-    const array = await dataset.toArray();
+    const expected = [
+      {
+        xs: "https://picsum.photos/seed/piximi/224",
+        ys: 0
+      },
+      {
+        xs: "https://picsum.photos/seed/piximi/224",
+        ys: 1
+      }
+    ];
 
-    const ys = array.map((y) => {
-      return y.ys;
-    });
+    expect(await dataset.toArray()).toEqual(expected);
+  });
 
-    expect(ys).toEqual([0, 1]);
+  it("encode", async () => {
+    const generator = generate(categories, images);
+
+    const dataset = tensorflow.data.generator(generator);
+
+    const depth: number = categories.length;
+
+    const processed = dataset.map(encode(depth));
+
+    const encoded = await processed.toArray();
+
+    expect(encoded.map((sample) => sample.ys.shape)).toEqual([[2], [2]]);
+  });
+
+  it("fetch", async () => {
+    const generator = generate(categories, images);
+
+    const dataset = tensorflow.data.generator(generator);
+
+    const fetch = async (item: {
+      xs: string;
+      ys: number;
+    }): Promise<{xs: tensorflow.Tensor3D; ys: number}> => {
+      const fetched = await tensorflow.util.fetch(item.xs);
+
+      const buffer: ArrayBuffer = await fetched.arrayBuffer();
+
+      const data: ImageJS.Image = await ImageJS.Image.load(buffer);
+
+      const canvas: HTMLCanvasElement = data.getCanvas();
+
+      const xs: tensorflow.Tensor3D = tensorflow.browser.fromPixels(canvas);
+
+      return new Promise((resolve) => {
+        return resolve({...item, xs: xs});
+      });
+    };
+
+    const fetched = dataset.mapAsync(fetch);
+
+    let x: Array<{
+      xs: tensorflow.Tensor3D;
+      ys: number;
+    }> = await fetched.toArray();
+
+    expect(x.map((item) => item.xs.shape)).toEqual([
+      [224, 224, 3],
+      [224, 224, 3]
+    ]);
   });
 });
