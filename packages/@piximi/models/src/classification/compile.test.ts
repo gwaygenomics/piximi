@@ -19,8 +19,6 @@ describe("compile", () => {
 
     const graph = await compile(promise, options);
 
-    if (graph) {
-      expect(graph.metricsNames).toEqual(["loss", "categoricalAccuracy"]);
-    }
+    expect(graph.metricsNames).toEqual(["loss", "categoricalAccuracy"]);
   });
 });
