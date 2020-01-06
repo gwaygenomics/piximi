@@ -75,8 +75,21 @@ describe("generate", () => {
     ]);
 
     const ys = tensorflow.data.array(
-      categories.map((category) => category.identifier)
+      categories.map((category) => {
+        return {ys: category.identifier};
+      })
     );
+
+    expect(await ys.toArray()).toEqual([
+      {ys: "11111111-1111-1111-1111-11111111111"},
+      {ys: "22222222-2222-2222-2222-22222222222"}
+    ]);
+
+    const zipped = tensorflow.data.zip([xs, ys]).map((x) => {
+      return {xs: x[0].xs, ys: x[1].ys};
+    });
+
+    expect(await zipped.toArray()).toEqual([]);
   });
 
   it("toArray", async () => {
