@@ -63,12 +63,20 @@ const images: Array<Image> = [
 
 describe("generate", () => {
   it("zip", async () => {
-    const xs = tensorflow.data.array(images.map((image) => image.data));
+    const xs = tensorflow.data.array(
+      images.map((image) => {
+        return {xs: image.data};
+      })
+    );
 
     expect(await xs.toArray()).toEqual([
-      "https://picsum.photos/seed/piximi/224",
-      "https://picsum.photos/seed/piximi/224"
+      {xs: "https://picsum.photos/seed/piximi/224"},
+      {xs: "https://picsum.photos/seed/piximi/224"}
     ]);
+
+    const ys = tensorflow.data.array(
+      categories.map((category) => category.identifier)
+    );
   });
 
   it("toArray", async () => {
