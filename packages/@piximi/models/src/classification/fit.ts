@@ -16,5 +16,12 @@ export const fit = async (
     .mapAsync(encodeImage)
     .batch(16);
 
-  return await graph.fitDataset(dataset, {epochs: options.epochs});
+  return await graph.fitDataset(dataset, {
+    callbacks: {
+      onEpochEnd: (epoch, logs) => {
+        console.log(logs.loss);
+      }
+    },
+    epochs: options.epochs
+  });
 };

@@ -88,11 +88,13 @@ describe("fit", () => {
 
     if (graph) {
       const history = await fit(categories, images, graph, {
-        epochs: 2,
+        epochs: 3,
         initialEpoch: 0
       });
 
-      expect(history.epoch).toEqual([0, 1]);
+      expect(history.epoch).toEqual([0, 1, 2]);
+    } else {
+      expect(true).toBe(false);
     }
   });
 });
