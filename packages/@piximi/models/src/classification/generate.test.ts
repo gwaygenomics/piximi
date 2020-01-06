@@ -4,7 +4,7 @@ import {Category, Image, Partition} from "@piximi/types";
 import * as tensorflow from "@tensorflow/tfjs";
 import * as ImageJS from "image-js";
 
-import {encode, generate, get} from "./generate";
+import {encode, generate, encodeImage} from "./generate";
 
 tensorflow.setBackend("tensorflow");
 
@@ -96,40 +96,18 @@ describe("generate", () => {
     expect(encoded.map((sample) => sample.ys.shape)).toEqual([[2], [2]]);
   });
 
-  it("fetch", async () => {
+  it("encodeImage", async () => {
     const generator = generate(categories, images);
 
     const dataset = tensorflow.data.generator(generator);
 
-    const fetch = async (item: {
-      xs: string;
-      ys: number;
-    }): Promise<{xs: tensorflow.Tensor3D; ys: number}> => {
-      const fetched = await tensorflow.util.fetch(item.xs);
-
-      const buffer: ArrayBuffer = await fetched.arrayBuffer();
-
-      const data: ImageJS.Image = await ImageJS.Image.load(buffer);
-
-      const canvas: HTMLCanvasElement = data.getCanvas();
-
-      const xs: tensorflow.Tensor3D = tensorflow.browser.fromPixels(canvas);
-
-      return new Promise((resolve) => {
-        return resolve({...item, xs: xs});
-      });
-    };
-
-    const fetched = dataset.mapAsync(fetch);
+    const fetched = dataset.mapAsync(encodeImage);
 
     let x: Array<{
       xs: tensorflow.Tensor3D;
       ys: number;
     }> = await fetched.toArray();
 
-    expect(x.map((item) => item.xs.shape)).toEqual([
-      [224, 224, 3],
-      [224, 224, 3]
-    ]);
+    expect(x[0].xs.shape).toEqual([224, 224, 3]);
   });
 });

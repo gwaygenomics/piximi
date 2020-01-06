@@ -9,19 +9,24 @@ export const encode = (depth: number) => {
   };
 };
 
-export const get = async (item: {xs: string; ys: number}) => {
-  const response = await axios.get(item.xs, {responseType: "arraybuffer"});
+export const encodeImage = async (item: {
+  xs: string;
+  ys: number;
+}): Promise<{xs: tensorflow.Tensor3D; ys: number}> => {
+  const fetched = await tensorflow.util.fetch(item.xs);
 
-  return {xs: Buffer.from(response.data, "binary"), ...item};
+  const buffer: ArrayBuffer = await fetched.arrayBuffer();
+
+  const data: ImageJS.Image = await ImageJS.Image.load(buffer);
+
+  const canvas: HTMLCanvasElement = data.getCanvas();
+
+  const xs: tensorflow.Tensor3D = tensorflow.browser.fromPixels(canvas);
+
+  return new Promise((resolve) => {
+    return resolve({...item, xs: xs});
+  });
 };
-
-// export const open = async (image: Image): Promise<HTMLCanvasElement> => {
-//   const buffer: Buffer = await get(image.data);
-
-//   const data: ImageJS.Image = await ImageJS.Image.load(buffer);
-
-//   return data.getCanvas();
-// };
 
 export const generate = (categories: Array<Category>, images: Array<Image>) => {
   const count = images.length;
