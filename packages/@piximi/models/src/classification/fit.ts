@@ -36,8 +36,6 @@ export const fit = async (
   graph: tensorflow.LayersModel,
   options: FitOptions
 ) => {
-  // const iterator = datasetIterator(categories, images);
-
   const generator = generate(categories, images);
 
   const dataset = tensorflow.data.generator(generator).batch(16);
