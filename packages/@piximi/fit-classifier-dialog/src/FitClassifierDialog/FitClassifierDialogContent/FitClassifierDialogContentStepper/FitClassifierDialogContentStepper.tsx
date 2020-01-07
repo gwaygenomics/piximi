@@ -12,16 +12,18 @@ import IconButton from "@material-ui/core/IconButton";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 
-type FitClassifierDialogContentProps = {};
+type FitClassifierDiaslogContentProps = {};
 
-const steps = () => {
-  return ["Compile options", "Fit options"];
-};
-
-export const FitClassifierDialogContentStepper = ({}: FitClassifierDialogContentProps) => {
+export const FitClassifierDialogContentStepper = ({}: FitClassifierDiaslogContentProps) => {
   const [activeStep, setActiveStep] = React.useState(0);
 
   const classes = useStyles({});
+
+  const compile = () => {
+    console.log("compile!");
+
+    next();
+  };
 
   const next = () => {
     setActiveStep((previous) => previous + 1);
@@ -49,7 +51,7 @@ export const FitClassifierDialogContentStepper = ({}: FitClassifierDialogContent
             <Button
               className={classes.button}
               color="primary"
-              onClick={next}
+              onClick={compile}
               variant="contained"
             >
               Compile
