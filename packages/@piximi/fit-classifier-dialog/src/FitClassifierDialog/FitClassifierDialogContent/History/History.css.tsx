@@ -1,8 +1,11 @@
-import {createStyles} from "@material-ui/styles";
+import {createStyles, makeStyles} from "@material-ui/styles";
 import {Theme} from "@material-ui/core";
 
-export const styles = (theme: Theme) =>
+const styles = (theme: Theme) =>
   createStyles({
+    container: {
+      marginLeft: "24px"
+    },
     typography: {
       color: "rgba(0, 0, 0, 0.54)",
       padding: 0,
@@ -16,3 +19,5 @@ export const styles = (theme: Theme) =>
       transformOrigin: "top left"
     }
   });
+
+export const useStyles = makeStyles(styles);

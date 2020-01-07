@@ -1,16 +1,22 @@
 import DialogContent from "@material-ui/core/DialogContent";
 import * as React from "react";
-import {History} from "../History";
 import {FitClassifierDialogContentStepper} from "../FitClassifierDialogContentStepper";
+import {History} from "../History";
 
 type FitClassifierDialogContentStepperProps = {};
 
 export const FitClassifierDialogContent = ({}: FitClassifierDialogContentStepperProps) => {
   return (
     <DialogContent style={{paddingTop: "80px"}}>
-      <History />
-
       <FitClassifierDialogContentStepper />
+
+      <History
+        status={"Training"}
+        lossData={[]}
+        validationLossData={[]}
+        accuracyData={[]}
+        validationAccuracyData={[]}
+      />
     </DialogContent>
   );
 };
