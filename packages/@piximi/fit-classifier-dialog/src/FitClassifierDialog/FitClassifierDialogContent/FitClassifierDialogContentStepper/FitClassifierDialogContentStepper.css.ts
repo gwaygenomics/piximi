@@ -9,6 +9,9 @@ const styles = (theme: Theme) =>
     button: {
       marginTop: theme.spacing(1),
       marginRight: theme.spacing(1)
+    },
+    formControl: {
+      width: "100%"
     }
   });
 

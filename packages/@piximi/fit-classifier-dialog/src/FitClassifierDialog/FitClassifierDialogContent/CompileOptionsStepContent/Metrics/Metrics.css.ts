@@ -1,14 +1,14 @@
 import {Theme} from "@material-ui/core";
 import {createStyles, makeStyles} from "@material-ui/styles";
 
-const styles = (theme: Theme) =>
+const styles = ({spacing}: Theme) =>
   createStyles({
-    actionsContainer: {
-      marginBottom: theme.spacing(2)
+    formControl: {
+      margin: spacing(3)
     },
-    button: {
-      marginTop: theme.spacing(1),
-      marginRight: theme.spacing(1)
+    formLabel: {
+      transform: "translate(0, 1.5px) scale(0.75)",
+      transformOrigin: "top left"
     }
   });
 

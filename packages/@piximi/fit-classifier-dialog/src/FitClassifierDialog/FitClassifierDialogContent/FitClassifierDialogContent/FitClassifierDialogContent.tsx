@@ -1,19 +1,16 @@
 import DialogContent from "@material-ui/core/DialogContent";
-import List from "@material-ui/core/List";
 import * as React from "react";
-import {CompileOptions} from "../CompileOptions";
 import {History} from "../History";
+import {FitClassifierDialogContentStepper} from "../FitClassifierDialogContentStepper";
 
-type FitClassifierDialogContentProps = {};
+type FitClassifierDialogContentStepperProps = {};
 
-export const FitClassifierDialogContent = ({}: FitClassifierDialogContentProps) => {
+export const FitClassifierDialogContent = ({}: FitClassifierDialogContentStepperProps) => {
   return (
     <DialogContent style={{paddingTop: "80px"}}>
       <History />
 
-      <List dense>
-        <CompileOptions />
-      </List>
+      <FitClassifierDialogContentStepper />
     </DialogContent>
   );
 };

@@ -36,25 +36,30 @@ type ModelProps = {};
 export const Model = ({}: ModelProps) => {
   const dispatch = useDispatch();
 
-  const onChange = React.useCallback(
-    (event: React.ChangeEvent<{value: Architecture}>) => {
-      const action = {
-        payload: {
-          architecture: event.target.value
-        },
-        type: "update-compile-options-architecture"
-      };
+  // const onChange = React.useCallback(
+  //   (event: React.ChangeEvent<{value: Architecture}>) => {
+  //     const action = {
+  //       payload: {
+  //         architecture: event.target.value
+  //       },
+  //       type: "update-compile-options-architecture"
+  //     };
 
-      dispatch(action);
-    },
+  //     dispatch(action);
+  //   },
+  //   [dispatch]
+  // );
+
+  const onChange = React.useCallback(
+    (event: React.ChangeEvent<{value: Architecture}>) => {},
     [dispatch]
   );
 
-  const architecture = useSelector(
-    ({classifier}: {classifier: Classifier}): Architecture => {
-      return classifier.compileOptions.architecture;
-    }
-  );
+  // const architecture = useSelector(
+  //   ({classifier}: {classifier: Classifier}): Architecture => {
+  //     return classifier.compileOptions.architecture;
+  //   }
+  // );
 
   const classes = useStyles({});
 
@@ -69,7 +74,7 @@ export const Model = ({}: ModelProps) => {
               id="architecture"
               labelId="architecture-label"
               onChange={onChange}
-              value={architecture}
+              value={1}
             >
               <MenuItem key={1} value={1}>
                 MobileNet
