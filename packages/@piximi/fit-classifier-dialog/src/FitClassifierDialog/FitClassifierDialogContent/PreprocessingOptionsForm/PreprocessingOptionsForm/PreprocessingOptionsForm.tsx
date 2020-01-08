@@ -11,21 +11,16 @@ type PreprocessingOptionsFormProps = {};
 export const PreprocessingOptionsForm = ({}: PreprocessingOptionsFormProps) => {
   return (
     <>
-      <Grid container spacing={2}>
+      <Grid container spacing={4}>
         <OutputShape />
 
         <Method />
       </Grid>
 
-      <Grid container spacing={2}>
-        <PreserveProportions />
-      </Grid>
+      <PreserveProportions />
 
-      <br />
-      <br />
-
-      <Grid container spacing={2}>
-        <Grid item xs={4}>
+      <Grid container spacing={4}>
+        <Grid item xs>
           <FormControlLabel
             control={<Switch checked onChange={() => {}} value="clahe" />}
             label="Contrast limited adaptive histogram equalization (CLAHE)"

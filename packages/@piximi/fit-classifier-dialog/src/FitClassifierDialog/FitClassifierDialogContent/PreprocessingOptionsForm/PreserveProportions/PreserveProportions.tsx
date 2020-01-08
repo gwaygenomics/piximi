@@ -7,8 +7,8 @@ type PreserveProportionsProps = {};
 
 export const PreserveProportions = ({}: PreserveProportionsProps) => {
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={2}>
+    <Grid container spacing={4}>
+      <Grid item xs>
         <FormControlLabel
           control={<Switch checked />}
           label="Preserve proportions"
