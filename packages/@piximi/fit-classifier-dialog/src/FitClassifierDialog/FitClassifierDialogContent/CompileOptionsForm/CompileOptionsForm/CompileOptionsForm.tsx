@@ -5,12 +5,13 @@ import {LossFunction} from "../LossFunction";
 import {LearningRate} from "../LearningRate";
 import {Metrics} from "../Metrics";
 import {Model} from "../Model";
+import List from "@material-ui/core/List";
 
 type CompileOptionsListItemProps = {};
 
 export const CompileOptionsForm = ({}: CompileOptionsListItemProps) => {
   return (
-    <>
+    <List dense>
       <Model />
 
       <Grid container spacing={2}>
@@ -30,6 +31,6 @@ export const CompileOptionsForm = ({}: CompileOptionsListItemProps) => {
       </Grid>
 
       <Metrics />
-    </>
+    </List>
   );
 };
