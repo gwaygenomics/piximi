@@ -1,6 +1,5 @@
 import Grid from "@material-ui/core/Grid";
 import * as React from "react";
-import List from "@material-ui/core/List";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import {PreserveProportions} from "../PreserveProportions/PreserveProportions";
@@ -11,7 +10,7 @@ type PreprocessingOptionsFormProps = {};
 
 export const PreprocessingOptionsForm = ({}: PreprocessingOptionsFormProps) => {
   return (
-    <List dense>
+    <>
       <Grid container spacing={2}>
         <OutputShape />
 
@@ -33,6 +32,6 @@ export const PreprocessingOptionsForm = ({}: PreprocessingOptionsFormProps) => {
           />
         </Grid>
       </Grid>
-    </List>
+    </>
   );
 };
