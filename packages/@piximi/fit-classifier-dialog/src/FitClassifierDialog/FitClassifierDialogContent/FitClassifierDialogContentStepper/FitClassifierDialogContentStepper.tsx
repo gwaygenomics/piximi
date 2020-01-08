@@ -9,83 +9,15 @@ import {CompileOptionsForm} from "../CompileOptionsForm/CompileOptionsForm";
 import Button from "@material-ui/core/Button/Button";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import IconButton from "@material-ui/core/IconButton";
-import Grid from "@material-ui/core/Grid";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Switch from "@material-ui/core/Switch";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import example from "./example.json";
 import {FitOptionsForm} from "../FitOptionsForm/FitOptionsForm";
 import {PreprocessingOptionsForm} from "../PreprocessingOptionsForm/PreprocessingOptionsForm";
 
-type FitClassifierDiaslogContentProps = {
-  accuracyData: any;
-  lossData: any;
-  setAccuracyData: any;
-  setLossData: any;
-  setValidationAccuracyData: any;
-  setValidationLossData: any;
-  validationAccuracyData: any;
-  validationLossData: any;
-};
+type FitClassifierDiaslogContentProps = {};
 
-function useInterval(callback, delay) {
-  const savedCallback = React.useRef(null);
-
-  React.useEffect(() => {
-    savedCallback.current = callback;
-  }, [callback]);
-
-  React.useEffect(() => {
-    function tick() {
-      savedCallback.current();
-    }
-
-    if (delay !== null) {
-      let id = setInterval(tick, delay);
-      return () => clearInterval(id);
-    }
-  }, [delay]);
-}
-
-export const FitClassifierDialogContentStepper = ({
-  setAccuracyData,
-  setLossData,
-  setValidationAccuracyData,
-  setValidationLossData
-}: FitClassifierDiaslogContentProps) => {
-  const {
-    trainingAccuracy,
-    trainingLoss,
-    validationAccuracy,
-    validationLoss
-  } = example;
-
-  const [delay, setDelay] = React.useState(100);
-  const [isRunning, setIsRunning] = React.useState(false);
-  const [t, setT] = React.useState(0);
-
+export const FitClassifierDialogContentStepper = ({}: FitClassifierDiaslogContentProps) => {
   const [activeStep, setActiveStep] = React.useState(0);
 
   const classes = useStyles({});
-
-  useInterval(
-    () => {
-      setAccuracyData((previous) => [...previous, trainingAccuracy[t]]);
-      setLossData((previous) => [...previous, trainingLoss[t]]);
-      setValidationAccuracyData((previous) => [
-        ...previous,
-        validationAccuracy[t]
-      ]);
-      setValidationLossData((previous) => [...previous, validationLoss[t]]);
-
-      setT(t + 1);
-    },
-    isRunning ? delay : null
-  );
 
   const compile = () => {
     console.log("compile!");
@@ -95,8 +27,6 @@ export const FitClassifierDialogContentStepper = ({
 
   const onFitClick = () => {
     next();
-
-    setIsRunning(true);
   };
 
   const next = () => {
