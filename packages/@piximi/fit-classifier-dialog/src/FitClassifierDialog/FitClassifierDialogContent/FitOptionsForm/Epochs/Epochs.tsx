@@ -6,14 +6,12 @@ type EpochsProps = {};
 
 export const Epochs = ({}: EpochsProps) => {
   return (
-    <Grid item xs={1}>
-      <TextField
-        fullWidth
-        id="epochs"
-        label="Epochs"
-        onChange={() => {}}
-        value={1}
-      />
-    </Grid>
+    <TextField
+      fullWidth
+      id="epochs"
+      label="Epochs"
+      onChange={() => {}}
+      value={1}
+    />
   );
 };

@@ -6,14 +6,12 @@ type BatchSizeProps = {};
 
 export const BatchSize = ({}: BatchSizeProps) => {
   return (
-    <Grid item xs={1}>
-      <TextField
-        fullWidth
-        id="batch-size"
-        label="Batch size"
-        onChange={() => {}}
-        value={32}
-      />
-    </Grid>
+    <TextField
+      fullWidth
+      id="batch-size"
+      label="Batch size"
+      onChange={() => {}}
+      value={32}
+    />
   );
 };

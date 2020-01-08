@@ -6,14 +6,12 @@ type InitialEpochProps = {};
 
 export const InitialEpoch = ({}: InitialEpochProps) => {
   return (
-    <Grid item xs={1}>
-      <TextField
-        fullWidth
-        id="initial-epoch"
-        label="Initial epoch"
-        onChange={() => {}}
-        value={1}
-      />
-    </Grid>
+    <TextField
+      fullWidth
+      id="initial-epoch"
+      label="Initial epoch"
+      onChange={() => {}}
+      value={1}
+    />
   );
 };

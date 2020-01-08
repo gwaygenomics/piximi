@@ -8,12 +8,18 @@ type FitOptionsFormProps = {};
 
 export const FitOptionsForm = ({}: FitOptionsFormProps) => {
   return (
-    <Grid container spacing={2}>
-      <BatchSize />
+    <Grid container spacing={4}>
+      <Grid item xs={2}>
+        <BatchSize />
+      </Grid>
 
-      <Epochs />
+      <Grid item xs={2}>
+        <Epochs />
+      </Grid>
 
-      <InitialEpoch />
+      <Grid item xs={2}>
+        <InitialEpoch />
+      </Grid>
     </Grid>
   );
 };
