@@ -150,6 +150,13 @@ export type Model = {
   graph?: tensorflow.LayersModel;
 };
 
+export type ModelOptions = {
+  architecture: string;
+  inputShape: string;
+  multiplier: string;
+  version: string;
+};
+
 export enum Partition {
   Training,
   Validation,

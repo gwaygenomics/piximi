@@ -66,29 +66,25 @@ export const LossFunction = ({}: LossFunctionProps) => {
   const classes = useStyles({});
 
   return (
-    <Grid container spacing={4}>
-      <Grid item xs={8}>
-        <FormControl className={classes.formControl}>
-          <InputLabel id="loss-label">Loss function</InputLabel>
+    <FormControl className={classes.formControl}>
+      <InputLabel id="loss-label">Loss function</InputLabel>
 
-          <Select
-            id="loss"
-            labelId="loss-label"
-            onChange={onChange}
-            value={lossFunction}
-          >
-            {Array.from(LOSS_FUNCTIONS).map(([k, v]: [Loss, string]) => {
-              return (
-                <MenuItem key={k} value={k}>
-                  {v}
-                </MenuItem>
-              );
-            })}
-          </Select>
+      <Select
+        id="loss"
+        labelId="loss-label"
+        onChange={onChange}
+        value={lossFunction}
+      >
+        {Array.from(LOSS_FUNCTIONS).map(([k, v]: [Loss, string]) => {
+          return (
+            <MenuItem key={k} value={k}>
+              {v}
+            </MenuItem>
+          );
+        })}
+      </Select>
 
-          <FormHelperText>&nbsp;</FormHelperText>
-        </FormControl>
-      </Grid>
-    </Grid>
+      <FormHelperText>&nbsp;</FormHelperText>
+    </FormControl>
   );
 };

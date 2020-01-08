@@ -9,6 +9,7 @@ import {PreprocessingOptionsForm} from "../PreprocessingOptionsForm";
 import {FitOptionsActions} from "../FitOptionsActions";
 import {CompileOptionsActions} from "../CompileOptionsActions";
 import {PreprocessingOptionsActions} from "../PreprocessingOptionsActions";
+import Grid from "@material-ui/core/Grid";
 
 type FitClassifierDiaslogContentProps = {};
 
@@ -28,48 +29,50 @@ export const FitClassifierDialogContentStepper = ({}: FitClassifierDiaslogConten
   };
 
   return (
-    <Stepper activeStep={activeStep} orientation="vertical">
-      <Step key="compile-options">
-        <StepLabel>Compile options</StepLabel>
+    <Grid item md={8}>
+      <Stepper activeStep={activeStep} orientation="vertical">
+        <Step key="compile-options">
+          <StepLabel>Compile options</StepLabel>
 
-        <StepContent>
-          <CompileOptionsForm />
+          <StepContent>
+            <CompileOptionsForm />
 
-          <CompileOptionsActions
-            activeStep={activeStep}
-            next={next}
-            previous={previous}
-          />
-        </StepContent>
-      </Step>
+            <CompileOptionsActions
+              activeStep={activeStep}
+              next={next}
+              previous={previous}
+            />
+          </StepContent>
+        </Step>
 
-      <Step key="preprocessing-options">
-        <StepLabel>Preprocessing options</StepLabel>
+        <Step key="preprocessing-options">
+          <StepLabel>Preprocessing options</StepLabel>
 
-        <StepContent>
-          <PreprocessingOptionsForm />
+          <StepContent>
+            <PreprocessingOptionsForm />
 
-          <PreprocessingOptionsActions
-            activeStep={activeStep}
-            next={next}
-            previous={previous}
-          />
-        </StepContent>
-      </Step>
+            <PreprocessingOptionsActions
+              activeStep={activeStep}
+              next={next}
+              previous={previous}
+            />
+          </StepContent>
+        </Step>
 
-      <Step key="fit-options">
-        <StepLabel>Fit options</StepLabel>
+        <Step key="fit-options">
+          <StepLabel>Fit options</StepLabel>
 
-        <StepContent>
-          <FitOptionsForm />
+          <StepContent>
+            <FitOptionsForm />
 
-          <FitOptionsActions
-            activeStep={activeStep}
-            next={next}
-            previous={previous}
-          />
-        </StepContent>
-      </Step>
-    </Stepper>
+            <FitOptionsActions
+              activeStep={activeStep}
+              next={next}
+              previous={previous}
+            />
+          </StepContent>
+        </Step>
+      </Stepper>
+    </Grid>
   );
 };

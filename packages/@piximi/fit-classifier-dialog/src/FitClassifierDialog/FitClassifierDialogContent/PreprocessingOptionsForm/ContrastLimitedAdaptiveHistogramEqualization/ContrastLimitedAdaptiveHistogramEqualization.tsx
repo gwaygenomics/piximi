@@ -1,7 +1,7 @@
-import Grid from "@material-ui/core/Grid";
-import * as React from "react";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Grid from "@material-ui/core/Grid";
 import Switch from "@material-ui/core/Switch";
+import * as React from "react";
 
 type ContrastLimitedAdaptiveHistogramEqualizationProps = {};
 

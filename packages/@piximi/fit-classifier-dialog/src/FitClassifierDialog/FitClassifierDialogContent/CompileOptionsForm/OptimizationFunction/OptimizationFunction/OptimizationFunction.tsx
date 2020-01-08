@@ -50,8 +50,8 @@ export const OptimizationFunction = ({}: OptimizationFunctionProps) => {
   const classes = useStyles({});
 
   return (
-    <Grid container spacing={4}>
-      <Grid item xs={8}>
+    <>
+      <Grid item xs={6}>
         <FormControl className={classes.formControl}>
           <InputLabel id="optimizer-label">Optimization function</InputLabel>
 
@@ -79,6 +79,6 @@ export const OptimizationFunction = ({}: OptimizationFunctionProps) => {
       <Grid item xs={4}>
         <LearningRate />
       </Grid>
-    </Grid>
+    </>
   );
 };

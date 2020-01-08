@@ -41,7 +41,7 @@ export const Metrics = ({}: MetricsProps) => {
   };
 
   return (
-    <Grid container>
+    <>
       <FormLabel className={classes.formLabel} component="legend">
         Metrics
       </FormLabel>
@@ -95,6 +95,6 @@ export const Metrics = ({}: MetricsProps) => {
       </Grid>
 
       <FormHelperText>&nbsp;</FormHelperText>
-    </Grid>
+    </>
   );
 };
