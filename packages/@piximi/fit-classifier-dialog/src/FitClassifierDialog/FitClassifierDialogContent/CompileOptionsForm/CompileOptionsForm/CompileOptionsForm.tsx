@@ -8,7 +8,7 @@ import {Model} from "../Model";
 
 type CompileOptionsListItemProps = {};
 
-export const CompileOptions = ({}: CompileOptionsListItemProps) => {
+export const CompileOptionsForm = ({}: CompileOptionsListItemProps) => {
   return (
     <>
       <Model />
@@ -29,11 +29,7 @@ export const CompileOptions = ({}: CompileOptionsListItemProps) => {
         </Grid>
       </Grid>
 
-      <Grid container spacing={2}>
-        <Grid item xs={4}>
-          {/*<MetricsList />*/}
-        </Grid>
-      </Grid>
+      <Metrics />
     </>
   );
 };

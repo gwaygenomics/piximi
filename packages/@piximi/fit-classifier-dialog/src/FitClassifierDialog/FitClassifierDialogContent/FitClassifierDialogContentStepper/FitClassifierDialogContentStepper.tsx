@@ -5,25 +5,21 @@ import StepLabel from "@material-ui/core/StepLabel";
 import {useStyles} from "./FitClassifierDialogContentStepper.css";
 import StepContent from "@material-ui/core/StepContent";
 import List from "@material-ui/core/List";
-import {CompileOptions} from "../CompileOptionsStepContent/CompileOptions";
+import {CompileOptionsForm} from "../CompileOptionsForm/CompileOptionsForm";
 import Button from "@material-ui/core/Button/Button";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import IconButton from "@material-ui/core/IconButton";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
-import {Model} from "../CompileOptionsStepContent/Model";
-import {OptimizationFunction} from "../CompileOptionsStepContent/OptimizationFunction";
-import {LearningRate} from "../CompileOptionsStepContent/LearningRate";
-import {LossFunction} from "../CompileOptionsStepContent/LossFunction";
-import {Metrics} from "../CompileOptionsStepContent/Metrics";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-import {History} from "../History";
 import example from "./example.json";
+import {FitOptionsForm} from "../FitOptionsForm/FitOptionsForm";
+import {PreprocessingOptionsForm} from "../PreprocessingOptionsForm/PreprocessingOptionsForm";
 
 type FitClassifierDiaslogContentProps = {
   accuracyData: any;
@@ -56,14 +52,10 @@ function useInterval(callback, delay) {
 }
 
 export const FitClassifierDialogContentStepper = ({
-  accuracyData,
-  lossData,
   setAccuracyData,
   setLossData,
   setValidationAccuracyData,
-  setValidationLossData,
-  validationAccuracyData,
-  validationLossData
+  setValidationLossData
 }: FitClassifierDiaslogContentProps) => {
   const {
     trainingAccuracy,
@@ -126,7 +118,7 @@ export const FitClassifierDialogContentStepper = ({
 
         <StepContent>
           <List dense>
-            <CompileOptions />
+            <CompileOptionsForm />
           </List>
 
           <div className={classes.actionsContainer}>
@@ -146,73 +138,7 @@ export const FitClassifierDialogContentStepper = ({
         <StepLabel>Preprocessing options</StepLabel>
 
         <StepContent>
-          <List dense>
-            <Grid container spacing={2}>
-              <Grid item xs={1}>
-                <TextField
-                  fullWidth
-                  id="output-shape-width"
-                  label="Output shape"
-                  onChange={() => {}}
-                  value={224}
-                />
-              </Grid>
-
-              <Grid item xs={1}>
-                <TextField
-                  fullWidth
-                  id="output-shape-height"
-                  label="&nbsp;"
-                  onChange={() => {}}
-                  value={224}
-                />
-              </Grid>
-
-              <Grid item xs={4}>
-                <FormControl className={classes.formControl}>
-                  <InputLabel id="method-label">Method</InputLabel>
-                  <Select
-                    labelId="method-label"
-                    id="method"
-                    value={3}
-                    onChange={() => {}}
-                    style={{width: "100%"}}
-                  >
-                    <MenuItem value={0}>Bicubic interpolation</MenuItem>
-                    <MenuItem value={1}>Bilinear interpolation</MenuItem>
-                    <MenuItem value={2}>Lanczos</MenuItem>
-                    <MenuItem value={3}>
-                      Nearest-neighbor interpolation
-                    </MenuItem>
-                    <MenuItem value={4}>Mitchell-Netravali</MenuItem>
-                    <MenuItem value={5}>Gaussian</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-            </Grid>
-
-            <Grid container spacing={2}>
-              <Grid item xs={2}>
-                <FormControlLabel
-                  control={<Switch checked />}
-                  label="Maintain proportions"
-                  value="maintain-proportions"
-                />
-              </Grid>
-            </Grid>
-
-            <br />
-            <br />
-
-            <Grid container spacing={2}>
-              <Grid item xs={4}>
-                <FormControlLabel
-                  control={<Switch checked onChange={() => {}} value="clahe" />}
-                  label="Contrast limited adaptive histogram equalization (CLAHE)"
-                />
-              </Grid>
-            </Grid>
-          </List>
+          <PreprocessingOptionsForm />
 
           <div className={classes.actionsContainer}>
             <div>
@@ -241,39 +167,7 @@ export const FitClassifierDialogContentStepper = ({
         <StepLabel>Fit options</StepLabel>
 
         <StepContent>
-          <List dense>
-            <Grid container spacing={2}>
-              <Grid item xs={1}>
-                <TextField
-                  fullWidth
-                  id="batch-size"
-                  label="Batch size"
-                  onChange={() => {}}
-                  value={32}
-                />
-              </Grid>
-
-              <Grid item xs={1}>
-                <TextField
-                  fullWidth
-                  id="epochs"
-                  label="Epochs"
-                  onChange={() => {}}
-                  value={1}
-                />
-              </Grid>
-
-              <Grid item xs={1}>
-                <TextField
-                  fullWidth
-                  id="initial-epoch"
-                  label="Initial epoch"
-                  onChange={() => {}}
-                  value={1}
-                />
-              </Grid>
-            </Grid>
-          </List>
+          <FitOptionsForm />
 
           <div className={classes.actionsContainer}>
             <div>
