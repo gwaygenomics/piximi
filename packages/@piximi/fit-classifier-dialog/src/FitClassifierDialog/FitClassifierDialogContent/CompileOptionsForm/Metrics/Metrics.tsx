@@ -1,13 +1,12 @@
 import * as React from "react";
 import {Metric} from "@piximi/types";
 import {useStyles} from "./Metrics.css";
-import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormHelperText from "@material-ui/core/FormHelperText";
-import Switch from "@material-ui/core/Switch";
 import Grid from "@material-ui/core/Grid";
+import {Checkbox} from "@material-ui/core";
 
 type MetricsProps = {};
 
@@ -33,7 +32,7 @@ export const Metrics = ({}: MetricsProps) => {
 
   const control = (metric: Metric) => {
     return (
-      <Switch
+      <Checkbox
         checked={checked(metric)}
         onChange={onChange(metric)}
         value={metric}
@@ -42,14 +41,14 @@ export const Metrics = ({}: MetricsProps) => {
   };
 
   return (
-    <FormControl component="fieldset">
+    <Grid container>
       <FormLabel className={classes.formLabel} component="legend">
         Metrics
       </FormLabel>
 
-      <FormGroup>
-        <Grid container spacing={2}>
-          <Grid item xs={3}>
+      <Grid container>
+        <Grid item xs>
+          <FormGroup>
             <FormControlLabel
               control={control(Metric.BinaryAccuracy)}
               label="Binary accuracy"
@@ -70,9 +69,11 @@ export const Metrics = ({}: MetricsProps) => {
               control={control(Metric.MAE)}
               label="Mean absolute error (MAE)"
             />
-          </Grid>
+          </FormGroup>
+        </Grid>
 
-          <Grid item xs={3}>
+        <Grid item xs>
+          <FormGroup>
             <FormControlLabel
               control={control(Metric.MAPE)}
               label="Mean absolute percentage error (MAPE)"
@@ -89,11 +90,11 @@ export const Metrics = ({}: MetricsProps) => {
               control={control(Metric.SparseCategoricalCrossentropy)}
               label="Sparse categorical cross-entropy"
             />
-          </Grid>
+          </FormGroup>
         </Grid>
-      </FormGroup>
+      </Grid>
 
       <FormHelperText>&nbsp;</FormHelperText>
-    </FormControl>
+    </Grid>
   );
 };
