@@ -2,7 +2,7 @@ import {Model} from "@piximi/types";
 import {createReducer} from "@reduxjs/toolkit";
 import * as tensorflow from "@tensorflow/tfjs";
 import {
-  compile,
+  compileAction,
   evaluate,
   fit,
   load,
@@ -30,7 +30,7 @@ function* generator() {
 const initialState: Model = {};
 
 export const modelReducer = createReducer(initialState, {
-  [compile.toString()]: (state) => {
+  [compileAction.toString()]: (state) => {
     const {lossFunction, optimizationFunction, metrics} = state.compileOptions;
 
     const args = {

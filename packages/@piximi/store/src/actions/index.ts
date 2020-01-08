@@ -41,3 +41,5 @@ export {
   updateImageVisibilityAction,
   updateImagesPartitionAction
 };
+
+import {compileAction} from "./model";

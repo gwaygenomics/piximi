@@ -1,5 +1,5 @@
 import {
-  compile,
+  compileAction,
   evaluate,
   fit,
   load,
@@ -13,7 +13,7 @@ import {modelReducer} from "./model";
 import {Category, Classifier, Image, Partition, Score} from "@piximi/types";
 
 it("compile", () => {
-  const action = compile();
+  const action = compileAction();
 
   const reducer = modelReducer({}, action);
 

@@ -1,7 +1,7 @@
 import {Category, CompileOptions, FitOptions, Image} from "@piximi/types";
 import {createAction} from "@reduxjs/toolkit";
 
-export const compile = createAction<{}>("MODEL/COMPILE");
+export const compileAction = createAction<{}>("MODEL/COMPILE");
 
 export const evaluate = createAction<{
   categories: Array<Category>;
