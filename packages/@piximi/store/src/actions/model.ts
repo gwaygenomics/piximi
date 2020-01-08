@@ -1,28 +1,44 @@
 import {Category, CompileOptions, FitOptions, Image} from "@piximi/types";
 import {createAction} from "@reduxjs/toolkit";
+import * as tensorflow from "@tensorflow/tfjs";
 
-export const compileAction = createAction<{}>("MODEL/COMPILE");
+export const compileAction = createAction<{
+  model: tensorflow.LayersModel;
+  options: CompileOptions;
+}>("MODEL/COMPILE");
 
-export const evaluate = createAction<{
+export const datasetAction = createAction<{}>("dataset");
+
+export const evaluateAction = createAction<{
   categories: Array<Category>;
   images: Array<Image>;
+  model: tensorflow.LayersModel;
+  options: FitOptions;
 }>("MODEL/EVALUATE");
 
-export const fit = createAction<{
+export const fitAction = createAction<{
   categories: Array<Category>;
   images: Array<Image>;
-}>("MODEL/FIT");
+  model: tensorflow.LayersModel;
+  options: FitOptions;
+}>("fit");
 
-export const load = createAction<{}>("MODEL/LOAD");
+export const generateAction = createAction<{
+  categories: Array<Category>;
+  images: Array<Image>;
+}>("generate");
 
-export const predict = createAction<{images: Array<Image>}>("MODEL/PREDICT");
+export const predictAction = createAction<{
+  images: Array<Image>;
+  model: tensorflow.LayersModel;
+}>("MODEL/PREDICT");
 
-export const save = createAction<{}>("MODEL/SAVE");
-
+export const saveAction = createAction<{}>("MODEL/SAVE");
 export const updateCompileOptions = createAction<CompileOptions>(
   "MODEL/UPDATE-COMPILE-OPTIONS"
 );
-
 export const updateFitOptions = createAction<FitOptions>(
   "MODEL/UPDATE-FIT-OPTIONS"
 );
+
+export const mobilenetv1Action = createAction<{}>("mobilenetv1");

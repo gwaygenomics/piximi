@@ -3,11 +3,11 @@ import {createReducer} from "@reduxjs/toolkit";
 import * as tensorflow from "@tensorflow/tfjs";
 import {
   compileAction,
-  evaluate,
-  fit,
-  load,
-  predict,
-  save,
+  evaluateAction,
+  fitAction,
+  openAction,
+  predictAction,
+  saveAction,
   updateCompileOptions,
   updateFitOptions
 } from "../actions/model";
@@ -41,19 +41,19 @@ export const modelReducer = createReducer(initialState, {
 
     state.graph.compile(args);
   },
-  [evaluate.toString()]: (state, action) => {
+  [evaluateAction.toString()]: (state, action) => {
     const {categories, images} = action.payload;
   },
-  [fit.toString()]: (state, action) => {
+  [fitAction.toString()]: (state, action) => {
     const {categories, images} = action.payload;
 
     const dataset = tensorflow.data.generator(generator);
   },
-  [load.toString()]: (state, action) => {},
-  [predict.toString()]: (state, action) => {
+  [openAction.toString()]: (state, action) => {},
+  [predictAction.toString()]: (state, action) => {
     const {images} = action.payload;
   },
-  [save.toString()]: (state, action) => {},
+  [saveAction.toString()]: (state, action) => {},
   [updateCompileOptions.toString()]: (state, action) => {
     state.compileOptions = action.payload;
   },

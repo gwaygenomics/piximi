@@ -1,10 +1,10 @@
 import {
   compileAction,
-  evaluate,
-  fit,
-  load,
-  predict,
-  save,
+  evaluateAction,
+  fitAction,
+  openAction,
+  predictAction,
+  saveAction,
   updateCompileOptions,
   updateFitOptions
 } from "../actions/model";
