@@ -30,7 +30,7 @@ describe("openSaga", () => {
 
     generator.next();
 
-    expect(generator.next(mock).value).toEqual(
+    expect(generator.next({opened: mock}).value).toEqual(
       put(openedAction({opened: mock}))
     );
 
