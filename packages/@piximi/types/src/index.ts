@@ -148,6 +148,8 @@ export type Model = {
   compileOptions?: CompileOptions;
   fitOptions?: FitOptions;
   graph?: tensorflow.LayersModel;
+  opened?: tensorflow.LayersModel;
+  opening: boolean;
 };
 
 export type ModelOptions = {

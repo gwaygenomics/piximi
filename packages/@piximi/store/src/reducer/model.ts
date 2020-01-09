@@ -9,7 +9,8 @@ import {
   predictAction,
   saveAction,
   updateCompileOptions,
-  updateFitOptions
+  updateFitOptions,
+  openedAction
 } from "../actions/model";
 
 function* generator() {
@@ -27,7 +28,9 @@ function* generator() {
   }
 }
 
-const initialState: Model = {};
+const initialState: Model = {
+  opening: false
+};
 
 export const modelReducer = createReducer(initialState, {
   [compileAction.toString()]: (state) => {
@@ -49,7 +52,6 @@ export const modelReducer = createReducer(initialState, {
 
     const dataset = tensorflow.data.generator(generator);
   },
-  [openAction.toString()]: (state, action) => {},
   [predictAction.toString()]: (state, action) => {
     const {images} = action.payload;
   },
@@ -59,5 +61,13 @@ export const modelReducer = createReducer(initialState, {
   },
   [updateFitOptions.toString()]: (state, action) => {
     state.fitOptions = action.payload;
+  },
+  [openedAction.toString()]: (state, action) => {
+    const {opened} = action.payload;
+
+    return {...state, opened: opened, opening: false};
+  },
+  [openAction.toString()]: (state) => {
+    return {...state, opening: true};
   }
 });

@@ -5,7 +5,7 @@ import * as tensorflow from "@tensorflow/tfjs";
 export const compileAction = createAction<{
   model: tensorflow.LayersModel;
   options: CompileOptions;
-}>("MODEL/COMPILE");
+}>("compile");
 
 export const datasetAction = createAction<{}>("dataset");
 
@@ -27,6 +27,16 @@ export const generateAction = createAction<{
   categories: Array<Category>;
   images: Array<Image>;
 }>("generate");
+
+export const openedAction = createAction<{opened: tensorflow.LayersModel}>(
+  "opened"
+);
+
+export const openAction = createAction<{
+  path: string;
+  classes: number;
+  units: number;
+}>("open");
 
 export const predictAction = createAction<{
   images: Array<Image>;

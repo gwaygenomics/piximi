@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@piximi/models": "*",
     "@piximi/types": "*",
     "@reduxjs/toolkit": "^1.1.0",
     "@tensorflow-models/mobilenet": "^2.0.4",
