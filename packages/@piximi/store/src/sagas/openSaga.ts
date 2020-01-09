@@ -1,15 +1,14 @@
 import {put, takeLatest} from "redux-saga/effects";
-import {openAction} from "../actions/model";
 import {mobilenetv1} from "@piximi/models";
 
 export function* openSaga(action: any) {
   const {path, classes, units} = action.payload;
 
-  const compiled = yield mobilenetv1(classes, path, units);
+  const opened = yield mobilenetv1(classes, path, units);
 
-  yield put(openAction());
+  yield put({payload: opened, type: "opened"});
 }
 
 export function* watchOpenSaga() {
-  yield takeLatest("open-MobileNetV1", openSaga);
+  yield takeLatest("open", openSaga);
 }

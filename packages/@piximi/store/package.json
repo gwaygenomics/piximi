@@ -5,6 +5,7 @@
     "@reduxjs/toolkit": "^1.1.0",
     "@tensorflow-models/mobilenet": "^2.0.4",
     "@tensorflow/tfjs": "^1.4.0",
+    "canvas": "^2.6.1",
     "image-js": "^0.21.8",
     "localforage": "^1.7.3",
     "react": "^16.12.0",

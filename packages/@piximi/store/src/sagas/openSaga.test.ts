@@ -1,16 +1,18 @@
 import {put, takeLatest} from "redux-saga/effects";
 import {openSaga, watchOpenSaga} from "./openSaga";
+import {mobilenetv1} from "@piximi/models";
+import {openAction, openedAction} from "../actions/model";
 
-describe("openMobileNetV1Saga", () => {
-  it("dispatches the 'openMobileNetV1Action'", () => {
+describe("openSaga", () => {
+  it("dispatches the 'openAction'", () => {
     const saga = watchOpenSaga();
 
-    expect(saga.next().value).toEqual(takeLatest("open-MobileNetV1", openSaga));
+    expect(saga.next().value).toEqual(takeLatest("open", openSaga));
 
     expect(saga.next().done).toBeTruthy();
   });
 
-  it("executes the `openMobileNetV1` function", () => {
+  it("executes the `open` function", async () => {
     const payload = {
       path:
         "https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_0.25_224/model.json",
@@ -18,15 +20,20 @@ describe("openMobileNetV1Saga", () => {
       units: 100
     };
 
-    const saga = openSaga({payload: payload, type: "open-MobileNetV1"});
+    const mock = await mobilenetv1(
+      payload.classes,
+      payload.path,
+      payload.units
+    );
 
-    saga.next();
+    const generator = openSaga(openAction(payload));
 
-    const a = saga.next().value;
-    const b = put({type: "opened-MobileNetV1"});
+    generator.next();
 
-    expect(a).toEqual(b);
+    expect(generator.next(mock).value).toEqual(
+      put(openedAction({opened: mock}))
+    );
 
-    expect(saga.next().done).toBeTruthy();
+    expect(generator.next().done).toBeTruthy();
   });
 });
