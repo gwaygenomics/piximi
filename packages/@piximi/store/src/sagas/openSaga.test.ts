@@ -28,7 +28,7 @@ describe("openSaga", () => {
 
     const generator = openSaga(openAction(payload));
 
-    generator.next();
+    await generator.next();
 
     expect(generator.next({opened: mock}).value).toEqual(
       put(openedAction({opened: mock}))
