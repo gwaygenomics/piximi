@@ -7,7 +7,9 @@ type CompileAction = {opened: LayersModel; options: CompileOptions};
 
 export const compile = createAction<CompileAction>("compile");
 
-type CompiledAction = {compiled: LayersModel};
+type CompiledAction = {
+  compiled: LayersModel;
+};
 
 export const compiled = createAction<CompiledAction>("compiled");
 
@@ -27,19 +29,30 @@ type FittedAction = {};
 
 export const fitted = createAction<FittedAction>("fitted");
 
-type GenerateAction = {categories: Array<Category>; images: Array<Image>};
+type GenerateAction = {
+  categories: Array<Category>;
+  images: Array<Image>;
+};
 
 export const generate = createAction<GenerateAction>("generate");
 
-type GeneratedAction = {generated: Dataset<{x: Tensor; y: Tensor}>};
+type GeneratedAction = {
+  generated: Dataset<{x: Tensor; y: Tensor}>;
+};
 
 export const generated = createAction<GeneratedAction>("generated");
 
-type OpenAction = {pathname: string; classes: number; units: number};
+type OpenAction = {
+  pathname: string;
+  classes: number;
+  units: number;
+};
 
 export const open = createAction<OpenAction>("open");
 
-type OpenedAction = {opened: LayersModel};
+type OpenedAction = {
+  opened: LayersModel;
+};
 
 export const opened = createAction<OpenedAction>("opened");
 
