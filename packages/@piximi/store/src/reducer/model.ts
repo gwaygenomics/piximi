@@ -1,73 +1,135 @@
-import {Model} from "@piximi/types";
+import {CompileOptions, FitOptions} from "@piximi/types";
 import {createReducer} from "@reduxjs/toolkit";
-import * as tensorflow from "@tensorflow/tfjs";
-import {
-  compileAction,
-  evaluateAction,
-  fitAction,
-  openAction,
-  predictAction,
-  saveAction,
-  updateCompileOptions,
-  updateFitOptions,
-  openedAction
-} from "../actions/model";
+import * as actions from "../actions/model";
+import {History, LayersModel, Scalar, Tensor} from "@tensorflow/tfjs";
+import {Dataset} from "@tensorflow/tfjs-data";
 
-function* generator() {
-  const elements = 10;
-  let index = 0;
-
-  while (index < elements) {
-    index++;
-
-    const x = tensorflow.randomUniform([224, 224, 3]);
-
-    const y = tensorflow.randomUniform([1], 0, 2);
-
-    yield [x, y];
-  }
-}
-
-const initialState: Model = {
-  opening: false
+export type Model = {
+  compileOptions?: CompileOptions;
+  compiling: boolean;
+  data?: Dataset<{x: Tensor; y: Tensor}>;
+  evaluating: boolean;
+  evaluations?: Scalar | Array<Scalar>;
+  fitOptions?: FitOptions;
+  fitting: boolean;
+  generating: boolean;
+  graph?: LayersModel;
+  history?: History;
+  opening: boolean;
+  predicting: boolean;
+  predictions?: Tensor;
+  saving: boolean;
+  validationData?: Dataset<{x: Tensor; y: Tensor}>;
 };
 
-export const modelReducer = createReducer(initialState, {
-  [compileAction.toString()]: (state) => {
-    const {lossFunction, optimizationFunction, metrics} = state.compileOptions;
+const state: Model = {
+  compiling: false,
+  evaluating: false,
+  fitting: false,
+  generating: false,
+  opening: false,
+  predicting: false,
+  saving: false
+};
 
-    const args = {
-      loss: lossFunction,
-      metrics: metrics,
-      optimizer: optimizationFunction
+export const reducer = createReducer(state, {
+  [actions.compile.toString()]: (state) => {
+    return {
+      ...state,
+      compiling: true
     };
+  },
+  [actions.compiled.toString()]: (state, action) => {
+    const {compiled} = action.payload;
 
-    state.graph.compile(args);
+    return {
+      ...state,
+      compiling: false,
+      graph: compiled
+    };
   },
-  [evaluateAction.toString()]: (state, action) => {
-    const {categories, images} = action.payload;
+  [actions.evaluate.toString()]: (state) => {
+    return {
+      ...state,
+      evaluating: true
+    };
   },
-  [fitAction.toString()]: (state, action) => {
-    const {categories, images} = action.payload;
+  [actions.evaluated.toString()]: (state, action) => {
+    const {evaluations} = action.payload;
 
-    const dataset = tensorflow.data.generator(generator);
+    return {
+      ...state,
+      evaluating: false,
+      evaluations: evaluations
+    };
   },
-  [predictAction.toString()]: (state, action) => {
-    const {images} = action.payload;
+  [actions.fit.toString()]: (state) => {
+    return {
+      ...state,
+      fitting: true
+    };
   },
-  [saveAction.toString()]: (state, action) => {},
-  [updateCompileOptions.toString()]: (state, action) => {
-    state.compileOptions = action.payload;
+  [actions.fitted.toString()]: (state, action) => {
+    const {fitted, history} = action.payload;
+
+    return {
+      ...state,
+      fitting: false,
+      graph: fitted,
+      history: history
+    };
   },
-  [updateFitOptions.toString()]: (state, action) => {
-    state.fitOptions = action.payload;
+  [actions.generate.toString()]: (state) => {
+    return {
+      ...state,
+      generating: true
+    };
   },
-  [openedAction.toString()]: (state, action) => {
+  [actions.generated.toString()]: (state, action) => {
+    const {data, validationData} = action.payload;
+
+    return {
+      ...state,
+      data: data,
+      generating: false,
+      validationData: validationData
+    };
+  },
+  [actions.open.toString()]: (state) => {
+    return {
+      ...state,
+      opening: true
+    };
+  },
+  [actions.opened.toString()]: (state, action) => {
     const {opened} = action.payload;
 
-    return {...state, opened: opened, opening: false};
+    return {
+      ...state,
+      graph: opened,
+      opening: false
+    };
   },
-  [openAction.toString()]: (state) => {
-    return {...state, opening: true};
-  }
+  [actions.predict.toString()]: (state) => {
+    return {
+      ...state,
+      predicting: true
+    };
+  },
+  [actions.predicted.toString()]: (state, action) => {
+    const {predictions} = action.payload;
+
+    return {
+      ...state,
+      predicting: false,
+      predictions: predictions
+    };
+  },
+  [actions.save.toString()]: (state) => {
+    return {
+      ...state,
+      saving: true
+    };
+  },
+  [actions.saved.toString()]: (state, action) => {}
 });

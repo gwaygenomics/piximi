@@ -1,9 +1,12 @@
-import {Category, CompileOptions, Image} from "@piximi/types";
+import {Category, CompileOptions, FitOptions, Image} from "@piximi/types";
 import {createAction} from "@reduxjs/toolkit";
-import {LayersModel, Tensor} from "@tensorflow/tfjs";
+import {History, LayersModel, Scalar, Tensor} from "@tensorflow/tfjs";
 import {Dataset} from "@tensorflow/tfjs-data";
 
-type CompileAction = {opened: LayersModel; options: CompileOptions};
+type CompileAction = {
+  opened: LayersModel;
+  options: CompileOptions;
+};
 
 export const compile = createAction<CompileAction>("compile");
 
@@ -13,19 +16,32 @@ type CompiledAction = {
 
 export const compiled = createAction<CompiledAction>("compiled");
 
-type EvaluateAction = {};
+type EvaluateAction = {
+  fitted: LayersModel;
+  data: Dataset<{x: Tensor; y: Tensor}>;
+};
 
 export const evaluate = createAction<EvaluateAction>("evaluate");
 
-type EvaluatedAction = {};
+type EvaluatedAction = {
+  evaluations: Scalar | Array<Scalar>;
+};
 
 export const evaluated = createAction<EvaluatedAction>("evaluated");
 
-type FitAction = {};
+type FitAction = {
+  compiled: LayersModel;
+  data: Dataset<{x: Tensor; y: Tensor}>;
+  validationData: Dataset<{x: Tensor; y: Tensor}>;
+  options: FitOptions;
+};
 
 export const fit = createAction<FitAction>("fit");
 
-type FittedAction = {};
+type FittedAction = {
+  fitted: LayersModel;
+  history: History;
+};
 
 export const fitted = createAction<FittedAction>("fitted");
 
@@ -37,7 +53,8 @@ type GenerateAction = {
 export const generate = createAction<GenerateAction>("generate");
 
 type GeneratedAction = {
-  generated: Dataset<{x: Tensor; y: Tensor}>;
+  data: Dataset<{x: Tensor; y: Tensor}>;
+  validationData: Dataset<{x: Tensor; y: Tensor}>;
 };
 
 export const generated = createAction<GeneratedAction>("generated");
@@ -56,11 +73,16 @@ type OpenedAction = {
 
 export const opened = createAction<OpenedAction>("opened");
 
-type PredictAction = {};
+type PredictAction = {
+  compiled: LayersModel;
+  data: Dataset<{x: Tensor; y: Tensor}>;
+};
 
 export const predict = createAction<PredictAction>("predict");
 
-type PredictedAction = {};
+type PredictedAction = {
+  predictions: Tensor;
+};
 
 export const predicted = createAction<PredictedAction>("predicted");
 
