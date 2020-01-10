@@ -42,4 +42,19 @@ export {
   updateImagesPartitionAction
 };
 
-import {compileAction, mobilenetv1Action} from "./model";
+export {
+  compile,
+  compiled,
+  evaluate,
+  evaluated,
+  fit,
+  fitted,
+  generate,
+  generated,
+  open,
+  opened,
+  predict,
+  predicted,
+  save,
+  saved
+} from "./model";

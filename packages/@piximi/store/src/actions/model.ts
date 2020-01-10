@@ -1,55 +1,60 @@
-import {Category, CompileOptions, FitOptions, Image} from "@piximi/types";
+import {Category, CompileOptions, Image} from "@piximi/types";
 import {createAction} from "@reduxjs/toolkit";
-import * as tensorflow from "@tensorflow/tfjs";
+import {LayersModel, Tensor} from "@tensorflow/tfjs";
+import {Dataset} from "@tensorflow/tfjs-data";
 
-export const datasetAction = createAction<{}>("dataset");
+type CompileAction = {opened: LayersModel; options: CompileOptions};
 
-export const evaluateAction = createAction<{
-  categories: Array<Category>;
-  images: Array<Image>;
-  model: tensorflow.LayersModel;
-  options: FitOptions;
-}>("MODEL/EVALUATE");
+export const compile = createAction<CompileAction>("compile");
 
-export const fitAction = createAction<{
-  categories: Array<Category>;
-  images: Array<Image>;
-  model: tensorflow.LayersModel;
-  options: FitOptions;
-}>("fit");
+type CompiledAction = {compiled: LayersModel};
 
-export const generateAction = createAction<{
-  categories: Array<Category>;
-  images: Array<Image>;
-}>("generate");
+export const compiled = createAction<CompiledAction>("compiled");
 
-export const compileAction = createAction<{
-  opened: tensorflow.LayersModel;
-  options: CompileOptions;
-}>("compile");
-export const compiledAction = createAction<{compiled: tensorflow.LayersModel}>(
-  "compiled"
-);
-export const openAction = createAction<{
-  path: string;
-  classes: number;
-  units: number;
-}>("open");
-export const openedAction = createAction<{opened: tensorflow.LayersModel}>(
-  "opened"
-);
+type EvaluateAction = {};
 
-export const predictAction = createAction<{
-  images: Array<Image>;
-  model: tensorflow.LayersModel;
-}>("MODEL/PREDICT");
+export const evaluate = createAction<EvaluateAction>("evaluate");
 
-export const saveAction = createAction<{}>("MODEL/SAVE");
-export const updateCompileOptions = createAction<CompileOptions>(
-  "MODEL/UPDATE-COMPILE-OPTIONS"
-);
-export const updateFitOptions = createAction<FitOptions>(
-  "MODEL/UPDATE-FIT-OPTIONS"
-);
+type EvaluatedAction = {};
 
-export const mobilenetv1Action = createAction<{}>("mobilenetv1");
+export const evaluated = createAction<EvaluatedAction>("evaluated");
+
+type FitAction = {};
+
+export const fit = createAction<FitAction>("fit");
+
+type FittedAction = {};
+
+export const fitted = createAction<FittedAction>("fitted");
+
+type GenerateAction = {categories: Array<Category>; images: Array<Image>};
+
+export const generate = createAction<GenerateAction>("generate");
+
+type GeneratedAction = {generated: Dataset<{x: Tensor; y: Tensor}>};
+
+export const generated = createAction<GeneratedAction>("generated");
+
+type OpenAction = {pathname: string; classes: number; units: number};
+
+export const open = createAction<OpenAction>("open");
+
+type OpenedAction = {opened: LayersModel};
+
+export const opened = createAction<OpenedAction>("opened");
+
+type PredictAction = {};
+
+export const predict = createAction<PredictAction>("predict");
+
+type PredictedAction = {};
+
+export const predicted = createAction<PredictedAction>("predicted");
+
+type SaveAction = {};
+
+export const save = createAction<SaveAction>("save");
+
+type SavedAction = {};
+
+export const saved = createAction<SavedAction>("saved");

@@ -1,7 +1,7 @@
 import {put, takeLatest} from "redux-saga/effects";
 import {compileSaga, watchCompileSaga} from "./compileSaga";
 import {compile, mobilenetv1} from "@piximi/models";
-import {compileAction, compiledAction} from "../actions/model";
+import * as actions from "../actions";
 import {CompileOptions, Loss, Metric, Optimizer} from "@piximi/types";
 
 const classes: number = 10;
@@ -33,13 +33,13 @@ describe("compileSaga", () => {
     const mock = await compile(mobilenetv1(classes, path, units), options);
 
     const generator = compileSaga(
-      compileAction({opened: opened, options: options})
+      actions.compile({opened: opened, options: options})
     );
 
     await generator.next();
 
     expect(generator.next({compiled: mock}).value).toEqual(
-      put(compiledAction({compiled: mock}))
+      put(actions.compiled({compiled: mock}))
     );
 
     expect(generator.next().done).toBeTruthy();
