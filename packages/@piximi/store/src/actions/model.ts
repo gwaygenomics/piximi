@@ -2,11 +2,6 @@ import {Category, CompileOptions, FitOptions, Image} from "@piximi/types";
 import {createAction} from "@reduxjs/toolkit";
 import * as tensorflow from "@tensorflow/tfjs";
 
-export const compileAction = createAction<{
-  model: tensorflow.LayersModel;
-  options: CompileOptions;
-}>("compile");
-
 export const datasetAction = createAction<{}>("dataset");
 
 export const evaluateAction = createAction<{
@@ -28,15 +23,21 @@ export const generateAction = createAction<{
   images: Array<Image>;
 }>("generate");
 
-export const openedAction = createAction<{opened: tensorflow.LayersModel}>(
-  "opened"
+export const compileAction = createAction<{
+  opened: tensorflow.LayersModel;
+  options: CompileOptions;
+}>("compile");
+export const compiledAction = createAction<{compiled: tensorflow.LayersModel}>(
+  "compiled"
 );
-
 export const openAction = createAction<{
   path: string;
   classes: number;
   units: number;
 }>("open");
+export const openedAction = createAction<{opened: tensorflow.LayersModel}>(
+  "opened"
+);
 
 export const predictAction = createAction<{
   images: Array<Image>;

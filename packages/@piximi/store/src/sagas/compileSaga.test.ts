@@ -1,8 +1,25 @@
 import {put, takeLatest} from "redux-saga/effects";
 import {compileSaga, watchCompileSaga} from "./compileSaga";
+import {compile, mobilenetv1} from "@piximi/models";
+import {compileAction, compiledAction} from "../actions/model";
+import {CompileOptions, Loss, Metric, Optimizer} from "@piximi/types";
+
+const classes: number = 10;
+
+const options: CompileOptions = {
+  learningRate: 0.01,
+  lossFunction: Loss.CategoricalCrossentropy,
+  metrics: [Metric.CategoricalAccuracy],
+  optimizationFunction: Optimizer.SGD
+};
+
+const path: string =
+  "https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_0.25_224/model.json";
+
+const units: number = 100;
 
 describe("compileSaga", () => {
-  it("should dispatch the 'compile' action", () => {
+  it("dispatches the 'compileAction'", () => {
     const saga = watchCompileSaga();
 
     expect(saga.next().value).toEqual(takeLatest("compile", compileSaga));
@@ -10,16 +27,21 @@ describe("compileSaga", () => {
     expect(saga.next().done).toBeTruthy();
   });
 
-  it("should execute the compile function", () => {
-    const saga = compileSaga();
+  it("executes the `compile` function", async () => {
+    const opened = await mobilenetv1(classes, path, units);
 
-    saga.next();
+    const mock = await compile(mobilenetv1(classes, path, units), options);
 
-    const a = saga.next().value;
-    const b = put({type: "compile"});
+    const generator = compileSaga(
+      compileAction({opened: opened, options: options})
+    );
 
-    expect(a).toEqual(b);
+    await generator.next();
 
-    expect(saga.next().done).toBeTruthy();
+    expect(generator.next({compiled: mock}).value).toEqual(
+      put(compiledAction({compiled: mock}))
+    );
+
+    expect(generator.next().done).toBeTruthy();
   });
 });

@@ -5,14 +5,16 @@ import {evaluateSaga} from "./evaluateSaga";
 import {fitSaga} from "./fitSaga";
 import {generateSaga} from "./generateSaga";
 import {predictSaga} from "./predictSaga";
+import {openSaga} from "./openSaga";
 
 export function* root() {
   yield all([
-    compileSaga(),
-    datasetSaga(),
-    evaluateSaga(),
-    fitSaga(),
-    generateSaga(),
-    predictSaga()
+    compileSaga,
+    datasetSaga,
+    evaluateSaga,
+    fitSaga,
+    generateSaga,
+    openSaga,
+    predictSaga
   ]);
 }

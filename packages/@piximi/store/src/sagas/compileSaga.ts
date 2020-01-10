@@ -1,24 +1,12 @@
 import {put, takeLatest} from "redux-saga/effects";
-import {compileAction} from "../actions/model";
-import {Loss, Metric, Optimizer} from "@piximi/types";
-import {compile, mobilenetv1} from "@piximi/models";
+import {compile} from "@piximi/models";
 
-const path =
-  "https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_0.25_224/model.json";
+export function* compileSaga(action: any) {
+  const {opened, options} = action.payload;
 
-const options = {
-  learningRate: 0.01,
-  lossFunction: Loss.CategoricalCrossentropy,
-  metrics: [Metric.CategoricalAccuracy],
-  optimizationFunction: Optimizer.SGD
-};
+  const compiled = yield compile(opened, options);
 
-export function* compileSaga() {
-  const compiled = yield compile(mobilenetv1(10, path, 100), options);
-
-  const action = compileAction();
-
-  yield put(action);
+  yield put({payload: compiled, type: "compiled"});
 }
 
 export function* watchCompileSaga() {
