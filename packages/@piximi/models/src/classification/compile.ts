@@ -1,17 +1,16 @@
 import {CompileOptions} from "@piximi/types";
-import * as tensorflow from "@tensorflow/tfjs";
+import {LayersModel} from "@tensorflow/tfjs";
 
-export const compile = async (
-  promise: Promise<tensorflow.LayersModel>,
-  options: CompileOptions
-) => {
-  const graph = await promise;
+export const compile = (opened: LayersModel, options: CompileOptions) => {
+  const compiled = opened;
 
-  graph.compile({
+  const args = {
     optimizer: options.optimizationFunction,
     metrics: options.metrics,
     loss: options.lossFunction
-  });
+  };
 
-  return graph;
+  compiled.compile(args);
+
+  return compiled;
 };

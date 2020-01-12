@@ -3,7 +3,7 @@ import "@tensorflow/tfjs-node";
 import {Category, Image, Partition} from "@piximi/types";
 import * as tensorflow from "@tensorflow/tfjs";
 
-import {encodeCategory, encodeImage, generate} from "./generate";
+import {encodeCategory, encodeImage, generate, generator} from "./generate";
 
 tensorflow.setBackend("tensorflow");
 
@@ -63,9 +63,7 @@ const images: Array<Image> = [
 
 describe("generate", () => {
   it("encodeCategory", async () => {
-    const generator = generate(categories, images);
-
-    const dataset = tensorflow.data.generator(generator);
+    const dataset = tensorflow.data.generator(generator(categories, images));
 
     const processed = dataset.map(encodeCategory(categories.length));
 
@@ -73,19 +71,16 @@ describe("generate", () => {
   });
 
   it("encodeImage", async () => {
-    const generator = generate(categories, images);
+    const dataset = tensorflow.data
+      .generator(generator(categories, images))
+      .map(encodeCategory(categories.length))
+      .mapAsync(encodeImage);
 
-    const dataset = tensorflow.data.generator(generator);
-
-    const fetched = dataset.mapAsync(encodeImage);
-
-    expect((await fetched.toArray())[0].xs.shape).toEqual([224, 224, 3]);
+    expect((await dataset.toArray())[0].xs.shape).toEqual([224, 224, 3]);
   });
 
   it("generator", async () => {
-    const generator = generate(categories, images);
-
-    const dataset = tensorflow.data.generator(generator);
+    const dataset = tensorflow.data.generator(generator(categories, images));
 
     const expected = [
       {
@@ -99,5 +94,11 @@ describe("generate", () => {
     ];
 
     expect(await dataset.toArray()).toEqual(expected);
+  });
+
+  it("example", async () => {
+    const data = await generate(images, categories);
+
+    expect((await data.toArray())[0].xs.shape).toEqual([224, 224, 3]);
   });
 });

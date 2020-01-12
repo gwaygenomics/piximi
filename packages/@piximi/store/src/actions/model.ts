@@ -46,8 +46,8 @@ type FittedAction = {
 export const fitted = createAction<FittedAction>("fitted");
 
 type GenerateAction = {
-  categories: Array<Category>;
   images: Array<Image>;
+  categories: Array<Category>;
 };
 
 export const generate = createAction<GenerateAction>("generate");

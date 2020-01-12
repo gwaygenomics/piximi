@@ -1,7 +1,7 @@
 import {put, takeLatest} from "redux-saga/effects";
-import {compileSaga, watchCompileSaga} from "./compileSaga";
-import {compile, mobilenetv1} from "@piximi/models";
-import * as actions from "../actions";
+import {compile, watchCompile} from "./compile";
+import * as classifier from "@piximi/models";
+import * as actions from "../../actions";
 import {CompileOptions, Loss, Metric, Optimizer} from "@piximi/types";
 
 const classes: number = 10;
@@ -18,21 +18,24 @@ const path: string =
 
 const units: number = 100;
 
-describe("compileSaga", () => {
-  it("dispatches the 'compileAction'", () => {
-    const saga = watchCompileSaga();
+describe("compile", () => {
+  it("dispatches the 'compile' action", () => {
+    const saga = watchCompile();
 
-    expect(saga.next().value).toEqual(takeLatest("compile", compileSaga));
+    expect(saga.next().value).toEqual(takeLatest("compile", compile));
 
     expect(saga.next().done).toBeTruthy();
   });
 
   it("executes the `compile` function", async () => {
-    const opened = await mobilenetv1(classes, path, units);
+    const opened = await classifier.mobilenetv1(classes, path, units);
 
-    const mock = await compile(mobilenetv1(classes, path, units), options);
+    const mock = await classifier.compile(
+      classifier.mobilenetv1(classes, path, units),
+      options
+    );
 
-    const generator = compileSaga(
+    const generator = compile(
       actions.compile({opened: opened, options: options})
     );
 

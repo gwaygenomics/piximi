@@ -1,9 +1,8 @@
 export {
   compile,
-  dataset,
   evaluate,
   fit,
   generate,
-  mobilenetv1,
+  open,
   predict
 } from "./classification";

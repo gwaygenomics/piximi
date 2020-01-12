@@ -1,27 +1,22 @@
-import {Category, FitOptions, Image} from "@piximi/types";
-import * as tensorflow from "@tensorflow/tfjs";
-import {generate, encodeCategory, encodeImage} from "./generate";
+import {FitOptions} from "@piximi/types";
+import {History, LayersModel, Tensor} from "@tensorflow/tfjs";
+import {Dataset} from "@tensorflow/tfjs-data";
 
 export const fit = async (
-  categories: Array<Category>,
-  images: Array<Image>,
-  graph: tensorflow.LayersModel,
+  compiled: LayersModel,
+  data: Dataset<{xs: Tensor; ys: Tensor}>,
+  validationData: Dataset<{xs: Tensor; ys: Tensor}>,
   options: FitOptions
-) => {
-  const generator = generate(categories, images);
-
-  const dataset = tensorflow.data
-    .generator(generator)
-    .map(encodeCategory(categories.length))
-    .mapAsync(encodeImage)
-    .batch(16);
-
-  return await graph.fitDataset(dataset, {
+): Promise<History> => {
+  const args = {
     callbacks: {
       onEpochEnd: (epoch, logs) => {
         console.log(logs.loss);
       }
     },
-    epochs: options.epochs
-  });
+    epochs: options.epochs,
+    validationData: validationData
+  };
+
+  return await compiled.fitDataset(data, args);
 };

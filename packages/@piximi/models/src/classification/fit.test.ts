@@ -12,7 +12,10 @@ import * as tensorflow from "@tensorflow/tfjs";
 
 import {compile} from "./compile";
 import {fit} from "./fit";
-import {mobilenetv1} from "./mobilenetv1";
+import {open} from "./open";
+import {encodeCategory, encodeImage, generate} from "./generate";
+import {Dataset} from "@tensorflow/tfjs-data";
+import {Tensor} from "@tensorflow/tfjs";
 
 tensorflow.setBackend("tensorflow");
 
@@ -75,7 +78,7 @@ const path =
 
 describe("fit", () => {
   it("metricsNames", async () => {
-    const promise = mobilenetv1(categories.length, path, 100);
+    const opened = await open(path, categories.length, 100);
 
     const options = {
       learningRate: 0.01,
@@ -84,10 +87,15 @@ describe("fit", () => {
       optimizationFunction: Optimizer.SGD
     };
 
-    const graph = await compile(promise, options);
+    const compiled = await compile(opened, options);
 
-    if (graph) {
-      const history = await fit(categories, images, graph, {
+    const data: Dataset<{xs: Tensor; ys: Tensor}> = await generate(
+      images,
+      categories
+    );
+
+    if (compiled) {
+      const history = await fit(compiled, data, data, {
         epochs: 3,
         initialEpoch: 0
       });

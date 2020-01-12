@@ -57,4 +57,4 @@ export {
   predicted,
   save,
   saved
-} from "./classification";
+} from "./model";

@@ -1,11 +1,11 @@
 import * as tensorflow from "@tensorflow/tfjs";
 
-export const mobilenetv1 = async (
+export const open = async (
+  pathname: string,
   classes: number,
-  pathOrIOHandler: string | tensorflow.io.IOHandler,
   units: number
 ): Promise<tensorflow.LayersModel> => {
-  const backbone = await tensorflow.loadLayersModel(pathOrIOHandler);
+  const backbone = await tensorflow.loadLayersModel(pathname);
 
   const truncated = tensorflow.model({
     inputs: backbone.inputs,

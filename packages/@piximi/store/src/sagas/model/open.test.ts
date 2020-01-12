@@ -1,13 +1,13 @@
 import {put, takeLatest} from "redux-saga/effects";
-import {openSaga, watchOpenSaga} from "./openSaga";
+import {open, watchOpen} from "./open";
 import {mobilenetv1} from "@piximi/models";
-import * as actions from "../actions";
+import * as actions from "../../actions";
 
-describe("openSaga", () => {
-  it("dispatches the 'openAction'", () => {
-    const saga = watchOpenSaga();
+describe("open", () => {
+  it("dispatches the 'open' action", () => {
+    const saga = watchOpen();
 
-    expect(saga.next().value).toEqual(takeLatest("open", openSaga));
+    expect(saga.next().value).toEqual(takeLatest("open", open));
 
     expect(saga.next().done).toBeTruthy();
   });
@@ -26,7 +26,7 @@ describe("openSaga", () => {
       payload.units
     );
 
-    const generator = openSaga(actions.open(payload));
+    const generator = open(actions.open(payload));
 
     await generator.next();
 

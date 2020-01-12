@@ -1,7 +1,7 @@
 import {Loss, Metric, Optimizer} from "@piximi/types";
 
 import {compile} from "./compile";
-import {mobilenetv1} from "./mobilenetv1";
+import {open} from "./open";
 
 const path =
   "https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_0.25_224/model.json";
@@ -15,10 +15,10 @@ describe("compile", () => {
       optimizationFunction: Optimizer.SGD
     };
 
-    const promise = mobilenetv1(10, path, 100);
+    const opened = await open(path, 10, 100);
 
-    const graph = await compile(promise, options);
+    const compiled = await compile(opened, options);
 
-    expect(graph.metricsNames).toEqual(["loss", "categoricalAccuracy"]);
+    expect(compiled.metricsNames).toEqual(["loss", "categoricalAccuracy"]);
   });
 });

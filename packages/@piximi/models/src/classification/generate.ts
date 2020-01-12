@@ -1,17 +1,22 @@
 import {Category, Image} from "@piximi/types";
 import * as tensorflow from "@tensorflow/tfjs";
 import * as ImageJS from "image-js";
+import {Dataset} from "@tensorflow/tfjs-data";
+import {Tensor} from "@tensorflow/tfjs";
 
 export const encodeCategory = (categories: number) => {
-  return (item: {xs: any; ys: number}): {xs: any; ys: tensorflow.Tensor} => {
+  return (item: {
+    xs: string;
+    ys: number;
+  }): {xs: string; ys: tensorflow.Tensor} => {
     return {...item, ys: tensorflow.oneHot(item.ys, categories)};
   };
 };
 
 export const encodeImage = async (item: {
   xs: string;
-  ys: any;
-}): Promise<{xs: tensorflow.Tensor3D; ys: any}> => {
+  ys: tensorflow.Tensor;
+}): Promise<{xs: tensorflow.Tensor; ys: tensorflow.Tensor}> => {
   const fetched = await tensorflow.util.fetch(item.xs);
 
   const buffer: ArrayBuffer = await fetched.arrayBuffer();
@@ -27,7 +32,10 @@ export const encodeImage = async (item: {
   });
 };
 
-export const generate = (categories: Array<Category>, images: Array<Image>) => {
+export const generator = (
+  categories: Array<Category>,
+  images: Array<Image>
+) => {
   const count = images.length;
 
   return function*() {
@@ -50,4 +58,21 @@ export const generate = (categories: Array<Category>, images: Array<Image>) => {
       index++;
     }
   };
+};
+
+export const generate = async (
+  images: Array<Image>,
+  categories: Array<Category>
+): Promise<Dataset<{xs: Tensor; ys: Tensor}>> => {
+  const generate = generator(categories, images);
+
+  const promise = tensorflow.data
+    .generator(generate)
+    .map(encodeCategory(categories.length))
+    .mapAsync(encodeImage)
+    .batch(16);
+
+  return new Promise(() => {
+    return promise;
+  });
 };
