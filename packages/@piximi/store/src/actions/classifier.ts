@@ -1,82 +1,94 @@
+import {Category, CompileOptions, FitOptions, Image} from "@piximi/types";
 import {createAction} from "@reduxjs/toolkit";
-import {Architecture, Loss, Metric} from "@piximi/types";
+import {History, LayersModel, Scalar, Tensor} from "@tensorflow/tfjs";
+import {Dataset} from "@tensorflow/tfjs-data";
 
-export const createCategoryAction = createAction<{}>("create-category");
+type CompileAction = {
+  opened: LayersModel;
+  options: CompileOptions;
+};
 
-export const createClassifierAction = createAction<{}>("create-classifier");
+export const compile = createAction<CompileAction>("compile");
 
-export const openClassifierAction = createAction<{}>("open-classifier");
+type CompiledAction = {
+  compiled: LayersModel;
+};
 
-export const createImageAction = createAction<{}>("create-image");
+export const compiled = createAction<CompiledAction>("compiled");
 
-export const createImagesAction = createAction<{}>("create-images");
+type EvaluateAction = {
+  fitted: LayersModel;
+  data: Dataset<{xs: Tensor; ys: Tensor}>;
+};
 
-export const createImagesScoreAction = createAction<{}>("create-images-score");
+export const evaluate = createAction<EvaluateAction>("evaluate");
 
-export const deleteCategoryAction = createAction<{}>("delete-category");
+type EvaluatedAction = {
+  evaluations: Scalar | Array<Scalar>;
+};
 
-export const deleteImageAction = createAction<{}>("delete-image");
+export const evaluated = createAction<EvaluatedAction>("evaluated");
 
-export const toggleCategoryVisibilityAction = createAction<{}>(
-  "toggle-category-visibility"
-);
+type FitAction = {
+  compiled: LayersModel;
+  data: Dataset<{xs: Tensor; ys: Tensor}>;
+  validationData: Dataset<{xs: Tensor; ys: Tensor}>;
+  options: FitOptions;
+};
 
-export const updateCategoryColorAction = createAction<{}>(
-  "update-category-color"
-);
+export const fit = createAction<FitAction>("fit");
 
-export const updateCategoryDescriptionAction = createAction<{}>(
-  "update-category-description"
-);
+type FittedAction = {
+  fitted: LayersModel;
+  status: History;
+};
 
-export const updateCategoryVisibilityAction = createAction<{}>(
-  "update-category-visibility"
-);
+export const fitted = createAction<FittedAction>("fitted");
 
-export const updateClassifierNameAction = createAction<{}>(
-  "update-classifier-name"
-);
+type GenerateAction = {
+  images: Array<Image>;
+  categories: Array<Category>;
+};
 
-export const updateImageBrightnessAction = createAction<{}>(
-  "update-image-brightness"
-);
+export const generate = createAction<GenerateAction>("generate");
 
-export const updateImageCategoryAction = createAction<{}>(
-  "update-image-category"
-);
+type GeneratedAction = {
+  data: Dataset<{xs: Tensor; ys: Tensor}>;
+};
 
-export const updateImagesCategoryAction = createAction<{}>(
-  "update-images-category"
-);
+export const generated = createAction<GeneratedAction>("generated");
 
-export const updateImageContrastAction = createAction<{}>(
-  "update-image-contrast"
-);
+type OpenAction = {
+  pathname: string;
+  classes: number;
+  units: number;
+};
 
-export const updateImageVisibilityAction = createAction<{}>(
-  "update-image-visibility"
-);
+export const open = createAction<OpenAction>("open");
 
-export const updateImagesPartitionAction = createAction<{}>(
-  "update-images-partition"
-);
+type OpenedAction = {
+  opened: LayersModel;
+};
 
-export const updateCompileOptionsLearningRate = createAction<number>(
-  "update-compile-options-learning-rate"
-);
+export const opened = createAction<OpenedAction>("opened");
 
-export const updateCompileOptionsLossFunction = createAction<Loss>(
-  "update-compile-options-loss-function"
-);
+type PredictAction = {
+  compiled: LayersModel;
+  data: Dataset<{xs: Tensor; ys: Tensor}>;
+};
 
-export const updateCompileOptionsMetrics = createAction<Array<Metric>>(
-  "update-compile-options-metrics"
-);
+export const predict = createAction<PredictAction>("predict");
 
-export const updateCompileOptionsOptimizationFunction = createAction<Metric[]>(
-  "update-compile-options-optimization-function"
-);
+type PredictedAction = {
+  predictions: Tensor;
+};
 
-export const updateCompileOptionsArchitecture = createAction<Architecture>(
-  "update-compile-options-architecture"
-);
+export const predicted = createAction<PredictedAction>("predicted");
+
+type SaveAction = {};
+
+export const save = createAction<SaveAction>("save");
+
+type SavedAction = {};
+
+export const saved = createAction<SavedAction>("saved");

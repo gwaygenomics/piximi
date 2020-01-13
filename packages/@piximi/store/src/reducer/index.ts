@@ -1,10 +1,11 @@
 import {combineReducers} from "redux";
-import {classifierReducer} from "./classifier";
-import * as model from "./model";
+
+import * as classifier from "./classifier";
+import * as project from "./project";
 
 const reducers = {
-  classifier: classifierReducer,
-  model: model.reducer
+  classifier: classifier.reducer,
+  project: project.reducer
 };
 
 export const reducer = combineReducers(reducers);

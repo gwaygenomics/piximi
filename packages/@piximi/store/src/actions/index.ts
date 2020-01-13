@@ -1,24 +1,24 @@
 import {
   createCategoryAction,
+  createClassifierAction,
   createImageAction,
   createImagesAction,
   createImagesScoreAction,
-  createClassifierAction,
-  openClassifierAction,
-  deleteImageAction,
   deleteCategoryAction,
+  deleteImageAction,
+  openClassifierAction,
   toggleCategoryVisibilityAction,
-  updateImageContrastAction,
-  updateImageBrightnessAction,
   updateCategoryColorAction,
   updateCategoryDescriptionAction,
   updateCategoryVisibilityAction,
   updateClassifierNameAction,
+  updateImageBrightnessAction,
   updateImageCategoryAction,
+  updateImageContrastAction,
   updateImagesCategoryAction,
-  updateImageVisibilityAction,
-  updateImagesPartitionAction
-} from "./classifier";
+  updateImagesPartitionAction,
+  updateImageVisibilityAction
+} from "./project";
 
 export {
   createCategoryAction,
@@ -57,4 +57,4 @@ export {
   predicted,
   save,
   saved
-} from "./model";
+} from "./classifier";

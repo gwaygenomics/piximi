@@ -1,15 +1,15 @@
-import logger from "redux-logger";
-import {persistReducer, persistStore, Persistor} from "redux-persist";
-import thunk from "redux-thunk";
-import autoMergeLevel2 from "redux-persist/es/stateReconciler/autoMergeLevel2";
-import localforage from "localforage";
 import {
-  EnhancedStore,
   configureStore,
+  EnhancedStore,
   Middleware,
   StoreEnhancer
 } from "@reduxjs/toolkit";
+import localforage from "localforage";
+import logger from "redux-logger";
+import {Persistor, persistReducer, persistStore} from "redux-persist";
+import autoMergeLevel2 from "redux-persist/es/stateReconciler/autoMergeLevel2";
 import createSagaMiddleware from "redux-saga";
+import thunk from "redux-thunk";
 
 import {reducer} from "./reducer";
 import {root} from "./sagas";
