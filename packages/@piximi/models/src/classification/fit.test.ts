@@ -84,7 +84,10 @@ it("fit", async () => {
 
   const data = await generate(images, categories);
 
-  const fitted = await fit(compiled, data, data, {epochs: 1, initialEpoch: 1});
+  const {fitted, status} = await fit(compiled, data, data, {
+    epochs: 1,
+    initialEpoch: 1
+  });
 
   const expected = [
     "categoricalAccuracy",
@@ -93,5 +96,5 @@ it("fit", async () => {
     "val_loss"
   ];
 
-  expect(Object.keys(fitted.history).sort()).toEqual(expected.sort());
+  expect(Object.keys(status.history).sort()).toEqual(expected.sort());
 });

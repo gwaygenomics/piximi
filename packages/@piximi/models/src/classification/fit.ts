@@ -7,7 +7,7 @@ export const fit = async (
   data: Dataset<{xs: Tensor; ys: Tensor}>,
   validationData: Dataset<{xs: Tensor; ys: Tensor}>,
   options: FitOptions
-): Promise<History> => {
+): Promise<{fitted: LayersModel; status: History}> => {
   const args = {
     callbacks: {
       onEpochEnd: (epoch, logs) => {
@@ -18,5 +18,7 @@ export const fit = async (
     validationData: validationData.batch(16)
   };
 
-  return await compiled.fitDataset(data.batch(16), args);
+  const status = await compiled.fitDataset(data.batch(16), args);
+
+  return {fitted: compiled, status: status};
 };

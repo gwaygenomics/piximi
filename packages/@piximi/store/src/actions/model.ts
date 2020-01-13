@@ -40,7 +40,7 @@ export const fit = createAction<FitAction>("fit");
 
 type FittedAction = {
   fitted: LayersModel;
-  history: History;
+  status: History;
 };
 
 export const fitted = createAction<FittedAction>("fitted");
