@@ -7,7 +7,7 @@ export function* compile(action: any) {
 
   const compiled = yield classifier.compile(opened, options);
 
-  yield put(actions.compiled(compiled));
+  yield put(actions.compiled({compiled: compiled}));
 }
 
 export function* watchCompile() {

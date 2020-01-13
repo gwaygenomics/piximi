@@ -1,6 +1,6 @@
 import {put, takeLatest} from "redux-saga/effects";
 import {open, watchOpen} from "./open";
-import {mobilenetv1} from "@piximi/models";
+import * as classifier from "@piximi/models";
 import * as actions from "../../actions";
 
 describe("open", () => {
@@ -13,25 +13,23 @@ describe("open", () => {
   });
 
   it("executes the `open` function", async () => {
-    const payload = {
-      pathname:
-        "https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_0.25_224/model.json",
-      classes: 10,
-      units: 100
-    };
+    const pathname =
+      "https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_0.25_224/model.json";
 
-    const mock = await mobilenetv1(
-      payload.classes,
-      payload.pathname,
-      payload.units
-    );
+    const classes = 10;
+
+    const units = 100;
+
+    const opened = await classifier.open(pathname, classes, units);
+
+    const payload = {pathname: pathname, classes: classes, units: units};
 
     const generator = open(actions.open(payload));
 
     await generator.next();
 
-    expect(generator.next({opened: mock}).value).toEqual(
-      put(actions.opened({opened: mock}))
+    expect(generator.next({opened: opened}).value).toEqual(
+      put(actions.opened({opened: opened}))
     );
 
     expect(generator.next().done).toBeTruthy();

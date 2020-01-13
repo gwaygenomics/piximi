@@ -2,21 +2,8 @@ import {put, takeLatest} from "redux-saga/effects";
 import {compile, watchCompile} from "./compile";
 import * as classifier from "@piximi/models";
 import * as actions from "../../actions";
-import {CompileOptions, Loss, Metric, Optimizer} from "@piximi/types";
-
-const classes: number = 10;
-
-const options: CompileOptions = {
-  learningRate: 0.01,
-  lossFunction: Loss.CategoricalCrossentropy,
-  metrics: [Metric.CategoricalAccuracy],
-  optimizationFunction: Optimizer.SGD
-};
-
-const path: string =
-  "https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_0.25_224/model.json";
-
-const units: number = 100;
+import {Loss, Metric, Optimizer} from "@piximi/types";
+import {LayersModel} from "@tensorflow/tfjs";
 
 describe("compile", () => {
   it("dispatches the 'compile' action", () => {
@@ -28,12 +15,23 @@ describe("compile", () => {
   });
 
   it("executes the `compile` function", async () => {
-    const opened = await classifier.mobilenetv1(classes, path, units);
+    const pathname =
+      "https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_0.25_224/model.json";
 
-    const mock = await classifier.compile(
-      classifier.mobilenetv1(classes, path, units),
-      options
-    );
+    const classes = 10;
+
+    const units = 100;
+
+    const opened = await classifier.open(pathname, classes, units);
+
+    const options = {
+      learningRate: 0.01,
+      lossFunction: Loss.CategoricalCrossentropy,
+      metrics: [Metric.CategoricalAccuracy],
+      optimizationFunction: Optimizer.SGD
+    };
+
+    const compiled: LayersModel = await classifier.compile(opened, options);
 
     const generator = compile(
       actions.compile({opened: opened, options: options})
@@ -41,9 +39,15 @@ describe("compile", () => {
 
     await generator.next();
 
-    expect(generator.next({compiled: mock}).value).toEqual(
-      put(actions.compiled({compiled: mock}))
-    );
+    const actual = generator.next(compiled).value["payload"]["action"][
+      "payload"
+    ];
+
+    const expected = put(actions.compiled({compiled: compiled}))["payload"][
+      "action"
+    ]["payload"];
+
+    expect(actual).toEqual(expected);
 
     expect(generator.next().done).toBeTruthy();
   });
