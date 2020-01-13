@@ -1,5 +1,5 @@
-import {put, takeLatest} from "redux-saga/effects";
 import * as classifier from "@piximi/models";
+import {put, takeLatest} from "redux-saga/effects";
 
 export function* open(action: any) {
   const {path, classes, units} = action.payload;

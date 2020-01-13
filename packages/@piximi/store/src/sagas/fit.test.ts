@@ -1,8 +1,6 @@
 import "@tensorflow/tfjs-node";
-import {put, takeLatest} from "redux-saga/effects";
-import {fit, watchFit} from "./fit";
+
 import * as classifier from "@piximi/models";
-import * as actions from "../../actions";
 import {
   Category,
   Image,
@@ -11,6 +9,10 @@ import {
   Optimizer,
   Partition
 } from "@piximi/types";
+import {put, takeLatest} from "redux-saga/effects";
+
+import * as actions from "../actions";
+import {fit, watchFit} from "./fit";
 
 jest.setTimeout(50000);
 

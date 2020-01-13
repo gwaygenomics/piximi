@@ -1,6 +1,7 @@
-import {put, takeLatest} from "redux-saga/effects";
 import * as classifier from "@piximi/models";
-import * as actions from "../../actions";
+import {put, takeLatest} from "redux-saga/effects";
+
+import * as actions from "../actions";
 
 export function* generate(action: any) {
   const {images, categories} = action.payload;

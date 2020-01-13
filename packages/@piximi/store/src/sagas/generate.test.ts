@@ -1,8 +1,9 @@
-import * as actions from "../../actions";
-import {Category, Image, Partition} from "@piximi/types";
-import {generate, watchGenerate} from "./generate";
-import {put, takeLatest} from "redux-saga/effects";
 import * as classifier from "@piximi/models";
+import {Category, Image, Partition} from "@piximi/types";
+import {put, takeLatest} from "redux-saga/effects";
+
+import * as actions from "../actions";
+import {generate, watchGenerate} from "./generate";
 
 const images: Array<Image> = [
   {

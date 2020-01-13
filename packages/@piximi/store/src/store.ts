@@ -12,7 +12,7 @@ import {
 import createSagaMiddleware from "redux-saga";
 
 import {reducer} from "./reducer";
-import {root} from "./sagas/model";
+import {root} from "./sagas";
 
 const enhancers: StoreEnhancer[] = [];
 

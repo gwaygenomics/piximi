@@ -1,9 +1,10 @@
-import {put, takeLatest} from "redux-saga/effects";
-import {compile, watchCompile} from "./compile";
 import * as classifier from "@piximi/models";
-import * as actions from "../../actions";
 import {Loss, Metric, Optimizer} from "@piximi/types";
 import {LayersModel} from "@tensorflow/tfjs";
+import {put, takeLatest} from "redux-saga/effects";
+
+import * as actions from "../actions";
+import {compile, watchCompile} from "./compile";
 
 describe("compile", () => {
   it("dispatches the 'compile' action", () => {

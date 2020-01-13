@@ -1,7 +1,8 @@
-import {put, takeLatest} from "redux-saga/effects";
-import {open, watchOpen} from "./open";
 import * as classifier from "@piximi/models";
-import * as actions from "../../actions";
+import {put, takeLatest} from "redux-saga/effects";
+
+import * as actions from "../actions";
+import {open, watchOpen} from "./open";
 
 describe("open", () => {
   it("dispatches the 'open' action", () => {
