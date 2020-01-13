@@ -1,7 +1,8 @@
-import {expectSaga} from "redux-saga-test-plan";
-import {generate} from "./generate";
 import * as actions from "../../actions";
 import {Category, Image, Partition} from "@piximi/types";
+import {generate, watchGenerate} from "./generate";
+import {put, takeLatest} from "redux-saga/effects";
+import * as classifier from "@piximi/models";
 
 const images: Array<Image> = [
   {
@@ -55,14 +56,28 @@ const categories: Array<Category> = [
   }
 ];
 
-it("generate", () => {
-  const response = {
-    data: {},
-    validationData: {}
-  };
+describe("generate", () => {
+  it("dispatches the 'generate' action", () => {
+    const saga = watchGenerate();
 
-  return expectSaga(generate, response)
-    .put(actions.generate({images: images, categories: categories}))
-    .dispatch(actions.generated())
-    .run();
+    expect(saga.next().value).toEqual(takeLatest("generate", generate));
+
+    expect(saga.next().done).toBeTruthy();
+  });
+
+  it("executes the `generate` function", async () => {
+    const data = await classifier.generate(images, categories);
+
+    const generator = generate(
+      actions.generate({images: images, categories: categories})
+    );
+
+    await generator.next();
+
+    expect(generator.next(data).value).toEqual(
+      put(actions.generated({data: data}))
+    );
+
+    expect(generator.next().done).toBeTruthy();
+  });
 });

@@ -18,7 +18,7 @@ export const compiled = createAction<CompiledAction>("compiled");
 
 type EvaluateAction = {
   fitted: LayersModel;
-  data: Dataset<{x: Tensor; y: Tensor}>;
+  data: Dataset<{xs: Tensor; ys: Tensor}>;
 };
 
 export const evaluate = createAction<EvaluateAction>("evaluate");
@@ -31,8 +31,8 @@ export const evaluated = createAction<EvaluatedAction>("evaluated");
 
 type FitAction = {
   compiled: LayersModel;
-  data: Dataset<{x: Tensor; y: Tensor}>;
-  validationData: Dataset<{x: Tensor; y: Tensor}>;
+  data: Dataset<{xs: Tensor; ys: Tensor}>;
+  validationData: Dataset<{xs: Tensor; ys: Tensor}>;
   options: FitOptions;
 };
 
@@ -53,8 +53,7 @@ type GenerateAction = {
 export const generate = createAction<GenerateAction>("generate");
 
 type GeneratedAction = {
-  data: Dataset<{x: Tensor; y: Tensor}>;
-  validationData: Dataset<{x: Tensor; y: Tensor}>;
+  data: Dataset<{xs: Tensor; ys: Tensor}>;
 };
 
 export const generated = createAction<GeneratedAction>("generated");
@@ -75,7 +74,7 @@ export const opened = createAction<OpenedAction>("opened");
 
 type PredictAction = {
   compiled: LayersModel;
-  data: Dataset<{x: Tensor; y: Tensor}>;
+  data: Dataset<{xs: Tensor; ys: Tensor}>;
 };
 
 export const predict = createAction<PredictAction>("predict");

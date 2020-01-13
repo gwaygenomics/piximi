@@ -39,15 +39,15 @@ describe("compile", () => {
 
     await generator.next();
 
-    const actual = generator.next(compiled).value["payload"]["action"][
-      "payload"
-    ];
+    const actual = generator.next(compiled).value;
 
-    const expected = put(actions.compiled({compiled: compiled}))["payload"][
-      "action"
-    ]["payload"];
+    const payload = {compiled: compiled};
 
-    expect(actual).toEqual(expected);
+    const expected = put(actions.compiled(payload));
+
+    expect(actual["payload"]["action"]["payload"]).toEqual(
+      expected["payload"]["action"]["payload"]
+    );
 
     expect(generator.next().done).toBeTruthy();
   });

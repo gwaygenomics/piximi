@@ -3,11 +3,11 @@ import * as classifier from "@piximi/models";
 import * as actions from "../../actions";
 
 export function* generate(action: any) {
-  // const {images, categories} = action.payload;
-  console.log(action.payload);
-  // const generated = yield classifier.generate(categories, images);
+  const {images, categories} = action.payload;
 
-  // yield put(actions.generate(generated));
+  const data = yield classifier.generate(images, categories);
+
+  yield put(actions.generated({data: data}));
 }
 
 export function* watchGenerate() {
