@@ -1,8 +1,8 @@
 import {Category, Image} from "@piximi/types";
 import * as tensorflow from "@tensorflow/tfjs";
+import {Tensor} from "@tensorflow/tfjs";
 import * as ImageJS from "image-js";
 import {Dataset} from "@tensorflow/tfjs-data";
-import {Tensor} from "@tensorflow/tfjs";
 
 export const encodeCategory = (categories: number) => {
   return (item: {
@@ -64,15 +64,8 @@ export const generate = async (
   images: Array<Image>,
   categories: Array<Category>
 ): Promise<Dataset<{xs: Tensor; ys: Tensor}>> => {
-  const generate = generator(categories, images);
-
-  const promise = tensorflow.data
-    .generator(generate)
+  return tensorflow.data
+    .generator(generator(categories, images))
     .map(encodeCategory(categories.length))
-    .mapAsync(encodeImage)
-    .batch(16);
-
-  return new Promise(() => {
-    return promise;
-  });
+    .mapAsync(encodeImage);
 };

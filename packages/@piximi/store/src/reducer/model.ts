@@ -7,7 +7,7 @@ import {Dataset} from "@tensorflow/tfjs-data";
 export type Model = {
   compileOptions?: CompileOptions;
   compiling: boolean;
-  data?: Dataset<{x: Tensor; y: Tensor}>;
+  data?: Dataset<{xs: Tensor; ys: Tensor}>;
   evaluating: boolean;
   evaluations?: Scalar | Array<Scalar>;
   fitOptions?: FitOptions;
@@ -19,7 +19,7 @@ export type Model = {
   predicting: boolean;
   predictions?: Tensor;
   saving: boolean;
-  validationData?: Dataset<{x: Tensor; y: Tensor}>;
+  validationData?: Dataset<{xs: Tensor; ys: Tensor}>;
 };
 
 const state: Model = {

@@ -15,8 +15,8 @@ export const fit = async (
       }
     },
     epochs: options.epochs,
-    validationData: validationData
+    validationData: validationData.batch(16)
   };
 
-  return await compiled.fitDataset(data, args);
+  return await compiled.fitDataset(data.batch(16), args);
 };

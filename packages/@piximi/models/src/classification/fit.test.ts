@@ -8,16 +8,10 @@ import {
   Partition,
   Category
 } from "@piximi/types";
-import * as tensorflow from "@tensorflow/tfjs";
-
 import {compile} from "./compile";
 import {fit} from "./fit";
 import {open} from "./open";
-import {encodeCategory, encodeImage, generate} from "./generate";
-import {Dataset} from "@tensorflow/tfjs-data";
-import {Tensor} from "@tensorflow/tfjs";
-
-tensorflow.setBackend("tensorflow");
+import {generate} from "./generate";
 
 jest.setTimeout(50000);
 
@@ -73,36 +67,31 @@ const images: Array<Image> = [
   }
 ];
 
-const path =
+const pathname =
   "https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_0.25_224/model.json";
 
-describe("fit", () => {
-  it("metricsNames", async () => {
-    const opened = await open(path, categories.length, 100);
+it("fit", async () => {
+  const opened = await open(pathname, categories.length, 100);
 
-    const options = {
-      learningRate: 0.01,
-      lossFunction: Loss.CategoricalCrossentropy,
-      metrics: [Metric.CategoricalAccuracy],
-      optimizationFunction: Optimizer.SGD
-    };
+  const options = {
+    learningRate: 0.01,
+    lossFunction: Loss.CategoricalCrossentropy,
+    metrics: [Metric.CategoricalAccuracy],
+    optimizationFunction: Optimizer.SGD
+  };
 
-    const compiled = await compile(opened, options);
+  const compiled = await compile(opened, options);
 
-    const data: Dataset<{xs: Tensor; ys: Tensor}> = await generate(
-      images,
-      categories
-    );
+  const data = await generate(images, categories);
 
-    if (compiled) {
-      const history = await fit(compiled, data, data, {
-        epochs: 3,
-        initialEpoch: 0
-      });
+  const fitted = await fit(compiled, data, data, {epochs: 1, initialEpoch: 1});
 
-      expect(history.epoch).toEqual([0, 1, 2]);
-    } else {
-      expect(true).toBe(false);
-    }
-  });
+  const expected = [
+    "categoricalAccuracy",
+    "loss",
+    "val_categoricalAccuracy",
+    "val_loss"
+  ];
+
+  expect(Object.keys(fitted.history).sort()).toEqual(expected.sort());
 });
