@@ -1,27 +1,7 @@
-import {CompileOptions, FitOptions} from "@piximi/types";
+import {Classifier} from "@piximi/types";
 import {createReducer} from "@reduxjs/toolkit";
-import {History, LayersModel, Scalar, Tensor} from "@tensorflow/tfjs";
-import {Dataset} from "@tensorflow/tfjs-data";
 
 import * as actions from "../actions";
-
-export type Classifier = {
-  compileOptions?: CompileOptions;
-  compiling: boolean;
-  data?: Dataset<{xs: Tensor; ys: Tensor}>;
-  evaluating: boolean;
-  evaluations?: Scalar | Array<Scalar>;
-  fitOptions?: FitOptions;
-  fitting: boolean;
-  generating: boolean;
-  graph?: LayersModel;
-  history?: History;
-  opening: boolean;
-  predicting: boolean;
-  predictions?: Tensor;
-  saving: boolean;
-  validationData?: Dataset<{xs: Tensor; ys: Tensor}>;
-};
 
 const state: Classifier = {
   compiling: false,

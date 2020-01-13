@@ -1,61 +1,33 @@
 import {createAction} from "@reduxjs/toolkit";
 
-export const createCategoryAction = createAction<{}>("create-category");
-
-export const createClassifierAction = createAction<{}>("create-classifier");
-
-export const openClassifierAction = createAction<{}>("open-classifier");
-
-export const createImageAction = createAction<{}>("create-image");
-
-export const createImagesAction = createAction<{}>("create-images");
-
-export const createImagesScoreAction = createAction<{}>("create-images-score");
-
-export const deleteCategoryAction = createAction<{}>("delete-category");
-
-export const deleteImageAction = createAction<{}>("delete-image");
-
-export const toggleCategoryVisibilityAction = createAction<{}>(
+export const createCategory = createAction<{}>("create-category");
+export const createImage = createAction<{}>("create-image");
+export const createImages = createAction<{}>("create-images");
+export const createImageScore = createAction<{}>("create-images-score");
+export const createProject = createAction<{}>("create-project");
+export const deleteCategory = createAction<{}>("delete-category");
+export const deleteImage = createAction<{}>("delete-image");
+export const openProject = createAction<{}>("open-project");
+export const toggleCategoryVisibility = createAction<{}>(
   "toggle-category-visibility"
 );
-
-export const updateCategoryColorAction = createAction<{}>(
-  "update-category-color"
-);
-
-export const updateCategoryDescriptionAction = createAction<{}>(
+export const updateCategoryColor = createAction<{}>("update-category-color");
+export const updateCategoryDescription = createAction<{}>(
   "update-category-description"
 );
-
-export const updateCategoryVisibilityAction = createAction<{}>(
+export const updateCategoryVisibility = createAction<{}>(
   "update-category-visibility"
 );
-
-export const updateClassifierNameAction = createAction<{}>(
-  "update-classifier-name"
-);
-
-export const updateImageBrightnessAction = createAction<{}>(
+export const updateImageBrightness = createAction<{}>(
   "update-image-brightness"
 );
-
-export const updateImageCategoryAction = createAction<{}>(
-  "update-image-category"
-);
-
-export const updateImagesCategoryAction = createAction<{}>(
-  "update-images-category"
-);
-
-export const updateImageContrastAction = createAction<{}>(
-  "update-image-contrast"
-);
-
-export const updateImageVisibilityAction = createAction<{}>(
-  "update-image-visibility"
-);
-
-export const updateImagesPartitionAction = createAction<{}>(
+export const updateImageCategory = createAction<{}>("update-image-category");
+export const updateImageContrast = createAction<{}>("update-image-contrast");
+export const updateImagesCategory = createAction<{}>("update-images-category");
+export const updateImagesPartition = createAction<{}>(
   "update-images-partition"
 );
+export const updateImageVisibility = createAction<{}>(
+  "update-image-visibility"
+);
+export const updateProjectName = createAction<{}>("update-project-name");

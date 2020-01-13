@@ -1,4 +1,15 @@
 import * as tensorflow from "@tensorflow/tfjs";
+import {Dataset} from "@tensorflow/tfjs-data";
+import {Tensor} from "@tensorflow/tfjs";
+import {Scalar} from "@tensorflow/tfjs";
+import {LayersModel} from "@tensorflow/tfjs";
+import {History} from "@tensorflow/tfjs";
+
+export type Project = {
+  categories: Array<Category>;
+  images: Array<Image>;
+  name: string;
+};
 
 export type Category = {
   description: string;
@@ -12,10 +23,22 @@ export type CategoryVisualization = {
   visible: boolean;
 };
 
-export type Project = {
-  categories: Array<Category>;
-  images: Array<Image>;
-  name: string;
+export type Classifier = {
+  compileOptions?: CompileOptions;
+  compiling: boolean;
+  data?: Dataset<{xs: Tensor; ys: Tensor}>;
+  evaluating: boolean;
+  evaluations?: Scalar | Array<Scalar>;
+  fitOptions?: FitOptions;
+  fitting: boolean;
+  generating: boolean;
+  graph?: LayersModel;
+  history?: History;
+  opening: boolean;
+  predicting: boolean;
+  predictions?: Tensor;
+  saving: boolean;
+  validationData?: Dataset<{xs: Tensor; ys: Tensor}>;
 };
 
 export type CompileOptions = {

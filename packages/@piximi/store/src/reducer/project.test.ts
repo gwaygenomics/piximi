@@ -34,7 +34,7 @@ it("createCategoryAction", () => {
     category: category
   };
 
-  const action = actions.createCategoryAction(payload);
+  const action = actions.createCategory(payload);
 
   const reducer = project.reducer(state, action);
 
@@ -87,7 +87,7 @@ it("createClassifierAction", () => {
     name: "example"
   };
 
-  const action = actions.createClassifierAction(payload);
+  const action = actions.createProject(payload);
 
   const reducer = project.reducer(state, action);
 
@@ -176,7 +176,7 @@ it("openClassifierAction", () => {
     name: "example"
   };
 
-  const action = actions.openClassifierAction(payload);
+  const action = actions.openProject(payload);
 
   const reducer = project.reducer(state, action);
 
@@ -269,7 +269,7 @@ it("createImageAction", () => {
     image: image
   };
 
-  const action = actions.createImageAction(payload);
+  const action = actions.createImage(payload);
 
   const reducer = project.reducer(state, action);
 
@@ -374,7 +374,7 @@ it("createImagesAction", () => {
     images: images
   };
 
-  const action = actions.createImagesAction(payload);
+  const action = actions.createImages(payload);
 
   const reducer = project.reducer(state, action);
 
@@ -532,7 +532,7 @@ it("createImageScoreAction", () => {
     scores: scores
   };
 
-  const action = actions.createImagesScoreAction(payload);
+  const action = actions.createImageScore(payload);
 
   const reducer = project.reducer(state, action);
 
@@ -662,7 +662,7 @@ it("deleteCategoryAction", () => {
     identifier: "11111111-1111-1111-1111-11111111111"
   };
 
-  const action = actions.deleteCategoryAction(payload);
+  const action = actions.deleteCategory(payload);
 
   const reducer = project.reducer(state, action);
 
@@ -736,7 +736,7 @@ it("deleteImageAction", () => {
     identifier: "11111111-1111-1111-1111-11111111111"
   };
 
-  const action = actions.deleteImageAction(payload);
+  const action = actions.deleteImage(payload);
 
   const reducer = project.reducer(state, action);
 
@@ -789,7 +789,7 @@ it("toggleCategoryVisibilityAction", () => {
     identifier: "11111111-1111-1111-1111-11111111111"
   };
 
-  const action = actions.toggleCategoryVisibilityAction(payload);
+  const action = actions.toggleCategoryVisibility(payload);
 
   const reducer = project.reducer(state, action);
 
@@ -852,7 +852,7 @@ it("updateCategoryColorAction", () => {
     color: "#000000"
   };
 
-  const action = actions.updateCategoryColorAction(payload);
+  const action = actions.updateCategoryColor(payload);
 
   const reducer = project.reducer(state, action);
 
@@ -915,7 +915,7 @@ it("updateCategoryDescriptionAction", () => {
     identifier: "11111111-1111-1111-1111-11111111111"
   };
 
-  const action = actions.updateCategoryDescriptionAction(payload);
+  const action = actions.updateCategoryDescription(payload);
 
   const reducer = project.reducer(state, action);
 
@@ -978,7 +978,7 @@ it("updateCategoryVisibilityAction", () => {
     visible: false
   };
 
-  const action = actions.updateCategoryVisibilityAction(payload);
+  const action = actions.updateCategoryVisibility(payload);
 
   const reducer = project.reducer(state, action);
 
@@ -1031,7 +1031,7 @@ it("updateClassifierNameAction", () => {
     name: "updated"
   };
 
-  const action = actions.updateClassifierNameAction(payload);
+  const action = actions.updateProjectName(payload);
 
   const reducer = project.reducer(state, action);
 
@@ -1091,7 +1091,7 @@ it("updateImageBrightnessAction", () => {
     identifier: "11111111-1111-1111-1111-11111111111"
   };
 
-  const action = actions.updateImageBrightnessAction(payload);
+  const action = actions.updateImageBrightness(payload);
 
   const reducer = project.reducer(state, action);
 
@@ -1175,7 +1175,7 @@ it("updateImageCategoryAction", () => {
     categoryIdentifier: "11111111-1111-1111-1111-11111111111"
   };
 
-  const action = actions.updateImageCategoryAction(payload);
+  const action = actions.updateImageCategory(payload);
 
   const reducer = project.reducer(state, action);
 
@@ -1300,7 +1300,7 @@ it("updateImagesCategoryAction", () => {
     categoryIdentifier: "11111111-1111-1111-1111-11111111111"
   };
 
-  const action = actions.updateImagesCategoryAction(payload);
+  const action = actions.updateImagesCategory(payload);
 
   const reducer = project.reducer(state, action);
 
@@ -1412,7 +1412,7 @@ it("updateImageContrastAction", () => {
     identifier: "11111111-1111-1111-1111-11111111111"
   };
 
-  const action = actions.updateImageContrastAction(payload);
+  const action = actions.updateImageContrast(payload);
 
   const reducer = project.reducer(state, action);
 
@@ -1487,7 +1487,7 @@ it("updateImageVisibilityAction", () => {
     visible: false
   };
 
-  const action = actions.updateImageVisibilityAction(payload);
+  const action = actions.updateImageVisibility(payload);
 
   const reducer = project.reducer(state, action);
 
@@ -1587,7 +1587,7 @@ it("updateImagesPartitionAction", () => {
 
   const payload = {partitions: [0, 1, 2]};
 
-  const action = actions.updateImagesPartitionAction(payload);
+  const action = actions.updateImagesPartition(payload);
 
   const reducer = project.reducer(state, action);
 
