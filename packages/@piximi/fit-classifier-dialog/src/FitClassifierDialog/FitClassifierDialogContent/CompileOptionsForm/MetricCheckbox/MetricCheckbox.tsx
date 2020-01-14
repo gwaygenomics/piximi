@@ -4,11 +4,7 @@ import {Checkbox} from "@material-ui/core";
 import {useDispatch, useSelector} from "react-redux";
 import {updateMetrics} from "@piximi/store";
 
-type MetricCheckboxProps = {
-  metric: Metric;
-};
-
-export const MetricCheckbox = ({metric}: MetricCheckboxProps) => {
+export const MetricCheckbox = ({metric}: {metric: Metric}) => {
   const dispatch = useDispatch();
 
   const checked = useSelector(({classifier}) => {
@@ -21,7 +17,9 @@ export const MetricCheckbox = ({metric}: MetricCheckboxProps) => {
 
   const onChange = () => {
     if (checked) {
-      dispatch(updateMetrics({metrics: [...metrics, metric]}));
+      dispatch(
+        updateMetrics({metrics: metrics.filter((item) => item !== metric)})
+      );
     } else {
       dispatch(updateMetrics({metrics: [...metrics, metric]}));
     }
