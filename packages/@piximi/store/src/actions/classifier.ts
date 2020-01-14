@@ -1,4 +1,11 @@
-import {Category, CompileOptions, FitOptions, Image} from "@piximi/types";
+import {
+  Category,
+  CompileOptions,
+  FitOptions,
+  Image,
+  Loss,
+  Optimizer
+} from "@piximi/types";
 import {createAction} from "@reduxjs/toolkit";
 import {History, LayersModel, Scalar, Tensor} from "@tensorflow/tfjs";
 import {Dataset} from "@tensorflow/tfjs-data";
@@ -60,6 +67,18 @@ export const predict = createAction<{
 export const predicted = createAction<{
   predictions: Tensor;
 }>("predicted");
+
+export const updateLearningRate = createAction<{
+  learningRate: number;
+}>("update-learning-rate");
+
+export const updateLossFunction = createAction<{
+  lossFunction: Loss;
+}>("update-loss-function");
+
+export const updateOptimizationFunction = createAction<{
+  optimizationFunction: Optimizer;
+}>("update-optimization-function");
 
 export const save = createAction<{}>("save");
 

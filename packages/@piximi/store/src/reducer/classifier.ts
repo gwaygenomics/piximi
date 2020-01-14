@@ -122,5 +122,38 @@ export const reducer = createReducer(state, {
       saving: true
     };
   },
-  [actions.saved.toString()]: (state, action) => {}
+  [actions.saved.toString()]: (state, action) => {},
+  [actions.updateLearningRate.toString()]: (state, action) => {
+    const {learningRate} = action.payload;
+
+    return {
+      ...state,
+      compileOptions: {
+        ...state.compileOptions,
+        learningRate: learningRate
+      }
+    };
+  },
+  [actions.updateLossFunction.toString()]: (state, action) => {
+    const {lossFunction} = action.payload;
+
+    return {
+      ...state,
+      compileOptions: {
+        ...state.compileOptions,
+        lossFunction: lossFunction
+      }
+    };
+  },
+  [actions.updateOptimizationFunction.toString()]: (state, action) => {
+    const {optimizationFunction} = action.payload;
+
+    return {
+      ...state,
+      compileOptions: {
+        ...state.compileOptions,
+        optimizationFunction: optimizationFunction
+      }
+    };
+  }
 });

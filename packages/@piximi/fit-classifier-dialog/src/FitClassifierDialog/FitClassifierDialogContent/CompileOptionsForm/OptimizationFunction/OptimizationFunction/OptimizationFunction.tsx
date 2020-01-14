@@ -4,11 +4,12 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
-import {ClassifierState, Optimizer} from "@piximi/types";
+import {ClassifierState, Optimizer, Project} from "@piximi/types";
 import {useStyles} from "./OptimizationFunction.css";
 import {useDispatch, useSelector} from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import {LearningRate} from "../LearningRate";
+import {updateOptimizationFunction} from "@piximi/store";
 
 const OPTIMIZATION_FUNCTIONS = new Map<Optimizer, string>();
 
@@ -29,12 +30,9 @@ export const OptimizationFunction = ({}: OptimizationFunctionProps) => {
 
   const onChange = React.useCallback(
     (event: React.ChangeEvent<{value: Optimizer}>) => {
-      const action = {
-        payload: {
-          optimizationFunction: event.target.value
-        },
-        type: "update-compile-options-optimization-function"
-      };
+      const action = updateOptimizationFunction({
+        optimizationFunction: event.target.value
+      });
 
       dispatch(action);
     },

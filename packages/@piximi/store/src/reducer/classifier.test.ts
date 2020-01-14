@@ -13,4 +13,7 @@ describe("classifier.reducer", () => {
   it("predicted", () => {});
   it("save", () => {});
   it("saved", () => {});
+  it("updateLearningRate", () => {});
+  it("updateLossFunction", () => {});
+  it("updateOptimizationFunction", () => {});
 });
