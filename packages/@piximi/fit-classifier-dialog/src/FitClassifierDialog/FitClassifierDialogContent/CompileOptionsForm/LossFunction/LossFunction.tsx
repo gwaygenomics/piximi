@@ -4,7 +4,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
-import {Classifier, Loss} from "@piximi/types";
+import {ClassifierState, Loss} from "@piximi/types";
 import {useStyles} from "./LossFunction.css";
 import {useDispatch, useSelector} from "react-redux";
 import Grid from "@material-ui/core/Grid";
@@ -58,7 +58,7 @@ export const LossFunction = ({}: LossFunctionProps) => {
   );
 
   const lossFunction = useSelector(
-    ({classifier}: {classifier: Classifier}): Loss => {
+    ({classifier}: {classifier: ClassifierState}): Loss => {
       return classifier.compileOptions.lossFunction as Loss;
     }
   );

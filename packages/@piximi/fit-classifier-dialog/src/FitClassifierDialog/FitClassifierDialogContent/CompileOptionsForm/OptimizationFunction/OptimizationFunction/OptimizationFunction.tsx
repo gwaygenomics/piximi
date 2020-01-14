@@ -4,7 +4,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
-import {Classifier, Optimizer} from "@piximi/types";
+import {ClassifierState, Optimizer} from "@piximi/types";
 import {useStyles} from "./OptimizationFunction.css";
 import {useDispatch, useSelector} from "react-redux";
 import Grid from "@material-ui/core/Grid";
@@ -42,7 +42,7 @@ export const OptimizationFunction = ({}: OptimizationFunctionProps) => {
   );
 
   const optimizationFunction = useSelector(
-    ({classifier}: {classifier: Classifier}): Optimizer => {
+    ({classifier}: {classifier: ClassifierState}): Optimizer => {
       return classifier.compileOptions.optimizationFunction as Optimizer;
     }
   );

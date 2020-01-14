@@ -2,7 +2,7 @@ import TextField from "@material-ui/core/TextField";
 import * as React from "react";
 import {useDispatch, useSelector} from "react-redux";
 
-import {Classifier} from "@piximi/types";
+import {ClassifierState} from "@piximi/types";
 
 type LearningRateProps = {};
 
@@ -24,7 +24,7 @@ export const LearningRate = ({}: LearningRateProps) => {
   );
 
   const learningRate = useSelector(
-    ({classifier}: {classifier: Classifier}): number => {
+    ({classifier}: {classifier: ClassifierState}): number => {
       return classifier.compileOptions.learningRate;
     }
   );
