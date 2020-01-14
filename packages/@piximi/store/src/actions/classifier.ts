@@ -3,92 +3,64 @@ import {createAction} from "@reduxjs/toolkit";
 import {History, LayersModel, Scalar, Tensor} from "@tensorflow/tfjs";
 import {Dataset} from "@tensorflow/tfjs-data";
 
-type CompileAction = {
+export const compile = createAction<{
   opened: LayersModel;
   options: CompileOptions;
-};
+}>("compile");
 
-export const compile = createAction<CompileAction>("compile");
-
-type CompiledAction = {
+export const compiled = createAction<{
   compiled: LayersModel;
-};
+}>("compiled");
 
-export const compiled = createAction<CompiledAction>("compiled");
-
-type EvaluateAction = {
+export const evaluate = createAction<{
   fitted: LayersModel;
   data: Dataset<{xs: Tensor; ys: Tensor}>;
-};
+}>("evaluate");
 
-export const evaluate = createAction<EvaluateAction>("evaluate");
-
-type EvaluatedAction = {
+export const evaluated = createAction<{
   evaluations: Scalar | Array<Scalar>;
-};
+}>("evaluated");
 
-export const evaluated = createAction<EvaluatedAction>("evaluated");
-
-type FitAction = {
+export const fit = createAction<{
   compiled: LayersModel;
   data: Dataset<{xs: Tensor; ys: Tensor}>;
   validationData: Dataset<{xs: Tensor; ys: Tensor}>;
   options: FitOptions;
-};
+}>("fit");
 
-export const fit = createAction<FitAction>("fit");
-
-type FittedAction = {
+export const fitted = createAction<{
   fitted: LayersModel;
   status: History;
-};
+}>("fitted");
 
-export const fitted = createAction<FittedAction>("fitted");
-
-type GenerateAction = {
+export const generate = createAction<{
   images: Array<Image>;
   categories: Array<Category>;
-};
+}>("generate");
 
-export const generate = createAction<GenerateAction>("generate");
-
-type GeneratedAction = {
+export const generated = createAction<{
   data: Dataset<{xs: Tensor; ys: Tensor}>;
-};
+}>("generated");
 
-export const generated = createAction<GeneratedAction>("generated");
-
-type OpenAction = {
+export const open = createAction<{
   pathname: string;
   classes: number;
   units: number;
-};
+}>("open");
 
-export const open = createAction<OpenAction>("open");
-
-type OpenedAction = {
+export const opened = createAction<{
   opened: LayersModel;
-};
+}>("opened");
 
-export const opened = createAction<OpenedAction>("opened");
-
-type PredictAction = {
+export const predict = createAction<{
   compiled: LayersModel;
   data: Dataset<{xs: Tensor; ys: Tensor}>;
-};
+}>("predict");
 
-export const predict = createAction<PredictAction>("predict");
-
-type PredictedAction = {
+export const predicted = createAction<{
   predictions: Tensor;
-};
+}>("predicted");
 
-export const predicted = createAction<PredictedAction>("predicted");
+export const save = createAction<{}>("save");
 
-type SaveAction = {};
-
-export const save = createAction<SaveAction>("save");
-
-type SavedAction = {};
-
-export const saved = createAction<SavedAction>("saved");
+export const saved = createAction<{}>("saved");
