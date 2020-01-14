@@ -1,1 +1,1 @@
-export {PreserveProportions} from "./PreprocessingOptionsForm";
+export {PreserveProportions} from "./PreserveProportions";

@@ -1,1 +1,1 @@
-export {Method} from "./PreprocessingOptionsForm";
+export {Method} from "./Method";

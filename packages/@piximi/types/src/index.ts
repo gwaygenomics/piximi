@@ -23,16 +23,16 @@ export type CategoryVisualization = {
   visible: boolean;
 };
 
-export type Classifier = {
-  compileOptions?: CompileOptions;
+export type ClassifierState = {
+  compileOptions: CompileOptions;
   compiling: boolean;
   data?: Dataset<{xs: Tensor; ys: Tensor}>;
   evaluating: boolean;
   evaluations?: Scalar | Array<Scalar>;
-  fitOptions?: FitOptions;
+  fitOptions: FitOptions;
   fitting: boolean;
   generating: boolean;
-  graph?: LayersModel;
+  model?: LayersModel;
   history?: History;
   opening: boolean;
   predicting: boolean;
@@ -126,13 +126,6 @@ export type Model = {
   graph?: tensorflow.LayersModel;
   opened?: tensorflow.LayersModel;
   opening: boolean;
-};
-
-export type ModelOptions = {
-  architecture: string;
-  inputShape: string;
-  multiplier: string;
-  version: string;
 };
 
 export enum Partition {

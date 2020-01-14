@@ -1,11 +1,21 @@
-import {Classifier} from "@piximi/types";
+import {ClassifierState, Loss, Metric, Optimizer} from "@piximi/types";
 import {createReducer} from "@reduxjs/toolkit";
 
 import * as actions from "../actions";
 
-const state: Classifier = {
+const state: ClassifierState = {
   compiling: false,
+  compileOptions: {
+    learningRate: 0.01,
+    lossFunction: Loss.CategoricalCrossentropy,
+    metrics: [Metric.CategoricalAccuracy],
+    optimizationFunction: Optimizer.SGD
+  },
   evaluating: false,
+  fitOptions: {
+    epochs: 1,
+    initialEpoch: 0
+  },
   fitting: false,
   generating: false,
   opening: false,
@@ -26,7 +36,7 @@ export const reducer = createReducer(state, {
     return {
       ...state,
       compiling: false,
-      graph: compiled
+      model: compiled
     };
   },
   [actions.evaluate.toString()]: (state) => {
@@ -56,8 +66,8 @@ export const reducer = createReducer(state, {
     return {
       ...state,
       fitting: false,
-      graph: fitted,
-      history: history
+      history: history,
+      model: fitted
     };
   },
   [actions.generate.toString()]: (state) => {
@@ -87,7 +97,7 @@ export const reducer = createReducer(state, {
 
     return {
       ...state,
-      graph: opened,
+      model: opened,
       opening: false
     };
   },

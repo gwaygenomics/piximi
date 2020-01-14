@@ -1,1 +1,1 @@
-export {OutputShape} from "./PreprocessingOptionsForm";
+export {OutputShape} from "./OutputShape";
