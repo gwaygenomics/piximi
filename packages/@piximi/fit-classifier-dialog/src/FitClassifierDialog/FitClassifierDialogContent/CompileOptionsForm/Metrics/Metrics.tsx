@@ -11,10 +11,6 @@ import {MetricCheckbox} from "../MetricCheckbox";
 export const Metrics = () => {
   const classes = useStyles({});
 
-  const control = (metric: Metric) => {
-    return <MetricCheckbox metric={metric} />;
-  };
-
   return (
     <>
       <FormLabel className={classes.formLabel} component="legend">
@@ -25,23 +21,25 @@ export const Metrics = () => {
         <Grid item xs>
           <FormGroup>
             <FormControlLabel
-              control={control(Metric.BinaryAccuracy)}
+              control={<MetricCheckbox metric={Metric.BinaryAccuracy} />}
               label="Binary accuracy"
             />
             <FormControlLabel
-              control={control(Metric.CategoricalAccuracy)}
+              control={<MetricCheckbox metric={Metric.CategoricalAccuracy} />}
               label="Categorical accuracy"
             />
             <FormControlLabel
-              control={control(Metric.CategoricalCrossentropy)}
+              control={
+                <MetricCheckbox metric={Metric.CategoricalCrossentropy} />
+              }
               label="Categorical cross-entropy"
             />
             <FormControlLabel
-              control={control(Metric.Cosine)}
+              control={<MetricCheckbox metric={Metric.Cosine} />}
               label="Cosine proximity"
             />
             <FormControlLabel
-              control={control(Metric.MAE)}
+              control={<MetricCheckbox metric={Metric.MAE} />}
               label="Mean absolute error (MAE)"
             />
           </FormGroup>
@@ -50,19 +48,21 @@ export const Metrics = () => {
         <Grid item xs>
           <FormGroup>
             <FormControlLabel
-              control={control(Metric.MAPE)}
+              control={<MetricCheckbox metric={Metric.MAPE} />}
               label="Mean absolute percentage error (MAPE)"
             />
             <FormControlLabel
-              control={control(Metric.MSE)}
+              control={<MetricCheckbox metric={Metric.MSE} />}
               label="Mean squared error (MSE)"
             />
             <FormControlLabel
-              control={control(Metric.Precision)}
+              control={<MetricCheckbox metric={Metric.Precision} />}
               label="Precision"
             />
             <FormControlLabel
-              control={control(Metric.SparseCategoricalCrossentropy)}
+              control={
+                <MetricCheckbox metric={Metric.SparseCategoricalCrossentropy} />
+              }
               label="Sparse categorical cross-entropy"
             />
           </FormGroup>
