@@ -5,12 +5,6 @@ import * as actions from "../actions";
 
 const state: ClassifierState = {
   compiling: false,
-  compileOptions: {
-    learningRate: 0.01,
-    lossFunction: Loss.CategoricalCrossentropy,
-    metrics: [Metric.CategoricalAccuracy],
-    optimizationFunction: Optimizer.SGD
-  },
   evaluating: false,
   fitOptions: {
     epochs: 1,
@@ -18,7 +12,11 @@ const state: ClassifierState = {
   },
   fitting: false,
   generating: false,
+  learningRate: 0.01,
+  lossFunction: Loss.CategoricalCrossentropy,
+  metrics: [Metric.CategoricalAccuracy],
   opening: false,
+  optimizationFunction: Optimizer.SGD,
   predicting: false,
   saving: false
 };
@@ -128,10 +126,7 @@ export const reducer = createReducer(state, {
 
     return {
       ...state,
-      compileOptions: {
-        ...state.compileOptions,
-        learningRate: learningRate
-      }
+      learningRate: learningRate
     };
   },
   [actions.updateLossFunction.toString()]: (state, action) => {
@@ -139,10 +134,15 @@ export const reducer = createReducer(state, {
 
     return {
       ...state,
-      compileOptions: {
-        ...state.compileOptions,
-        lossFunction: lossFunction
-      }
+      lossFunction: lossFunction
+    };
+  },
+  [actions.updateMetrics.toString()]: (state, action) => {
+    const {metrics} = action.payload;
+
+    return {
+      ...state,
+      metrics: metrics
     };
   },
   [actions.updateOptimizationFunction.toString()]: (state, action) => {
@@ -150,10 +150,7 @@ export const reducer = createReducer(state, {
 
     return {
       ...state,
-      compileOptions: {
-        ...state.compileOptions,
-        optimizationFunction: optimizationFunction
-      }
+      optimizationFunction: optimizationFunction
     };
   }
 });

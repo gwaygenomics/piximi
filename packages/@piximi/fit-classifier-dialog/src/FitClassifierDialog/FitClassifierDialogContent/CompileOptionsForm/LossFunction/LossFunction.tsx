@@ -69,7 +69,7 @@ export const LossFunction = ({}: LossFunctionProps) => {
 
   const lossFunction = useSelector(
     ({classifier}: {classifier: ClassifierState}): Loss => {
-      return classifier.compileOptions.lossFunction as Loss;
+      return classifier.lossFunction as Loss;
     }
   );
 

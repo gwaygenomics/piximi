@@ -41,7 +41,7 @@ export const OptimizationFunction = ({}: OptimizationFunctionProps) => {
 
   const optimizationFunction = useSelector(
     ({classifier}: {classifier: ClassifierState}): Optimizer => {
-      return classifier.compileOptions.optimizationFunction as Optimizer;
+      return classifier.optimizationFunction as Optimizer;
     }
   );
 

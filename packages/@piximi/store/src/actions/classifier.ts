@@ -4,6 +4,7 @@ import {
   FitOptions,
   Image,
   Loss,
+  Metric,
   Optimizer
 } from "@piximi/types";
 import {createAction} from "@reduxjs/toolkit";
@@ -75,6 +76,10 @@ export const updateLearningRate = createAction<{
 export const updateLossFunction = createAction<{
   lossFunction: Loss;
 }>("update-loss-function");
+
+export const updateMetrics = createAction<{
+  metrics: Array<Metric>;
+}>("update-metrics");
 
 export const updateOptimizationFunction = createAction<{
   optimizationFunction: Optimizer;

@@ -6,38 +6,13 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Grid from "@material-ui/core/Grid";
-import {Checkbox} from "@material-ui/core";
+import {MetricCheckbox} from "../MetricCheckbox";
 
-type MetricsProps = {};
-
-export const Metrics = ({}: MetricsProps) => {
-  const [metrics, setMetrics] = React.useState<Array<Metric>>([
-    Metric.CategoricalAccuracy
-  ]);
-
+export const Metrics = () => {
   const classes = useStyles({});
 
-  const checked = (metric: Metric) => metrics.includes(metric);
-
-  const onChange = (metric: Metric) => {
-    return (event: React.ChangeEvent<HTMLInputElement>) => {
-      return checked(metric)
-        ? setMetrics(remove(metric))
-        : setMetrics([...metrics, metric]);
-    };
-  };
-
-  const remove = (metric: Metric) =>
-    metrics.filter((item: Metric) => metric !== item);
-
   const control = (metric: Metric) => {
-    return (
-      <Checkbox
-        checked={checked(metric)}
-        onChange={onChange(metric)}
-        value={metric}
-      />
-    );
+    return <MetricCheckbox metric={metric} />;
   };
 
   return (

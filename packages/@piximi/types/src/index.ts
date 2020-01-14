@@ -24,7 +24,6 @@ export type CategoryVisualization = {
 };
 
 export type ClassifierState = {
-  compileOptions: CompileOptions;
   compiling: boolean;
   data?: Dataset<{xs: Tensor; ys: Tensor}>;
   evaluating: boolean;
@@ -32,9 +31,13 @@ export type ClassifierState = {
   fitOptions: FitOptions;
   fitting: boolean;
   generating: boolean;
-  model?: LayersModel;
   history?: History;
+  learningRate: number;
+  lossFunction: Loss | Array<Loss> | {[outputName: string]: Loss};
+  metrics: Array<Metric>;
+  model?: LayersModel;
   opening: boolean;
+  optimizationFunction: Optimizer;
   predicting: boolean;
   predictions?: Tensor;
   saving: boolean;
@@ -44,7 +47,7 @@ export type ClassifierState = {
 export type CompileOptions = {
   learningRate: number;
   lossFunction: Loss | Array<Loss> | {[outputName: string]: Loss};
-  metrics: Metric | Array<Metric> | {[outputName: string]: Metric};
+  metrics: Array<Metric>;
   optimizationFunction: Optimizer;
 };
 
@@ -89,7 +92,7 @@ export enum Metric {
 export const DefaultCompileOptions: CompileOptions = {
   learningRate: 0.01,
   lossFunction: Loss.BinaryCrossentropy,
-  metrics: Metric.BinaryAccuracy,
+  metrics: [Metric.BinaryAccuracy],
   optimizationFunction: Optimizer.Adadelta
 };
 

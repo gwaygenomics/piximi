@@ -23,7 +23,7 @@ export const LearningRate = ({}: LearningRateProps) => {
 
   const learningRate = useSelector(
     ({classifier}: {classifier: ClassifierState}): number => {
-      return classifier.compileOptions.learningRate as number;
+      return classifier.learningRate as number;
     }
   );
 
