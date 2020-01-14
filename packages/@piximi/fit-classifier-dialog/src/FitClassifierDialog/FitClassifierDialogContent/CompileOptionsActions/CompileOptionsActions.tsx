@@ -1,8 +1,7 @@
 import * as React from "react";
 import {useStyles} from "./CompileOptionsActions.css";
-import Button from "@material-ui/core/Button/Button";
-import ArrowBack from "@material-ui/icons/ArrowBack";
-import IconButton from "@material-ui/core/IconButton";
+import {CompileButton} from "../CompileButton/CompileButton";
+import {PreviousStepIconButton} from "../PreviousStepIconButton";
 
 type CompileOptionsActionsProps = {
   activeStep: any;
@@ -17,29 +16,12 @@ export const CompileOptionsActions = ({
 }: CompileOptionsActionsProps) => {
   const classes = useStyles({});
 
-  const onCompileClick = () => {
-    next();
-  };
-
   return (
     <div className={classes.actionsContainer}>
       <div>
-        <IconButton
-          className={classes.button}
-          disabled={activeStep === 0}
-          onClick={previous}
-        >
-          <ArrowBack />
-        </IconButton>
+        <PreviousStepIconButton activeStep={activeStep} previous={previous} />
 
-        <Button
-          className={classes.button}
-          color="primary"
-          onClick={onCompileClick}
-          variant="contained"
-        >
-          Compile
-        </Button>
+        <CompileButton next={next} />
       </div>
     </div>
   );
