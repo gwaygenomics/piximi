@@ -1,9 +1,10 @@
-import * as React from "react";
 import Grid from "@material-ui/core/Grid";
+import * as React from "react";
+
 import {Architecture} from "../Architecture";
-import {Version} from "../Version";
-import {Multiplier} from "../Multiplier";
 import {InputShape} from "../InputShape";
+import {Multiplier} from "../Multiplier";
+import {Version} from "../Version";
 
 type ModelProps = {};
 
