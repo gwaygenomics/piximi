@@ -5,10 +5,7 @@ import {ThemeProvider} from "@material-ui/styles";
 import {createMuiTheme} from "@material-ui/core";
 import {useDialog} from "@piximi/hooks";
 import {Provider} from "react-redux";
-import {reducer} from "@piximi/store";
-import {createStore} from "redux";
-
-const store = createStore(reducer);
+import {store} from "@piximi/store";
 
 const theme = createMuiTheme({
   palette: {

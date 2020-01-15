@@ -10,13 +10,14 @@ import {Persistor, persistReducer, persistStore} from "redux-persist";
 import autoMergeLevel2 from "redux-persist/es/stateReconciler/autoMergeLevel2";
 import createSagaMiddleware from "redux-saga";
 import thunk from "redux-thunk";
+import * as actions from "./actions";
 
 import {reducer} from "./reducer";
 import {root} from "./sagas";
 
-const enhancers: StoreEnhancer[] = [];
-
 const saga = createSagaMiddleware();
+
+const enhancers: StoreEnhancer[] = [];
 
 const middleware: Middleware[] = [logger, saga, thunk];
 
@@ -36,7 +37,7 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, reducer);
 
 const options = {
-  devTools: process.env.NODE_ENV !== "production",
+  devTools: true,
   enhancers: enhancers,
   middleware: middleware,
   preloadedState: preloadedState,
@@ -45,6 +46,6 @@ const options = {
 
 export const store: EnhancedStore = configureStore(options);
 
-export const persistor: Persistor = persistStore(store);
-
 saga.run(root);
+
+export const persistor: Persistor = persistStore(store);
