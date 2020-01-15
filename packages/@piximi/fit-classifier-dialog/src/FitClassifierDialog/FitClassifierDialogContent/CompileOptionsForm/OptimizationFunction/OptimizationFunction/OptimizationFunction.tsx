@@ -1,15 +1,16 @@
-import * as React from "react";
 import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
-import {ClassifierState, Optimizer, Project} from "@piximi/types";
-import {useStyles} from "./OptimizationFunction.css";
-import {useDispatch, useSelector} from "react-redux";
 import Grid from "@material-ui/core/Grid";
-import {LearningRate} from "../LearningRate";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
 import {updateOptimizationFunction} from "@piximi/store";
+import {ClassifierState, Optimizer} from "@piximi/types";
+import * as React from "react";
+import {useDispatch, useSelector} from "react-redux";
+
+import {LearningRate} from "../LearningRate";
+import {useStyles} from "./OptimizationFunction.css";
 
 const OPTIMIZATION_FUNCTIONS = new Map<Optimizer, string>();
 

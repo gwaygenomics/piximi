@@ -1,9 +1,8 @@
 import TextField from "@material-ui/core/TextField";
+import {updateLearningRate} from "@piximi/store";
+import {ClassifierState} from "@piximi/types";
 import * as React from "react";
 import {useDispatch, useSelector} from "react-redux";
-
-import {ClassifierState} from "@piximi/types";
-import {updateLearningRate} from "@piximi/store";
 
 type LearningRateProps = {};
 
