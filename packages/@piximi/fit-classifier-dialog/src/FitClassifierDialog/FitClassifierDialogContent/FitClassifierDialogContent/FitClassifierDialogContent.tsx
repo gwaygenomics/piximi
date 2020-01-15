@@ -1,5 +1,6 @@
 import DialogContent from "@material-ui/core/DialogContent";
 import * as React from "react";
+
 import {FitClassifierDialogContentStepper} from "../FitClassifierDialogContentStepper";
 import {History} from "../History";
 

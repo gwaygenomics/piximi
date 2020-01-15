@@ -1,15 +1,16 @@
-import * as React from "react";
-import Stepper from "@material-ui/core/Stepper";
 import {Step} from "@material-ui/core";
-import StepLabel from "@material-ui/core/StepLabel";
-import StepContent from "@material-ui/core/StepContent";
-import {CompileOptionsForm} from "../CompileOptionsForm";
-import {FitOptionsForm} from "../FitOptionsForm";
-import {PreprocessingOptionsForm} from "../PreprocessingOptionsForm";
-import {FitOptionsActions} from "../FitOptionsActions";
-import {CompileOptionsActions} from "../CompileOptionsActions";
-import {PreprocessingOptionsActions} from "../PreprocessingOptionsActions";
 import Grid from "@material-ui/core/Grid";
+import StepContent from "@material-ui/core/StepContent";
+import StepLabel from "@material-ui/core/StepLabel";
+import Stepper from "@material-ui/core/Stepper";
+import * as React from "react";
+
+import {CompileOptionsActions} from "../CompileOptionsActions";
+import {CompileOptionsForm} from "../CompileOptionsForm";
+import {FitOptionsActions} from "../FitOptionsActions";
+import {FitOptionsForm} from "../FitOptionsForm";
+import {PreprocessingOptionsActions} from "../PreprocessingOptionsActions";
+import {PreprocessingOptionsForm} from "../PreprocessingOptionsForm";
 
 type FitClassifierDiaslogContentProps = {};
 
