@@ -1,13 +1,14 @@
-import * as React from "react";
 import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
-import {ClassifierState, Loss} from "@piximi/types";
-import {useStyles} from "./LossFunction.css";
-import {useDispatch, useSelector} from "react-redux";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
 import {updateLossFunction} from "@piximi/store";
+import {ClassifierState, Loss} from "@piximi/types";
+import * as React from "react";
+import {useDispatch, useSelector} from "react-redux";
+
+import {useStyles} from "./LossFunction.css";
 
 const LOSS_FUNCTIONS = new Map<Loss, string>();
 

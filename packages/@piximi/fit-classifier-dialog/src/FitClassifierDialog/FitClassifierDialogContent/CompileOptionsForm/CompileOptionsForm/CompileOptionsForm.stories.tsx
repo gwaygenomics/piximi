@@ -1,11 +1,12 @@
-import * as React from "react";
-import {storiesOf} from "@storybook/react";
-import {CompileOptionsForm} from "./CompileOptionsForm";
-import {ThemeProvider} from "@material-ui/styles";
 import {createMuiTheme} from "@material-ui/core";
-import {Provider} from "react-redux";
+import {ThemeProvider} from "@material-ui/styles";
 import {reducer} from "@piximi/store";
+import {storiesOf} from "@storybook/react";
+import * as React from "react";
+import {Provider} from "react-redux";
 import {createStore} from "redux";
+
+import {CompileOptionsForm} from "./CompileOptionsForm";
 
 const store = createStore(reducer);
 

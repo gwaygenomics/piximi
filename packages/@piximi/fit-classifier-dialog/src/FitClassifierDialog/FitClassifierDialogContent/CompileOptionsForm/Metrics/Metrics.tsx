@@ -1,12 +1,13 @@
-import * as React from "react";
-import {Metric} from "@piximi/types";
-import {useStyles} from "./Metrics.css";
-import FormLabel from "@material-ui/core/FormLabel";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormHelperText from "@material-ui/core/FormHelperText";
+import FormLabel from "@material-ui/core/FormLabel";
 import Grid from "@material-ui/core/Grid";
+import {Metric} from "@piximi/types";
+import * as React from "react";
+
 import {MetricCheckbox} from "../MetricCheckbox";
+import {useStyles} from "./Metrics.css";
 
 export const Metrics = () => {
   const classes = useStyles({});

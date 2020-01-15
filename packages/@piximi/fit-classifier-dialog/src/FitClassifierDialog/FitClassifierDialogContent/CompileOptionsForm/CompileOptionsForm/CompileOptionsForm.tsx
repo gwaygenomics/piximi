@@ -1,9 +1,10 @@
+import Grid from "@material-ui/core/Grid";
 import * as React from "react";
-import {OptimizationFunction} from "../OptimizationFunction/OptimizationFunction";
+
 import {LossFunction} from "../LossFunction";
 import {Metrics} from "../Metrics";
 import {Model} from "../Model/Model";
-import Grid from "@material-ui/core/Grid";
+import {OptimizationFunction} from "../OptimizationFunction/OptimizationFunction";
 
 type CompileOptionsListItemProps = {};
 

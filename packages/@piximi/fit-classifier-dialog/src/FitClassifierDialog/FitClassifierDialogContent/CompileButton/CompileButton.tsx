@@ -1,11 +1,12 @@
-import * as React from "react";
-import {useCallback} from "react";
-import {useStyles} from "./CompileButton.css";
 import Button from "@material-ui/core/Button/Button";
-import {useDispatch, useSelector} from "react-redux";
 import {compile} from "@piximi/store";
 import {CompileOptions} from "@piximi/types";
 import {LayersModel} from "@tensorflow/tfjs";
+import * as React from "react";
+import {useCallback} from "react";
+import {useDispatch, useSelector} from "react-redux";
+
+import {useStyles} from "./CompileButton.css";
 
 export const CompileButton = ({next}: {next: any}) => {
   const dispatch = useDispatch();

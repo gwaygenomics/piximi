@@ -1,8 +1,8 @@
-import * as React from "react";
-import {Metric} from "@piximi/types";
 import {Checkbox} from "@material-ui/core";
-import {useDispatch, useSelector} from "react-redux";
 import {updateMetrics} from "@piximi/store";
+import {Metric} from "@piximi/types";
+import * as React from "react";
+import {useDispatch, useSelector} from "react-redux";
 
 export const MetricCheckbox = ({metric}: {metric: Metric}) => {
   const dispatch = useDispatch();

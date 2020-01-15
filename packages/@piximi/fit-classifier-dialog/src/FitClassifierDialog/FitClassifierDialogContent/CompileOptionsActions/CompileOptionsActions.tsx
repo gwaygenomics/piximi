@@ -1,7 +1,8 @@
 import * as React from "react";
-import {useStyles} from "./CompileOptionsActions.css";
+
 import {CompileButton} from "../CompileButton/CompileButton";
 import {PreviousStepIconButton} from "../PreviousStepIconButton";
+import {useStyles} from "./CompileOptionsActions.css";
 
 type CompileOptionsActionsProps = {
   activeStep: any;
