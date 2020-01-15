@@ -10,7 +10,6 @@ import {Persistor, persistReducer, persistStore} from "redux-persist";
 import autoMergeLevel2 from "redux-persist/es/stateReconciler/autoMergeLevel2";
 import createSagaMiddleware from "redux-saga";
 import thunk from "redux-thunk";
-import * as actions from "./actions";
 
 import {reducer} from "./reducer";
 import {root} from "./sagas";
