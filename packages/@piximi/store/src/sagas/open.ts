@@ -6,8 +6,6 @@ export function* open(action: any) {
 
   const opened = yield classifier.open(classes, path, units);
 
-  console.log(opened);
-
   yield put({payload: opened, type: "opened"});
 }
 
