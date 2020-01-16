@@ -3,11 +3,11 @@ import {Loss, Metric, Optimizer} from "@piximi/types";
 import {put, takeLatest} from "redux-saga/effects";
 
 import {compileAction, compiledAction} from "../actions";
-import {compileSaga, watchCompileSaga} from "./compileSaga";
+import {compileSaga, watchCompileActionSaga} from "./compileSaga";
 
 describe("compile", () => {
   it("dispatches 'compileAction'", () => {
-    const saga = watchCompileSaga();
+    const saga = watchCompileActionSaga();
 
     expect(saga.next().value).toEqual(
       takeLatest("CLASSIFIER_COMPILE", compileSaga)

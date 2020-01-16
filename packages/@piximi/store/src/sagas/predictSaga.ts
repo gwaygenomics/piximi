@@ -1,3 +1,3 @@
 export function* predictSaga() {}
 
-export function* watchPredictSaga() {}
+export function* watchPredictActionSaga() {}

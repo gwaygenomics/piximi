@@ -12,7 +12,7 @@ import {
 import {put, takeLatest} from "redux-saga/effects";
 
 import {fitAction, fittedAction} from "../actions";
-import {fitSaga, watchFitSaga} from "./fitSaga";
+import {fitSaga, watchFitActionSaga} from "./fitSaga";
 
 jest.setTimeout(50000);
 
@@ -70,7 +70,7 @@ const categories: Array<Category> = [
 
 describe("fit", () => {
   it("dispatches the 'fitAction' action", () => {
-    const saga = watchFitSaga();
+    const saga = watchFitActionSaga();
 
     expect(saga.next().value).toEqual(takeLatest("CLASSIFIER_FIT", fitSaga));
 

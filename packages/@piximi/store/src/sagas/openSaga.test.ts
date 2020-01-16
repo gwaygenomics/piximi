@@ -2,11 +2,11 @@ import {put, takeLatest} from "redux-saga/effects";
 import {open} from "@piximi/models";
 
 import {openAction, openedAction} from "../actions";
-import {openSaga, watchOpenSaga} from "./openSaga";
+import {openSaga, watchOpenActionSaga} from "./openSaga";
 
 describe("open", () => {
   it("dispatches 'openAction'", () => {
-    const saga = watchOpenSaga();
+    const saga = watchOpenActionSaga();
 
     expect(saga.next().value).toEqual(takeLatest("CLASSIFIER_OPEN", openSaga));
 

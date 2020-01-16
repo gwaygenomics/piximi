@@ -11,6 +11,6 @@ export function* compileSaga(action: any) {
   yield put(compiledAction({compiled: compiled}));
 }
 
-export function* watchCompileSaga() {
+export function* watchCompileActionSaga() {
   yield takeLatest("CLASSIFIER_COMPILE", compileSaga);
 }

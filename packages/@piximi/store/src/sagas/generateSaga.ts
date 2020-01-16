@@ -11,6 +11,6 @@ export function* generateSaga(action: any) {
   yield put(generatedAction({data: data}));
 }
 
-export function* watchGenerateSaga() {
+export function* watchGenerateActionSaga() {
   yield takeLatest("CLASSIFIER_GENERATE", generateSaga);
 }

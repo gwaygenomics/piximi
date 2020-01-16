@@ -1,12 +1,12 @@
 import {all} from "redux-saga/effects";
 
-import {compileSaga, watchCompileSaga} from "./compileSaga";
-import {evaluateSaga, watchEvaluateSaga} from "./evaluateSaga";
-import {fitSaga, watchFitSaga} from "./fitSaga";
-import {generateSaga, watchGenerateSaga} from "./generateSaga";
-import {openSaga, watchOpenSaga} from "./openSaga";
-import {predictSaga, watchPredictSaga} from "./predictSaga";
-import {saveSaga, watchSaveSaga} from "./saveSaga";
+import {compileSaga, watchCompileActionSaga} from "./compileSaga";
+import {evaluateSaga, watchEvaluateActionSaga} from "./evaluateSaga";
+import {fitSaga, watchFitActionSaga} from "./fitSaga";
+import {generateSaga, watchGenerateActionSaga} from "./generateSaga";
+import {openSaga, watchOpenActionSaga} from "./openSaga";
+import {predictSaga, watchPredictActionSaga} from "./predictSaga";
+import {saveSaga, watchSaveActionSaga} from "./saveSaga";
 
 export function* root() {
   const effects = [
@@ -17,13 +17,13 @@ export function* root() {
     openSaga,
     predictSaga,
     saveSaga,
-    watchCompileSaga,
-    watchEvaluateSaga,
-    watchFitSaga,
-    watchGenerateSaga,
-    watchOpenSaga,
-    watchPredictSaga,
-    watchSaveSaga
+    watchCompileActionSaga,
+    watchEvaluateActionSaga,
+    watchFitActionSaga,
+    watchGenerateActionSaga,
+    watchOpenActionSaga,
+    watchPredictActionSaga,
+    watchSaveActionSaga
   ];
 
   yield all(effects);

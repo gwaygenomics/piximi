@@ -3,7 +3,7 @@ import {Category, Image, Partition} from "@piximi/types";
 import {put, takeLatest} from "redux-saga/effects";
 
 import {generateAction, generatedAction} from "../actions";
-import {generateSaga, watchGenerateSaga} from "./generateSaga";
+import {generateSaga, watchGenerateActionSaga} from "./generateSaga";
 
 const images: Array<Image> = [
   {
@@ -59,7 +59,7 @@ const categories: Array<Category> = [
 
 describe("generateSaga", () => {
   it("dispatches the 'generate' action", () => {
-    const saga = watchGenerateSaga();
+    const saga = watchGenerateActionSaga();
 
     expect(saga.next().value).toEqual(
       takeLatest("CLASSIFIER_GENERATE", generateSaga)

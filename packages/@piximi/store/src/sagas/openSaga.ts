@@ -11,6 +11,6 @@ export function* openSaga(action: any) {
   yield put(openedAction({opened: opened}));
 }
 
-export function* watchOpenSaga() {
+export function* watchOpenActionSaga() {
   yield takeLatest("CLASSIFIER_OPEN", openSaga);
 }

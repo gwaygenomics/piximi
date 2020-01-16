@@ -11,6 +11,6 @@ export function* fitSaga(action: any) {
   yield put(fittedAction({fitted: fitted, status: status}));
 }
 
-export function* watchFitSaga() {
+export function* watchFitActionSaga() {
   yield takeLatest("CLASSIFIER_FIT", fitSaga);
 }
