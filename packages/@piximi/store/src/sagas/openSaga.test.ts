@@ -5,7 +5,7 @@ import {openAction, openedAction} from "../actions";
 import {openSaga, watchOpenSaga} from "./openSaga";
 
 describe("open", () => {
-  it("dispatches the 'open' action", () => {
+  it("dispatches 'openAction'", () => {
     const saga = watchOpenSaga();
 
     expect(saga.next().value).toEqual(takeLatest("CLASSIFIER_OPEN", openSaga));
@@ -23,9 +23,9 @@ describe("open", () => {
       openAction({pathname: pathname, classes: 10, units: 100})
     );
 
-    await generator.next();
+    const _ = await generator.next();
 
-    expect(generator.next({opened: opened}).value).toEqual(
+    expect(generator.next(opened).value).toEqual(
       put(openedAction({opened: opened}))
     );
 
