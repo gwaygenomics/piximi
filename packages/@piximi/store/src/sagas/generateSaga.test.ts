@@ -1,6 +1,6 @@
 import {generate} from "@piximi/models";
 import {Category, Image, Partition} from "@piximi/types";
-import {put, takeLatest} from "redux-saga/effects";
+import {put, takeEvery} from "redux-saga/effects";
 
 import {generateAction, generatedAction} from "../actions";
 import {generateSaga, watchGenerateActionSaga} from "./generateSaga";
@@ -62,7 +62,7 @@ describe("generateSaga", () => {
     const saga = watchGenerateActionSaga();
 
     expect(saga.next().value).toEqual(
-      takeLatest("CLASSIFIER_GENERATE", generateSaga)
+      takeEvery("CLASSIFIER_GENERATE", generateSaga)
     );
 
     expect(saga.next().done).toBeTruthy();

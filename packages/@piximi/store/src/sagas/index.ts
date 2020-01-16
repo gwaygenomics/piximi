@@ -1,4 +1,4 @@
-import {all} from "redux-saga/effects";
+import {all, fork} from "redux-saga/effects";
 
 import {compileSaga, watchCompileActionSaga} from "./compileSaga";
 import {evaluateSaga, watchEvaluateActionSaga} from "./evaluateSaga";
@@ -9,22 +9,7 @@ import {predictSaga, watchPredictActionSaga} from "./predictSaga";
 import {saveSaga, watchSaveActionSaga} from "./saveSaga";
 
 export function* root() {
-  const effects = [
-    compileSaga,
-    evaluateSaga,
-    fitSaga,
-    generateSaga,
-    openSaga,
-    predictSaga,
-    saveSaga,
-    watchCompileActionSaga,
-    watchEvaluateActionSaga,
-    watchFitActionSaga,
-    watchGenerateActionSaga,
-    watchOpenActionSaga,
-    watchPredictActionSaga,
-    watchSaveActionSaga
-  ];
+  const effects = [fork(watchOpenActionSaga)];
 
   yield all(effects);
 }

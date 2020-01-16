@@ -1,5 +1,5 @@
 import {generate} from "@piximi/models";
-import {put, takeLatest} from "redux-saga/effects";
+import {put, takeEvery} from "redux-saga/effects";
 
 import {generatedAction} from "../actions";
 
@@ -12,5 +12,5 @@ export function* generateSaga(action: any) {
 }
 
 export function* watchGenerateActionSaga() {
-  yield takeLatest("CLASSIFIER_GENERATE", generateSaga);
+  yield takeEvery("CLASSIFIER_GENERATE", generateSaga);
 }

@@ -1,5 +1,5 @@
 import {fit} from "@piximi/models";
-import {put, takeLatest} from "redux-saga/effects";
+import {put, takeEvery} from "redux-saga/effects";
 
 import {fittedAction} from "../actions";
 
@@ -12,5 +12,5 @@ export function* fitSaga(action: any) {
 }
 
 export function* watchFitActionSaga() {
-  yield takeLatest("CLASSIFIER_FIT", fitSaga);
+  yield takeEvery("CLASSIFIER_FIT", fitSaga);
 }

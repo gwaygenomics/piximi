@@ -1,5 +1,5 @@
 import TextField from "@material-ui/core/TextField";
-import {updateLearningRate} from "@piximi/store";
+import {updateLearningRateAction} from "@piximi/store";
 import {ClassifierState} from "@piximi/types";
 import * as React from "react";
 import {useDispatch, useSelector} from "react-redux";
@@ -11,7 +11,7 @@ export const LearningRate = ({}: LearningRateProps) => {
 
   const onChange = React.useCallback(
     (event: React.ChangeEvent<{value: string}>) => {
-      const action = updateLearningRate({
+      const action = updateLearningRateAction({
         learningRate: parseFloat(event.target.value)
       });
 

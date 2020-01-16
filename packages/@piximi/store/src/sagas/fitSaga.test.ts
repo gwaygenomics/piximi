@@ -9,7 +9,7 @@ import {
   Optimizer,
   Partition
 } from "@piximi/types";
-import {put, takeLatest} from "redux-saga/effects";
+import {put, takeEvery} from "redux-saga/effects";
 
 import {fitAction, fittedAction} from "../actions";
 import {fitSaga, watchFitActionSaga} from "./fitSaga";
@@ -72,7 +72,7 @@ describe("fit", () => {
   it("dispatches the 'fitAction' action", () => {
     const saga = watchFitActionSaga();
 
-    expect(saga.next().value).toEqual(takeLatest("CLASSIFIER_FIT", fitSaga));
+    expect(saga.next().value).toEqual(takeEvery("CLASSIFIER_FIT", fitSaga));
 
     expect(saga.next().done).toBeTruthy();
   });

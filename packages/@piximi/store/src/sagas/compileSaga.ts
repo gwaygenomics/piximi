@@ -1,5 +1,5 @@
 import {compile} from "@piximi/models";
-import {put, takeLatest} from "redux-saga/effects";
+import {put, takeEvery} from "redux-saga/effects";
 
 import {compiledAction} from "../actions";
 
@@ -12,5 +12,5 @@ export function* compileSaga(action: any) {
 }
 
 export function* watchCompileActionSaga() {
-  yield takeLatest("CLASSIFIER_COMPILE", compileSaga);
+  yield takeEvery("CLASSIFIER_COMPILE", compileSaga);
 }

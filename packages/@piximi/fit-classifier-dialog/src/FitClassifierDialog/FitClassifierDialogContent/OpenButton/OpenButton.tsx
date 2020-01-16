@@ -1,5 +1,5 @@
 import Button from "@material-ui/core/Button/Button";
-import {open} from "@piximi/store";
+import {openAction} from "@piximi/store";
 import * as React from "react";
 import {useCallback} from "react";
 import {useDispatch} from "react-redux";
@@ -13,9 +13,7 @@ export const OpenButton = ({next}: {next: any}) => {
   const dispatch = useDispatch();
 
   const onClick = useCallback(() => {
-    const action = open({pathname: pathname, classes: 10, units: 100});
-
-    dispatch(action);
+    dispatch(openAction({pathname: pathname, classes: 10, units: 100}));
 
     next();
   }, [dispatch]);

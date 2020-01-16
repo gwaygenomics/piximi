@@ -4,7 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
-import {updateOptimizationFunction} from "@piximi/store";
+import {updateOptimizationFunctionAction} from "@piximi/store";
 import {ClassifierState, Optimizer} from "@piximi/types";
 import * as React from "react";
 import {useDispatch, useSelector} from "react-redux";
@@ -31,7 +31,7 @@ export const OptimizationFunction = ({}: OptimizationFunctionProps) => {
 
   const onChange = React.useCallback(
     (event: React.ChangeEvent<{value: Optimizer}>) => {
-      const action = updateOptimizationFunction({
+      const action = updateOptimizationFunctionAction({
         optimizationFunction: event.target.value
       });
 

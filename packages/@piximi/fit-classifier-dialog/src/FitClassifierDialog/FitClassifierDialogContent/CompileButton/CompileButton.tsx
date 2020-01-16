@@ -1,5 +1,5 @@
 import Button from "@material-ui/core/Button/Button";
-import {compile} from "@piximi/store";
+import {compileAction} from "@piximi/store";
 import {CompileOptions} from "@piximi/types";
 import {LayersModel} from "@tensorflow/tfjs";
 import * as React from "react";
@@ -12,7 +12,7 @@ export const CompileButton = ({next}: {next: any}) => {
   const dispatch = useDispatch();
 
   const onClick = useCallback(() => {
-    dispatch(compile({opened: opened, options: options}));
+    dispatch(compileAction({opened: opened, options: options}));
 
     next();
   }, [dispatch]);

@@ -3,7 +3,7 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
-import {updateLossFunction} from "@piximi/store";
+import {updateLossFunctionAction} from "@piximi/store";
 import {ClassifierState, Loss} from "@piximi/types";
 import * as React from "react";
 import {useDispatch, useSelector} from "react-redux";
@@ -59,7 +59,7 @@ export const LossFunction = ({}: LossFunctionProps) => {
 
   const onChange = React.useCallback(
     (event: React.ChangeEvent<{value: Loss}>) => {
-      const action = updateLossFunction({
+      const action = updateLossFunctionAction({
         lossFunction: event.target.value
       });
 
