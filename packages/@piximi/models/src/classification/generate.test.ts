@@ -45,7 +45,7 @@ const images: Array<Image> = [
     checksum: "",
     data: "https://picsum.photos/seed/piximi/224",
     identifier: "22222222-2222-2222-2222-22222222222",
-    partition: Partition.Training,
+    partition: Partition.Validation,
     scores: [],
     visualization: {
       brightness: 0,
@@ -57,8 +57,11 @@ const images: Array<Image> = [
 ];
 
 it("generate", async () => {
-  const data = await generate(images, categories);
+  const {data, validationData} = await generate(images, categories);
 
   expect((await data.toArray())[0].xs.shape).toEqual([224, 224, 3]);
   expect((await data.toArray())[0].ys.shape).toEqual([2]);
+
+  expect((await validationData.toArray())[0].xs.shape).toEqual([224, 224, 3]);
+  expect((await validationData.toArray())[0].ys.shape).toEqual([2]);
 });

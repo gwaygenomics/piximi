@@ -82,7 +82,7 @@ it("fit", async () => {
 
   const compiled = await compile(opened, options);
 
-  const data = await generate(images, categories);
+  const {data, validationData} = await generate(images, categories);
 
   const {fitted, status} = await fit(compiled, data, data, {
     epochs: 1,

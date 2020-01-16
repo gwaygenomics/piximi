@@ -6,9 +6,9 @@ import {generatedAction} from "../actions";
 export function* generateSaga(action: any) {
   const {images, categories} = action.payload;
 
-  const data = yield generate(images, categories);
+  const {data, validationData} = yield generate(images, categories);
 
-  yield put(generatedAction({data: data}));
+  yield put(generatedAction({data: data, validationData: validationData}));
 }
 
 export function* watchGenerateActionSaga() {

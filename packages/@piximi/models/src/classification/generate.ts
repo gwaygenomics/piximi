@@ -1,4 +1,4 @@
-import {Category, Image} from "@piximi/types";
+import {Category, Image, Partition} from "@piximi/types";
 import * as tensorflow from "@tensorflow/tfjs";
 import {Tensor} from "@tensorflow/tfjs";
 import * as ImageJS from "image-js";
@@ -33,8 +33,8 @@ export const encodeImage = async (item: {
 };
 
 export const generator = (
-  categories: Array<Category>,
-  images: Array<Image>
+  images: Array<Image>,
+  categories: Array<Category>
 ) => {
   const count = images.length;
 
@@ -63,9 +63,32 @@ export const generator = (
 export const generate = async (
   images: Array<Image>,
   categories: Array<Category>
-): Promise<Dataset<{xs: Tensor; ys: Tensor}>> => {
-  return tensorflow.data
-    .generator(generator(categories, images))
-    .map(encodeCategory(categories.length))
-    .mapAsync(encodeImage);
+): Promise<{
+  data: Dataset<{xs: Tensor; ys: Tensor}>;
+  validationData: Dataset<{xs: Tensor; ys: Tensor}>;
+}> => {
+  return {
+    data: tensorflow.data
+      .generator(
+        generator(
+          images.filter(
+            (image: Image) => image.partition === Partition.Training
+          ),
+          categories
+        )
+      )
+      .map(encodeCategory(categories.length))
+      .mapAsync(encodeImage),
+    validationData: tensorflow.data
+      .generator(
+        generator(
+          images.filter(
+            (image: Image) => image.partition === Partition.Validation
+          ),
+          categories
+        )
+      )
+      .map(encodeCategory(categories.length))
+      .mapAsync(encodeImage)
+  };
 };

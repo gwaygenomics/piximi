@@ -1,9 +1,12 @@
-import {generate} from "@piximi/models";
-import {Category, Image, Partition} from "@piximi/types";
-import {put, takeEvery} from "redux-saga/effects";
+import {createMuiTheme} from "@material-ui/core";
+import {ThemeProvider} from "@material-ui/styles";
+import {createCategory, createImages, store} from "@piximi/store";
+import {storiesOf} from "@storybook/react";
+import * as React from "react";
+import {Provider, useDispatch} from "react-redux";
 
-import {generateAction, generatedAction} from "../actions";
-import {generateSaga, watchGenerateActionSaga} from "./generateSaga";
+import {GenerateButton} from "./GenerateButton";
+import {Category, Image, Partition} from "@piximi/types";
 
 const categories: Array<Category> = [
   {
@@ -57,32 +60,26 @@ const images: Array<Image> = [
   }
 ];
 
-describe("generateSaga", () => {
-  it("dispatches 'generateAction'", () => {
-    const saga = watchGenerateActionSaga();
+const theme = createMuiTheme({
+  palette: {
+    type: "light"
+  }
+});
 
-    expect(saga.next().value).toEqual(
-      takeEvery("CLASSIFIER_GENERATE", generateSaga)
-    );
+storiesOf("GenerateButton", module).add("example", () => {
+  const next = () => {};
 
-    expect(saga.next().done).toBeTruthy();
+  store.dispatch(createImages({images: images}));
+
+  categories.forEach((category: Category) => {
+    store.dispatch(createCategory({category: category}));
   });
 
-  it("executes the `generate` function", async () => {
-    const {data, validationData} = await generate(images, categories);
-
-    const generator = generateSaga(
-      generateAction({images: images, categories: categories})
-    );
-
-    await generator.next();
-
-    expect(
-      generator.next({data: data, validationData: validationData}).value
-    ).toEqual(
-      put(generatedAction({data: data, validationData: validationData}))
-    );
-
-    expect(generator.next().done).toBeTruthy();
-  });
+  return (
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <GenerateButton next={next} />
+      </ThemeProvider>
+    </Provider>
+  );
 });

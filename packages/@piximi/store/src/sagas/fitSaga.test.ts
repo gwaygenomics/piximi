@@ -94,9 +94,9 @@ describe("fit", () => {
 
     const compiled = await compile(opened, compileOptions);
 
-    const data = await generate(images, categories);
+    const {data, validationData} = await generate(images, categories);
 
-    const {fitted, status} = await fit(compiled, data, data, {
+    const {fitted, status} = await fit(compiled, data, validationData, {
       epochs: 1,
       initialEpoch: 0
     });
