@@ -1,9 +1,9 @@
-import * as classifier from "@piximi/models";
+import {generate} from "@piximi/models";
 import {Category, Image, Partition} from "@piximi/types";
 import {put, takeLatest} from "redux-saga/effects";
 
-import * as actions from "../actions";
-import {generate, watchGenerate} from "./generate";
+import {generateAction, generatedAction} from "../actions";
+import {generateSaga, watchGenerateSaga} from "./generateSaga";
 
 const images: Array<Image> = [
   {
@@ -57,26 +57,28 @@ const categories: Array<Category> = [
   }
 ];
 
-describe("generate", () => {
+describe("generateSaga", () => {
   it("dispatches the 'generate' action", () => {
-    const saga = watchGenerate();
+    const saga = watchGenerateSaga();
 
-    expect(saga.next().value).toEqual(takeLatest("generate", generate));
+    expect(saga.next().value).toEqual(
+      takeLatest("CLASSIFIER_GENERATE", generateSaga)
+    );
 
     expect(saga.next().done).toBeTruthy();
   });
 
   it("executes the `generate` function", async () => {
-    const data = await classifier.generate(images, categories);
+    const data = await generate(images, categories);
 
-    const generator = generate(
-      actions.generate({images: images, categories: categories})
+    const generator = generateSaga(
+      generateAction({images: images, categories: categories})
     );
 
     await generator.next();
 
     expect(generator.next(data).value).toEqual(
-      put(actions.generated({data: data}))
+      put(generatedAction({data: data}))
     );
 
     expect(generator.next().done).toBeTruthy();

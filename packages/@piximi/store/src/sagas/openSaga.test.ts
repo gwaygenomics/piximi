@@ -1,0 +1,34 @@
+import {put, takeLatest} from "redux-saga/effects";
+import {open} from "@piximi/models";
+
+import {openAction, openedAction} from "../actions";
+import {openSaga, watchOpenSaga} from "./openSaga";
+
+describe("open", () => {
+  it("dispatches the 'open' action", () => {
+    const saga = watchOpenSaga();
+
+    expect(saga.next().value).toEqual(takeLatest("CLASSIFIER_OPEN", openSaga));
+
+    expect(saga.next().done).toBeTruthy();
+  });
+
+  it("executes the `open` function", async () => {
+    const pathname =
+      "https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_0.25_224/model.json";
+
+    const opened = await open(pathname, 10, 100);
+
+    const generator = openSaga(
+      openAction({pathname: pathname, classes: 10, units: 100})
+    );
+
+    await generator.next();
+
+    expect(generator.next({opened: opened}).value).toEqual(
+      put(openedAction({opened: opened}))
+    );
+
+    expect(generator.next().done).toBeTruthy();
+  });
+});

@@ -22,13 +22,13 @@ const state: ClassifierState = {
 };
 
 export const reducer = createReducer(state, {
-  [actions.compile.toString()]: (state) => {
+  [actions.compileAction.toString()]: (state) => {
     return {
       ...state,
       compiling: true
     };
   },
-  [actions.compiled.toString()]: (state, action) => {
+  [actions.compiledAction.toString()]: (state, action) => {
     const {compiled} = action.payload;
 
     return {
@@ -37,13 +37,13 @@ export const reducer = createReducer(state, {
       model: compiled
     };
   },
-  [actions.evaluate.toString()]: (state) => {
+  [actions.evaluateAction.toString()]: (state) => {
     return {
       ...state,
       evaluating: true
     };
   },
-  [actions.evaluated.toString()]: (state, action) => {
+  [actions.evaluatedAction.toString()]: (state, action) => {
     const {evaluations} = action.payload;
 
     return {
@@ -52,13 +52,13 @@ export const reducer = createReducer(state, {
       evaluations: evaluations
     };
   },
-  [actions.fit.toString()]: (state) => {
+  [actions.fitAction.toString()]: (state) => {
     return {
       ...state,
       fitting: true
     };
   },
-  [actions.fitted.toString()]: (state, action) => {
+  [actions.fittedAction.toString()]: (state, action) => {
     const {fitted, history} = action.payload;
 
     return {
@@ -68,13 +68,13 @@ export const reducer = createReducer(state, {
       model: fitted
     };
   },
-  [actions.generate.toString()]: (state) => {
+  [actions.generateAction.toString()]: (state) => {
     return {
       ...state,
       generating: true
     };
   },
-  [actions.generated.toString()]: (state, action) => {
+  [actions.generatedAction.toString()]: (state, action) => {
     const {data, validationData} = action.payload;
 
     return {
@@ -84,13 +84,13 @@ export const reducer = createReducer(state, {
       validationData: validationData
     };
   },
-  [actions.open.toString()]: (state) => {
+  [actions.openAction.toString()]: (state) => {
     return {
       ...state,
       opening: true
     };
   },
-  [actions.opened.toString()]: (state, action) => {
+  [actions.openedAction.toString()]: (state, action) => {
     const {opened} = action.payload;
 
     return {
@@ -99,13 +99,13 @@ export const reducer = createReducer(state, {
       opening: false
     };
   },
-  [actions.predict.toString()]: (state) => {
+  [actions.predictAction.toString()]: (state) => {
     return {
       ...state,
       predicting: true
     };
   },
-  [actions.predicted.toString()]: (state, action) => {
+  [actions.predictedAction.toString()]: (state, action) => {
     const {predictions} = action.payload;
 
     return {
@@ -114,14 +114,14 @@ export const reducer = createReducer(state, {
       predictions: predictions
     };
   },
-  [actions.save.toString()]: (state) => {
+  [actions.saveAction.toString()]: (state) => {
     return {
       ...state,
       saving: true
     };
   },
-  [actions.saved.toString()]: (state, action) => {},
-  [actions.updateLearningRate.toString()]: (state, action) => {
+  [actions.savedAction.toString()]: (state, action) => {},
+  [actions.updateLearningRateAction.toString()]: (state, action) => {
     const {learningRate} = action.payload;
 
     return {
@@ -129,7 +129,7 @@ export const reducer = createReducer(state, {
       learningRate: learningRate
     };
   },
-  [actions.updateLossFunction.toString()]: (state, action) => {
+  [actions.updateLossFunctionAction.toString()]: (state, action) => {
     const {lossFunction} = action.payload;
 
     return {
@@ -137,7 +137,7 @@ export const reducer = createReducer(state, {
       lossFunction: lossFunction
     };
   },
-  [actions.updateMetrics.toString()]: (state, action) => {
+  [actions.updateMetricsAction.toString()]: (state, action) => {
     const {metrics} = action.payload;
 
     return {
@@ -145,7 +145,7 @@ export const reducer = createReducer(state, {
       metrics: metrics
     };
   },
-  [actions.updateOptimizationFunction.toString()]: (state, action) => {
+  [actions.updateOptimizationFunctionAction.toString()]: (state, action) => {
     const {optimizationFunction} = action.payload;
 
     return {

@@ -11,80 +11,80 @@ import {createAction} from "@reduxjs/toolkit";
 import {History, LayersModel, Scalar, Tensor} from "@tensorflow/tfjs";
 import {Dataset} from "@tensorflow/tfjs-data";
 
-export const compile = createAction<{
+export const compileAction = createAction<{
   opened: LayersModel;
   options: CompileOptions;
-}>("compile");
+}>("CLASSIFIER_COMPILE");
 
-export const compiled = createAction<{
+export const compiledAction = createAction<{
   compiled: LayersModel;
-}>("compiled");
+}>("CLASSIFIER_COMPILED");
 
-export const evaluate = createAction<{
+export const evaluateAction = createAction<{
   fitted: LayersModel;
   data: Dataset<{xs: Tensor; ys: Tensor}>;
-}>("evaluate");
+}>("CLASSIFIER_EVALUATE");
 
-export const evaluated = createAction<{
+export const evaluatedAction = createAction<{
   evaluations: Scalar | Array<Scalar>;
-}>("evaluated");
+}>("CLASSIFIER_EVALUATED");
 
-export const fit = createAction<{
+export const fitAction = createAction<{
   compiled: LayersModel;
   data: Dataset<{xs: Tensor; ys: Tensor}>;
   validationData: Dataset<{xs: Tensor; ys: Tensor}>;
   options: FitOptions;
-}>("fit");
+}>("CLASSIFIER_FIT");
 
-export const fitted = createAction<{
+export const fittedAction = createAction<{
   fitted: LayersModel;
   status: History;
-}>("fitted");
+}>("CLASSIFIER_FITTED");
 
-export const generate = createAction<{
+export const generateAction = createAction<{
   images: Array<Image>;
   categories: Array<Category>;
-}>("generate");
+}>("CLASSIFIER_GENERATE");
 
-export const generated = createAction<{
+export const generatedAction = createAction<{
   data: Dataset<{xs: Tensor; ys: Tensor}>;
-}>("generated");
+}>("CLASSIFIER_GENERATED");
 
-export const open = createAction<{
+export const openAction = createAction<{
   pathname: string;
   classes: number;
   units: number;
-}>("open");
+}>("CLASSIFIER_OPEN");
 
-export const opened = createAction<{
+export const openedAction = createAction<{
   opened: LayersModel;
-}>("opened");
+}>("CLASSIFIER_OPENED");
 
-export const predict = createAction<{
+export const predictAction = createAction<{
   compiled: LayersModel;
   data: Dataset<{xs: Tensor; ys: Tensor}>;
-}>("predict");
+}>("CLASSIFIER_PREDICT");
 
-export const predicted = createAction<{
+export const predictedAction = createAction<{
   predictions: Tensor;
-}>("predicted");
+}>("CLASSIFIER_PREDICTED");
 
-export const updateLearningRate = createAction<{
+export const updateLearningRateAction = createAction<{
   learningRate: number;
-}>("update-learning-rate");
+}>("CLASSIFIER_UPDATE_LEARNING_RATE");
 
-export const updateLossFunction = createAction<{
+export const updateLossFunctionAction = createAction<{
   lossFunction: Loss;
-}>("update-loss-function");
+}>("CLASSIFIER_UPDATE_LOSS_FUNCTION");
 
-export const updateMetrics = createAction<{
+export const updateMetricsAction = createAction<{
   metrics: Array<Metric>;
-}>("update-metrics");
+}>("CLASSIFIER_UPDATE_METRICS");
 
-export const updateOptimizationFunction = createAction<{
+export const updateOptimizationFunctionAction = createAction<{
   optimizationFunction: Optimizer;
-}>("update-optimization-function");
+}>("CLASSIFIER_UPDATE_OPTIMIZATION_FUNCTION");
 
-export const save = createAction<{}>("save");
+export const saveAction = createAction<{}>("CLASSIFIER_SAVE");
 
-export const saved = createAction<{}>("saved");
+export const savedAction = createAction<{}>("CLASSIFIER_SAVED");

@@ -1,6 +1,6 @@
 import "@tensorflow/tfjs-node";
 
-import * as classifier from "@piximi/models";
+import {compile, fit, generate, open} from "@piximi/models";
 import {
   Category,
   Image,
@@ -11,8 +11,8 @@ import {
 } from "@piximi/types";
 import {put, takeLatest} from "redux-saga/effects";
 
-import * as actions from "../actions";
-import {fit, watchFit} from "./fit";
+import {fitAction, fittedAction} from "../actions";
+import {fitSaga, watchFitSaga} from "./fitSaga";
 
 jest.setTimeout(50000);
 
@@ -69,10 +69,10 @@ const categories: Array<Category> = [
 ];
 
 describe("fit", () => {
-  it("dispatches the 'fit' action", () => {
-    const saga = watchFit();
+  it("dispatches the 'fitAction' action", () => {
+    const saga = watchFitSaga();
 
-    expect(saga.next().value).toEqual(takeLatest("fit", fit));
+    expect(saga.next().value).toEqual(takeLatest("CLASSIFIER_FIT", fitSaga));
 
     expect(saga.next().done).toBeTruthy();
   });
@@ -83,20 +83,20 @@ describe("fit", () => {
 
     const units = 100;
 
-    const opened = await classifier.open(pathname, categories.length, units);
+    const opened = await open(pathname, categories.length, units);
 
-    const options = {
+    const compileOptions = {
       learningRate: 0.01,
       lossFunction: Loss.CategoricalCrossentropy,
       metrics: [Metric.CategoricalAccuracy],
       optimizationFunction: Optimizer.SGD
     };
 
-    const compiled = await classifier.compile(opened, options);
+    const compiled = await compile(opened, compileOptions);
 
-    const data = await classifier.generate(images, categories);
+    const data = await generate(images, categories);
 
-    const {fitted, status} = await classifier.fit(compiled, data, data, {
+    const {fitted, status} = await fit(compiled, data, data, {
       epochs: 1,
       initialEpoch: 0
     });
@@ -111,12 +111,12 @@ describe("fit", () => {
       }
     };
 
-    const generator = fit(actions.fit(payload));
+    const generator = fitSaga(fitAction(payload));
 
     await generator.next();
 
     expect(generator.next({fitted: fitted, status: status}).value).toEqual(
-      put(actions.fitted({fitted: fitted, status: status}))
+      put(fittedAction({fitted: fitted, status: status}))
     );
 
     expect(generator.next().done).toBeTruthy();
