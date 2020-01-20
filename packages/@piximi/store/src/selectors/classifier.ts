@@ -6,3 +6,7 @@ export const compileOptionsSelector = ({classifier}) => {
     optimizationFunction: classifier.optimizationFunction
   };
 };
+
+export const modelSelector = ({classifier}) => {
+  return classifier.model;
+};
