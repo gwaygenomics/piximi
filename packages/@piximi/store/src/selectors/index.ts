@@ -1,2 +1,2 @@
-export {compileOptionsSelector, modelSelector} from "./classifier";
-export {categoriesSelector, categorizedImagesSelector} from "./project";
+export * from "./classifier";
+export * from "./project";
