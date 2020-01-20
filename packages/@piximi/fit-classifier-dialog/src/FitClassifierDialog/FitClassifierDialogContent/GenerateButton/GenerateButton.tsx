@@ -1,48 +1,38 @@
 import Button from "@material-ui/core/Button/Button";
 import {generateAction} from "@piximi/store";
-import {Category, Image, Partition, Project} from "@piximi/types";
 import * as React from "react";
 import {useCallback} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
 import {useStyles} from "./GenerateButton.css";
+import {
+  categoriesSelector,
+  categorizedImagesSelector,
+  validationPercentageSelector
+} from "@piximi/store/dist";
 
 export const GenerateButton = ({next}: {next: any}) => {
   const dispatch = useDispatch();
 
   const onClick = useCallback(() => {
-    dispatch(generateAction({images: trainingImages, categories: categories}));
+    const payload = {
+      images: images,
+      categories: categories,
+      options: {
+        validationPercentage: validationPercentage
+      }
+    };
+
+    dispatch(generateAction(payload));
 
     next();
   }, [dispatch]);
 
-  const categories = useSelector(
-    ({project}: {project: Project}): Array<Category> => {
-      return project.categories;
-    }
-  );
+  const categories = useSelector(categoriesSelector);
 
-  const trainingImages = useSelector(
-    ({project}: {project: Project}): Array<Image> => {
-      return project.images.filter((image: Image) => {
-        return (
-          image.partition === Partition.Training &&
-          image.categoryIdentifier !== "00000000-0000-0000-0000-00000000000"
-        );
-      });
-    }
-  );
+  const images = useSelector(categorizedImagesSelector);
 
-  const validationImages = useSelector(
-    ({project}: {project: Project}): Array<Image> => {
-      return project.images.filter((image: Image) => {
-        return (
-          image.partition === Partition.Validation &&
-          image.categoryIdentifier !== "00000000-0000-0000-0000-00000000000"
-        );
-      });
-    }
-  );
+  const validationPercentage = useSelector(validationPercentageSelector);
 
   const classes = useStyles({});
 

@@ -62,7 +62,8 @@ export const generator = (
 
 export const generate = async (
   images: Array<Image>,
-  categories: Array<Category>
+  categories: Array<Category>,
+  options?: {validationPercentage: number}
 ): Promise<{
   data: Dataset<{xs: Tensor; ys: Tensor}>;
   validationData: Dataset<{xs: Tensor; ys: Tensor}>;

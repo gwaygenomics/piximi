@@ -5,7 +5,8 @@ import {
   Image,
   Loss,
   Metric,
-  Optimizer
+  Optimizer,
+  ValidationOptions
 } from "@piximi/types";
 import {createAction} from "@reduxjs/toolkit";
 import {History, LayersModel, Scalar, Tensor} from "@tensorflow/tfjs";
@@ -44,6 +45,7 @@ export const fittedAction = createAction<{
 export const generateAction = createAction<{
   images: Array<Image>;
   categories: Array<Category>;
+  options: ValidationOptions;
 }>("CLASSIFIER_GENERATE");
 
 export const generatedAction = createAction<{

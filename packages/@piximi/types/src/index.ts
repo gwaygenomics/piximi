@@ -151,3 +151,7 @@ export type Settings = {
     spinning: boolean;
   };
 };
+
+export type ValidationOptions = {
+  validationPercentage: number;
+};

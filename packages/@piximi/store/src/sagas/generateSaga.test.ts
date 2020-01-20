@@ -69,11 +69,19 @@ describe("generateSaga", () => {
   });
 
   it("executes the `generate` function", async () => {
-    const {data, validationData} = await generate(images, categories);
+    const options = {
+      validationPercentage: 0.25
+    };
 
-    const generator = generateSaga(
-      generateAction({images: images, categories: categories})
-    );
+    const {data, validationData} = await generate(images, categories, options);
+
+    const payload = {
+      images: images,
+      categories: categories,
+      options: options
+    };
+
+    const generator = generateSaga(generateAction(payload));
 
     await generator.next();
 
