@@ -85,6 +85,10 @@ export const updateOptimizationFunctionAction = createAction<{
   optimizationFunction: Optimizer;
 }>("CLASSIFIER_UPDATE_OPTIMIZATION_FUNCTION");
 
+export const updateValidationPercentageAction = createAction<{
+  validationPercentage: number;
+}>("CLASSIFIER_UPDATE_VALIDATION_PERCENTAGE");
+
 export const saveAction = createAction<{}>("CLASSIFIER_SAVE");
 
 export const savedAction = createAction<{}>("CLASSIFIER_SAVED");

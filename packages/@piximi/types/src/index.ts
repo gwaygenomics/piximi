@@ -45,6 +45,7 @@ export type ClassifierState = {
   predictions?: Tensor;
   saving: boolean;
   validationData?: Dataset<{xs: Tensor; ys: Tensor}>;
+  validationPercentage: number;
 };
 
 export type CompileOptions = {

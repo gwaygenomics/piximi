@@ -38,3 +38,7 @@ export const validationDataSelector = ({
 }): Dataset<{xs: Tensor; ys: Tensor}> => {
   return classifier.validationData;
 };
+
+export const validationPercentageSelector = ({classifier}): number => {
+  return classifier.validationPercentage;
+};

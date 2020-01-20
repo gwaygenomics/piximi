@@ -18,7 +18,8 @@ const state: ClassifierState = {
   opening: false,
   optimizationFunction: Optimizer.SGD,
   predicting: false,
-  saving: false
+  saving: false,
+  validationPercentage: 0.25
 };
 
 export const reducer = createReducer(state, {
@@ -151,6 +152,14 @@ export const reducer = createReducer(state, {
     return {
       ...state,
       optimizationFunction: optimizationFunction
+    };
+  },
+  [actions.updateValidationPercentageAction.toString()]: (state, action) => {
+    const {validationPercentage} = action.payload;
+
+    return {
+      ...state,
+      validationPercentage: validationPercentage
     };
   }
 });

@@ -6,12 +6,15 @@ import {OutputShape} from "../OutputShape";
 import {ContrastLimitedAdaptiveHistogramEqualization} from "../ContrastLimitedAdaptiveHistogramEqualization";
 import {useStyles} from "./GeneratorOptionsForm.css";
 import {Typography} from "@material-ui/core";
+import {ValidationPercentage} from "../ValidationPercentage";
 
 export const GeneratorOptionsForm = () => {
   const classes = useStyles({});
 
   return (
     <>
+      <ValidationPercentage />
+
       <ContrastLimitedAdaptiveHistogramEqualization />
 
       <Typography className={classes.typography} variant="subtitle1">
