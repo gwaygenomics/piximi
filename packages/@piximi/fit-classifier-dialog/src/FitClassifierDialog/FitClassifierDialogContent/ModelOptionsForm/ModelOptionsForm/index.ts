@@ -1,1 +1,1 @@
-export {ModelOptionsForm} from "./FitOptionsForm";
+export {ModelOptionsForm} from "./ModelOptionsForm";
