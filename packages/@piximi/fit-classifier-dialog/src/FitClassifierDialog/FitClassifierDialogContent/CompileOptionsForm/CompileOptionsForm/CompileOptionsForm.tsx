@@ -3,7 +3,6 @@ import * as React from "react";
 
 import {LossFunction} from "../LossFunction";
 import {Metrics} from "../Metrics";
-import {Model} from "../Model/Model";
 import {OptimizationFunction} from "../OptimizationFunction/OptimizationFunction";
 
 type CompileOptionsListItemProps = {};
@@ -11,10 +10,6 @@ type CompileOptionsListItemProps = {};
 export const CompileOptionsForm = ({}: CompileOptionsListItemProps) => {
   return (
     <>
-      <Grid container spacing={2}>
-        <Model />
-      </Grid>
-
       <Grid container spacing={2}>
         <OptimizationFunction />
       </Grid>

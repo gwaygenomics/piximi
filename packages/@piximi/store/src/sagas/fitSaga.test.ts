@@ -69,7 +69,7 @@ const categories: Array<Category> = [
 ];
 
 describe("fit", () => {
-  it("dispatches the 'fitAction' action", () => {
+  it("dispatches 'fitAction'", () => {
     const saga = watchFitActionSaga();
 
     expect(saga.next().value).toEqual(takeEvery("CLASSIFIER_FIT", fitSaga));
@@ -96,19 +96,15 @@ describe("fit", () => {
 
     const {data, validationData} = await generate(images, categories);
 
-    const {fitted, status} = await fit(compiled, data, validationData, {
-      epochs: 1,
-      initialEpoch: 0
-    });
+    const options = {epochs: 1, initialEpoch: 0};
+
+    const {fitted, status} = await fit(compiled, data, validationData, options);
 
     const payload = {
       compiled: compiled,
       data: data,
-      validationData: data,
-      options: {
-        epochs: 1,
-        initialEpoch: 0
-      }
+      validationData: validationData,
+      options: options
     };
 
     const generator = fitSaga(fitAction(payload));

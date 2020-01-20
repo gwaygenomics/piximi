@@ -11,6 +11,8 @@ import {FitOptionsActions} from "../FitOptionsActions";
 import {FitOptionsForm} from "../FitOptionsForm";
 import {PreprocessingOptionsActions} from "../PreprocessingOptionsActions";
 import {PreprocessingOptionsForm} from "../PreprocessingOptionsForm";
+import {ModelOptionsForm} from "../ModelOptionsForm/ModelOptionsForm/ModelOptionsForm";
+import {ModelOptionsActions} from "../ModelOptionsActions";
 
 type FitClassifierDiaslogContentProps = {};
 
@@ -32,6 +34,20 @@ export const FitClassifierDialogContentStepper = ({}: FitClassifierDiaslogConten
   return (
     <Grid item md={8}>
       <Stepper activeStep={activeStep} orientation="vertical">
+        <Step key="model-options">
+          <StepLabel>Model options</StepLabel>
+
+          <StepContent>
+            <ModelOptionsForm />
+
+            <ModelOptionsActions
+              activeStep={activeStep}
+              next={next}
+              previous={previous}
+            />
+          </StepContent>
+        </Step>
+
         <Step key="compile-options">
           <StepLabel>Compile options</StepLabel>
 
