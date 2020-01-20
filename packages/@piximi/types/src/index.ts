@@ -24,11 +24,13 @@ export type CategoryVisualization = {
 };
 
 export type ClassifierState = {
+  compiled?: LayersModel;
   compiling: boolean;
   data?: Dataset<{xs: Tensor; ys: Tensor}>;
   evaluating: boolean;
   evaluations?: Scalar | Array<Scalar>;
   fitOptions: FitOptions;
+  fitted?: LayersModel;
   fitting: boolean;
   generating: boolean;
   history?: History;
@@ -36,6 +38,7 @@ export type ClassifierState = {
   lossFunction: Loss | Array<Loss> | {[outputName: string]: Loss};
   metrics: Array<Metric>;
   model?: LayersModel;
+  opened?: LayersModel;
   opening: boolean;
   optimizationFunction: Optimizer;
   predicting: boolean;

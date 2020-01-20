@@ -2,6 +2,10 @@ import {CompileOptions, FitOptions} from "@piximi/types";
 import {LayersModel, Tensor} from "@tensorflow/tfjs";
 import {Dataset} from "@tensorflow/tfjs-data";
 
+export const compiledSelector = ({classifier}): LayersModel => {
+  return classifier.compiled;
+};
+
 export const compileOptionsSelector = ({classifier}): CompileOptions => {
   return {
     learningRate: classifier.learningRate,
@@ -21,8 +25,12 @@ export const fitOptionsSelector = ({classifier}): FitOptions => {
   return classifier.fitOptions;
 };
 
-export const modelSelector = ({classifier}): LayersModel => {
-  return classifier.model;
+export const fittedSelector = ({classifier}): LayersModel => {
+  return classifier.fitted;
+};
+
+export const openedSelector = ({classifier}): LayersModel => {
+  return classifier.opened;
 };
 
 export const validationDataSelector = ({

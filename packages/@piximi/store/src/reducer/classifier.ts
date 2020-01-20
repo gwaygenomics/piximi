@@ -33,8 +33,8 @@ export const reducer = createReducer(state, {
 
     return {
       ...state,
-      compiling: false,
-      model: compiled
+      compiled: compiled,
+      compiling: false
     };
   },
   [actions.evaluateAction.toString()]: (state) => {
@@ -63,9 +63,9 @@ export const reducer = createReducer(state, {
 
     return {
       ...state,
+      fitted: fitted,
       fitting: false,
-      history: history,
-      model: fitted
+      history: history
     };
   },
   [actions.generateAction.toString()]: (state) => {
@@ -95,7 +95,7 @@ export const reducer = createReducer(state, {
 
     return {
       ...state,
-      model: opened,
+      opened: opened,
       opening: false
     };
   },
