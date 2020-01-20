@@ -1,20 +1,20 @@
 import * as React from "react";
-import {useStyles} from "./PreprocessingOptionsActions.css";
+import {useStyles} from "./GeneratorOptionsActions.css";
 import Button from "@material-ui/core/Button/Button";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import IconButton from "@material-ui/core/IconButton";
 
-type PreprocessingOptionsActionsProps = {
+type GeneratorOptionsActionsProps = {
   activeStep: any;
   next: any;
   previous: any;
 };
 
-export const PreprocessingOptionsActions = ({
+export const GeneratorOptionsActions = ({
   activeStep,
   next,
   previous
-}: PreprocessingOptionsActionsProps) => {
+}: GeneratorOptionsActionsProps) => {
   const classes = useStyles({});
 
   const onCompileClick = () => {

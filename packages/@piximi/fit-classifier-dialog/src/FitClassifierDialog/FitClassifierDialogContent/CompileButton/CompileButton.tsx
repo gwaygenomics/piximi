@@ -1,7 +1,9 @@
 import Button from "@material-ui/core/Button/Button";
-import {compileAction} from "@piximi/store";
-import {CompileOptions} from "@piximi/types";
-import {LayersModel} from "@tensorflow/tfjs";
+import {
+  compileAction,
+  compileOptionsSelector,
+  openedSelector
+} from "@piximi/store";
 import * as React from "react";
 import {useCallback} from "react";
 import {useDispatch, useSelector} from "react-redux";
@@ -12,27 +14,16 @@ export const CompileButton = ({next}: {next: any}) => {
   const dispatch = useDispatch();
 
   const onClick = useCallback(() => {
-    dispatch(compileAction({opened: opened, options: options}));
+    const payload = {opened: opened, options: options};
+
+    dispatch(compileAction(payload));
 
     next();
   }, [dispatch]);
 
-  const opened = useSelector(
-    ({classifier}): LayersModel => {
-      return classifier.model;
-    }
-  );
+  const opened = useSelector(openedSelector);
 
-  const options = useSelector(
-    ({classifier}): CompileOptions => {
-      return {
-        learningRate: classifier.learningRate,
-        lossFunction: classifier.lossFunction,
-        metrics: classifier.metrics,
-        optimizationFunction: classifier.optimizationFunction
-      };
-    }
-  );
+  const options = useSelector(compileOptionsSelector);
 
   const classes = useStyles({});
 

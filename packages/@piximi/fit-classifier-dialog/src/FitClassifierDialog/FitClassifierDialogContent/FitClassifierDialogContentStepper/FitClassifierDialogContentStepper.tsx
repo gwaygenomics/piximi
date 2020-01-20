@@ -9,8 +9,8 @@ import {CompileOptionsActions} from "../CompileOptionsActions";
 import {CompileOptionsForm} from "../CompileOptionsForm";
 import {FitOptionsActions} from "../FitOptionsActions";
 import {FitOptionsForm} from "../FitOptionsForm";
-import {PreprocessingOptionsActions} from "../PreprocessingOptionsActions";
-import {PreprocessingOptionsForm} from "../PreprocessingOptionsForm";
+import {GeneratorOptionsActions} from "../GeneratorOptionsActions";
+import {GeneratorOptionsForm} from "../GeneratorOptionsForm";
 import {ModelOptionsForm} from "../ModelOptionsForm/ModelOptionsForm/ModelOptionsForm";
 import {ModelOptionsActions} from "../ModelOptionsActions";
 
@@ -63,12 +63,12 @@ export const FitClassifierDialogContentStepper = ({}: FitClassifierDiaslogConten
         </Step>
 
         <Step key="preprocessing-options">
-          <StepLabel>Preprocessing options</StepLabel>
+          <StepLabel>Generator options</StepLabel>
 
           <StepContent>
-            <PreprocessingOptionsForm />
+            <GeneratorOptionsForm />
 
-            <PreprocessingOptionsActions
+            <GeneratorOptionsActions
               activeStep={activeStep}
               next={next}
               previous={previous}

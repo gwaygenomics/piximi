@@ -1,6 +1,6 @@
 import * as React from "react";
 import {storiesOf} from "@storybook/react";
-import {PreprocessingOptionsForm} from "./PreprocessingOptionsForm";
+import {GeneratorOptionsForm} from "./GeneratorOptionsForm";
 import {ThemeProvider} from "@material-ui/styles";
 import {createMuiTheme} from "@material-ui/core";
 import {Provider} from "react-redux";
@@ -15,11 +15,11 @@ const theme = createMuiTheme({
   }
 });
 
-storiesOf("PreprocessingOptionsForm", module).add("example", () => {
+storiesOf("GeneratorOptionsForm", module).add("example", () => {
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <PreprocessingOptionsForm />
+        <GeneratorOptionsForm />
       </ThemeProvider>
     </Provider>
   );

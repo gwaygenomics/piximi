@@ -1,12 +1,14 @@
 import Button from "@material-ui/core/Button/Button";
-import {fitAction} from "@piximi/store";
-import {FitOptions} from "@piximi/types";
-import {LayersModel} from "@tensorflow/tfjs";
+import {
+  compiledSelector,
+  dataSelector,
+  fitAction,
+  fitOptionsSelector,
+  validationDataSelector
+} from "@piximi/store";
 import * as React from "react";
 import {useCallback} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {Dataset} from "@tensorflow/tfjs-data";
-import {Tensor} from "@tensorflow/tfjs";
 
 import {useStyles} from "./FitButton.css";
 
@@ -21,36 +23,18 @@ export const FitButton = ({next}: {next: any}) => {
       options: options
     };
 
-    const action = fitAction(payload);
-
-    dispatch(action);
+    dispatch(fitAction(payload));
 
     next();
   }, [dispatch]);
 
-  const compiled = useSelector(
-    ({classifier}): LayersModel => {
-      return classifier.model;
-    }
-  );
+  const compiled = useSelector(compiledSelector);
 
-  const data = useSelector(
-    ({classifier}): Dataset<{xs: Tensor; ys: Tensor}> => {
-      return classifier.data;
-    }
-  );
+  const data = useSelector(dataSelector);
 
-  const validationData = useSelector(
-    ({classifier}): Dataset<{xs: Tensor; ys: Tensor}> => {
-      return classifier.validationData;
-    }
-  );
+  const validationData = useSelector(validationDataSelector);
 
-  const options = useSelector(
-    ({classifier}): FitOptions => {
-      return classifier.fitOptions;
-    }
-  );
+  const options = useSelector(fitOptionsSelector);
 
   const classes = useStyles({});
 

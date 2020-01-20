@@ -13,7 +13,9 @@ export const OpenButton = ({next}: {next: any}) => {
   const dispatch = useDispatch();
 
   const onClick = useCallback(() => {
-    dispatch(openAction({pathname: pathname, classes: 10, units: 100}));
+    const payload = {pathname: pathname, classes: 10, units: 100};
+
+    dispatch(openAction(payload));
 
     next();
   }, [dispatch]);

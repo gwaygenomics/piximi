@@ -1,15 +1,13 @@
 import Grid from "@material-ui/core/Grid";
 import * as React from "react";
-import {PreserveProportions} from "../PreserveProportions/PreserveProportions";
-import {Method} from "../Method/Method";
-import {OutputShape} from "../OutputShape/OutputShape";
+import {PreserveProportions} from "../PreserveProportions";
+import {Method} from "../Method";
+import {OutputShape} from "../OutputShape";
 import {ContrastLimitedAdaptiveHistogramEqualization} from "../ContrastLimitedAdaptiveHistogramEqualization";
-import {useStyles} from "./PreprocessingOptionsForm.css";
+import {useStyles} from "./GeneratorOptionsForm.css";
 import {Typography} from "@material-ui/core";
 
-type PreprocessingOptionsFormProps = {};
-
-export const PreprocessingOptionsForm = ({}: PreprocessingOptionsFormProps) => {
+export const GeneratorOptionsForm = () => {
   const classes = useStyles({});
 
   return (
